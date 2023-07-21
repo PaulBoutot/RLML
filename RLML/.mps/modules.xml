@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MPSProject">
+    <projectModules>
+      <modulePath path="$PROJECT_DIR$/languages/RLML/RLML.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/languages/RLML/runtime/RLML.runtime.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/languages/RLML/sandbox/RLML.sandbox.msd" folder="" />
+    </projectModules>
+  </component>
+</project>

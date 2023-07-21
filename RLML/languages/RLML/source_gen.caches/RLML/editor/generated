@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="1zruh4gdlck2i665dop9pe4yea6idez">
+  <files names="Actions_Editor.java:Actions_EditorBuilder_a.java:ActorCritic_Editor.java:ActorCritic_EditorBuilder_a.java:DQN_Editor.java:DQN_EditorBuilder_a.java:DoneStates_Editor.java:DoneStates_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:Environment_Editor.java:Environment_EditorBuilder_a.java:Hyperparameters_Editor.java:Hyperparameters_EditorBuilder_a.java:MonteCarloControl_Editor.java:MonteCarloControl_EditorBuilder_a.java:QLearning_Editor.java:QLearning_EditorBuilder_a.java:RLAgent_Editor.java:RLAgent_EditorBuilder_a.java:RLML_Editor.java:RLML_EditorBuilder_a.java:Result_Editor.java:Result_EditorBuilder_a.java:Rewards_Editor.java:Rewards_EditorBuilder_a.java:SARSA_Editor.java:SARSA_EditorBuilder_a.java:Settings_Editor.java:Settings_EditorBuilder_a.java:States_Editor.java:States_EditorBuilder_a.java" />
+</product>
+
