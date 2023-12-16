@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="bu4aho64eqgpmnoxti8xtl2bxr7x6r9">
-  <files names="FrozenLake.java:FrozenLakeActorCritic.java:PathFindingActorCritic.java:PathFindingQLearning.java:PathFindingSARSA.java:SimpleExample.java:SimpleGameQLearning.java:TESTSARSA.java:TestActorCritic.java:TestDQN.java:TestMonteCarloControl.java" />
+<product version="3" modelHash="-b2rf8j199ubjbfem5mak7xlwcwt62ny">
+  <files names="Compare_QLearningAndSarsa.java:FrozenLake.java:FrozenLakeActorCritic.java:PathFindingActorCritic.java:PathFindingHyperNEAT-Not_Implemented.java:PathFindingPPO-NewlyAdded.java:PathFindingPPO.java:PathFindingQLearning.java:PathFindingSARSA.java:SimpleExample.java:SimpleGameQLearning.java:TESTSARSA.java:TestActorCritic.java:TestDQN.java:TestMonteCarloControl.java" />
 </product>
 

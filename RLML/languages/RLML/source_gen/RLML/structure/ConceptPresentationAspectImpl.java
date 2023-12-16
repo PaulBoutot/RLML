@@ -11,15 +11,23 @@ import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
   private ConceptPresentation props_Actions;
   private ConceptPresentation props_ActorCritic;
+  private ConceptPresentation props_CPG_ES;
   private ConceptPresentation props_DQN;
   private ConceptPresentation props_DoneStates;
   private ConceptPresentation props_Environment;
+  private ConceptPresentation props_EvolutionStrategies;
+  private ConceptPresentation props_GeneticAlgorithm;
+  private ConceptPresentation props_Geneticparameters;
+  private ConceptPresentation props_GradientFree;
+  private ConceptPresentation props_HyperNEAT;
   private ConceptPresentation props_Hyperparameters;
   private ConceptPresentation props_MonteCarloControl;
+  private ConceptPresentation props_ProximalPolicyOptimization;
   private ConceptPresentation props_QLearning;
   private ConceptPresentation props_RLAgent;
   private ConceptPresentation props_RLAlgorithm;
   private ConceptPresentation props_RLML;
+  private ConceptPresentation props_RLMLComparator;
   private ConceptPresentation props_Result;
   private ConceptPresentation props_Rewards;
   private ConceptPresentation props_SARSA;
@@ -46,6 +54,14 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ActorCritic = cpb.create();
         }
         return props_ActorCritic;
+      case LanguageConceptSwitch.CPG_ES:
+        if (props_CPG_ES == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Cartesian Genetic Programming - Evolution Strategies Algorithm");
+          cpb.presentationByName();
+          props_CPG_ES = cpb.create();
+        }
+        return props_CPG_ES;
       case LanguageConceptSwitch.DQN:
         if (props_DQN == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -68,6 +84,41 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Environment = cpb.create();
         }
         return props_Environment;
+      case LanguageConceptSwitch.EvolutionStrategies:
+        if (props_EvolutionStrategies == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Evolution Strategies for Policy Optimization Algorithm");
+          cpb.presentationByName();
+          props_EvolutionStrategies = cpb.create();
+        }
+        return props_EvolutionStrategies;
+      case LanguageConceptSwitch.GeneticAlgorithm:
+        if (props_GeneticAlgorithm == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_GeneticAlgorithm = cpb.create();
+        }
+        return props_GeneticAlgorithm;
+      case LanguageConceptSwitch.Geneticparameters:
+        if (props_Geneticparameters == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Geneticparameters");
+          props_Geneticparameters = cpb.create();
+        }
+        return props_Geneticparameters;
+      case LanguageConceptSwitch.GradientFree:
+        if (props_GradientFree == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_GradientFree = cpb.create();
+        }
+        return props_GradientFree;
+      case LanguageConceptSwitch.HyperNEAT:
+        if (props_HyperNEAT == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Hyper NeuroEvolution of Augmenting Topologies Algorithm");
+          cpb.presentationByName();
+          props_HyperNEAT = cpb.create();
+        }
+        return props_HyperNEAT;
       case LanguageConceptSwitch.Hyperparameters:
         if (props_Hyperparameters == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -83,6 +134,14 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_MonteCarloControl = cpb.create();
         }
         return props_MonteCarloControl;
+      case LanguageConceptSwitch.ProximalPolicyOptimization:
+        if (props_ProximalPolicyOptimization == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Proximal Policy Optimization Algorithm");
+          cpb.presentationByName();
+          props_ProximalPolicyOptimization = cpb.create();
+        }
+        return props_ProximalPolicyOptimization;
       case LanguageConceptSwitch.QLearning:
         if (props_QLearning == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -111,6 +170,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_RLML = cpb.create();
         }
         return props_RLML;
+      case LanguageConceptSwitch.RLMLComparator:
+        if (props_RLMLComparator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RLMLComparator = cpb.create();
+        }
+        return props_RLMLComparator;
       case LanguageConceptSwitch.Result:
         if (props_Result == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -136,7 +202,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.Settings:
         if (props_Settings == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("Reinforcement Learning Algorithm Settings");
+          cpb.rawPresentation("Gradient Free Reinforcement Learning Algorithm Settings");
           props_Settings = cpb.create();
         }
         return props_Settings;

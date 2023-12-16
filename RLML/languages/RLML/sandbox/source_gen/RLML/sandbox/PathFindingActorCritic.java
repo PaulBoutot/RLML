@@ -8,6 +8,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Collections;
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.io.Serializable;
 import java.util.function.Function;
 import java.util.Map;
@@ -51,6 +56,8 @@ public class PathFindingActorCritic {
 
     rewards = strToArrArr("[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,100,0,0,0]]", rewardsArrLst);
     actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]]", actionsArrLst);
+
+    boolean modelExist = false;
     //  Initialize matrix Q as zero matrix
     qTable = new double[statesCount][statesCount];
     // Initialize actor critic agent
@@ -104,6 +111,7 @@ public class PathFindingActorCritic {
     obj.run();
     obj.printQTableResult();
     obj.showPolicy();
+    obj.saveQTableResults();
 
     long End = System.currentTimeMillis();
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
@@ -112,9 +120,9 @@ public class PathFindingActorCritic {
   /*package*/ void run() {
     {
       // ActorCritic: Hyper Parameters
-      final double alpha = 0.3;
-      final double gamma = 0.5;
-      final int episodes = 10000000;
+      final double alpha = 0.1;
+      final double gamma = 0.9;
+      final int episodes = 10000;
 
       // Actor Critic Agent was initialized in the init function
       // Set properties of agent
@@ -193,6 +201,49 @@ public class PathFindingActorCritic {
 
   /*package*/ int R(int s, int a) {
     return rewards[s][a];
+  }
+
+  /*package*/ void loadQTable() {
+    try {
+      File qTableFile = new File("filename.txt");
+      Scanner reader = new Scanner(qTableFile);
+      while (reader.hasNextLine()) {
+        String data = reader.nextLine();
+        System.out.println(data);
+      }
+      reader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occured");
+      e.printStackTrace();
+    }
+  }
+
+  /*package*/ void saveQTableResults() {
+    try {
+      File qTableFile = new File("filename.txt");
+      if (qTableFile.createNewFile()) {
+        System.out.println("File created: " + qTableFile.getName());
+      } else {
+        System.out.println("File already exists.");
+      }
+    } catch (IOException e) {
+      System.out.println("An error occured" + e);
+      e.printStackTrace();
+    }
+    try {
+      FileWriter qTableWriter = new FileWriter("filename.txt");
+      for (int i = 0; i < qTable.length; i++) {
+        qTableWriter.write("" + states[i] + ":  ");
+        for (int j = 0; j < qTable[i].length; j++) {
+          qTableWriter.write(df.format(qTable[i][j]) + " ");
+        }
+        qTableWriter.write("\n");
+      }
+      qTableWriter.close();
+    } catch (IOException e) {
+      System.out.println("An error occured" + e);
+      e.printStackTrace();
+    }
   }
 
   /*package*/ void printQTableResult() {
@@ -457,6 +508,92 @@ public class PathFindingActorCritic {
     Map<String, String> getAttributes();
   }
 
+  public class PPOSelectionStrategy implements ActionSelectionStrategy {
+    private String prototype;
+    protected Map<String, String> attributes = new HashMap<String, String>();
+    public String getPrototype() {
+      return prototype;
+    }
+    public IndexValue selectAction(int stateId, QModel model, Set<Integer> actionsAtState) {
+      ArrayList<Integer> actions = new ArrayList<>();
+      double probD = sampleCategorical(actions);
+      if (actionsAtState == null) {
+        for (int i = 0; i < model.getActionCount(); i++) {
+          actions.add(i);
+        }
+      } else {
+        for (int actionId : actionsAtState) {
+          actions.add(actionId);
+        }
+      }
+      double maxReward = Double.NEGATIVE_INFINITY;
+      IndexValue maxRewardAction = new IndexValue();
+      for (int actionId : actions) {
+        double curReward = model.getQ(stateId, actionId);
+        if (curReward > maxReward) {
+          maxReward = curReward;
+          maxRewardAction.setIndex(actionId);
+          maxRewardAction.setValue(maxReward);
+        }
+      }
+
+      return maxRewardAction;
+    }
+    private double sampleCategorical(ArrayList<Integer> prob) {
+      double randD = Math.random();
+      double cumilativeProb = 0.0;
+
+      for (int i : prob) {
+        cumilativeProb += i;
+        if (randD < cumilativeProb) {
+          return Math.log(i);
+        }
+      }
+      // Fallback (should not reach here)
+      return Math.log(prob.get(prob.size() - 1));
+    }
+    public IndexValue selectAction(int stateId, UtilityModel model, Set<Integer> actionsAtState) {
+      return new IndexValue();
+    }
+    public PPOSelectionStrategy() {
+      prototype = this.getClass().getCanonicalName();
+    }
+    public PPOSelectionStrategy(HashMap<String, String> attributes) {
+      this.attributes = attributes;
+      if (attributes.containsKey("prototype")) {
+        this.prototype = attributes.get("prototype");
+      }
+    }
+    public Map<String, String> getAttributes() {
+      return attributes;
+    }
+    @Override
+    public boolean equals(Object obj) {
+      ActionSelectionStrategy rhs = (ActionSelectionStrategy) obj;
+      if (!(prototype.equalsIgnoreCase(rhs.getPrototype()))) {
+        return false;
+      }
+      for (Map.Entry<String, String> entry : rhs.getAttributes().entrySet()) {
+        if (!(attributes.containsKey(entry.getKey()))) {
+          return false;
+        }
+        if (!(attributes.get(entry.getKey()).equals(entry.getValue()))) {
+          return false;
+        }
+      }
+      for (Map.Entry<String, String> entry : attributes.entrySet()) {
+        if (!(rhs.getAttributes().containsKey(entry.getKey()))) {
+          return false;
+        }
+        if (!(rhs.getAttributes().get(entry.getKey()).equals(entry.getValue()))) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+
+
   public abstract class AbstractActionSelectionStrategy implements ActionSelectionStrategy {
     private String prototype;
     protected Map<String, String> attributes = new HashMap<String, String>();
@@ -538,6 +675,8 @@ public class PathFindingActorCritic {
       } else
       if (prototype.equals(GibbsSoftMaxActionSelectionStrategy.class.getCanonicalName())) {
         return new GibbsSoftMaxActionSelectionStrategy();
+      } else if (prototype.equals(PPOSelectionStrategy.class.getCanonicalName())) {
+        return new PPOSelectionStrategy();
       }
       return null;
     }
@@ -618,6 +757,7 @@ public class PathFindingActorCritic {
     }
   }
 
+
   public class GibbsSoftMaxActionSelectionStrategy extends AbstractActionSelectionStrategy {
     private Random random = null;
     public GibbsSoftMaxActionSelectionStrategy() {
@@ -666,6 +806,8 @@ public class PathFindingActorCritic {
       return iv;
     }
   }
+
+
 
   public class GreedyActionSelectionStrategy extends AbstractActionSelectionStrategy {
     @Override

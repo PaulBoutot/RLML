@@ -142,13 +142,6 @@
     <property role="TrG5h" value="RLAlgorithm" />
     <property role="R5$K7" value="true" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
-    <node concept="1TJgyj" id="3CRs5xFk4Ea" role="1TKVEi">
-      <property role="IQ2ns" value="4194945102978763402" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="settings" />
-      <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="65A0jOcuIDr" resolve="Settings" />
-    </node>
     <node concept="PrWs8" id="47TPQTJ69Cc" role="PzmwI">
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
@@ -156,14 +149,19 @@
   <node concept="1TIwiD" id="65A0jOcuIDr">
     <property role="EcuMT" value="7018298431017511515" />
     <property role="TrG5h" value="Settings" />
-    <property role="34LRSv" value="Reinforcement Learning Algorithm Settings" />
+    <property role="34LRSv" value="Gradient Free Reinforcement Learning Algorithm Settings" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="3CRs5xFk4Eh" role="1TKVEi">
       <property role="IQ2ns" value="4194945102978763409" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="hyperparameters" />
-      <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="65A0jOcuIDs" resolve="Hyperparameters" />
+    </node>
+    <node concept="1TJgyj" id="1xBWOI5zYO$" role="1TKVEi">
+      <property role="IQ2ns" value="1758641685200366884" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="geneticparamters" />
+      <ref role="20lvS9" node="1xBWOI5zYSI" resolve="Geneticparameters" />
     </node>
   </node>
   <node concept="1TIwiD" id="65A0jOcuIDs">
@@ -196,21 +194,21 @@
     <property role="TrG5h" value="SARSA" />
     <property role="3GE5qa" value="RLAlgoritms" />
     <property role="R4oN_" value="SARSA - On-policy TD Control Algorithm" />
-    <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
+    <ref role="1TJDcQ" node="1xBWOI5uNeD" resolve="GradientFree" />
   </node>
   <node concept="1TIwiD" id="3CRs5xFk3Fj">
     <property role="EcuMT" value="4194945102978759379" />
     <property role="3GE5qa" value="RLAlgoritms" />
     <property role="TrG5h" value="QLearning" />
     <property role="R4oN_" value="Q-Learning - Off-policy TD Control Algorithm" />
-    <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
+    <ref role="1TJDcQ" node="1xBWOI5uNeD" resolve="GradientFree" />
   </node>
   <node concept="1TIwiD" id="47TPQTJ33oA">
     <property role="EcuMT" value="4754067750975714854" />
     <property role="3GE5qa" value="RLAlgoritms" />
     <property role="TrG5h" value="DQN" />
     <property role="R4oN_" value="RL DQN Algorithm" />
-    <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
+    <ref role="1TJDcQ" node="1xBWOI5uNeD" resolve="GradientFree" />
   </node>
   <node concept="1TIwiD" id="1PQYTQHx7Ml">
     <property role="EcuMT" value="2123160928991345813" />
@@ -261,14 +259,128 @@
     <property role="3GE5qa" value="RLAlgoritms" />
     <property role="TrG5h" value="ActorCritic" />
     <property role="R4oN_" value="RL Actor Critic Algorithm" />
-    <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
+    <ref role="1TJDcQ" node="1xBWOI5uNeD" resolve="GradientFree" />
   </node>
   <node concept="1TIwiD" id="4b2ZscRNN1$">
     <property role="EcuMT" value="4810686366881886308" />
     <property role="3GE5qa" value="RLAlgoritms" />
     <property role="TrG5h" value="MonteCarloControl" />
     <property role="R4oN_" value="RL Monte Carlo Control Algorithm" />
+    <ref role="1TJDcQ" node="1xBWOI5uNeD" resolve="GradientFree" />
+  </node>
+  <node concept="1TIwiD" id="2CsvH$$ikO3">
+    <property role="EcuMT" value="3034439720022658307" />
+    <property role="3GE5qa" value="RLAlgoritms" />
+    <property role="TrG5h" value="ProximalPolicyOptimization" />
+    <property role="R4oN_" value="Proximal Policy Optimization Algorithm" />
+    <ref role="1TJDcQ" node="1xBWOI5uNeD" resolve="GradientFree" />
+  </node>
+  <node concept="1TIwiD" id="2CsvH$$D7nu">
+    <property role="EcuMT" value="3034439720028632542" />
+    <property role="TrG5h" value="RLMLComparator" />
+    <property role="19KtqR" value="true" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="PrWs8" id="2CsvH$$D7tm" role="PzmwI">
+      <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
+    </node>
+    <node concept="PrWs8" id="2CsvH$$D7tA" role="PzmwI">
+      <ref role="PrY4T" to="4fqr:431DWIovi3l" resolve="IMainClass" />
+    </node>
+    <node concept="1TJgyj" id="2CsvH$$D7wh" role="1TKVEi">
+      <property role="IQ2ns" value="3034439720028633105" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="environment" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="4ojP1jnJd$E" resolve="Environment" />
+    </node>
+    <node concept="1TJgyj" id="2CsvH$$D7z9" role="1TKVEi">
+      <property role="IQ2ns" value="3034439720028633289" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="agent" />
+      <property role="20lbJX" value="fLJekj6/_1__n" />
+      <ref role="20lvS9" node="4ojP1jnJd$F" resolve="RLAgent" />
+    </node>
+    <node concept="1TJgyj" id="2CsvH$$D7A2" role="1TKVEi">
+      <property role="IQ2ns" value="3034439720028633474" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="result" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="4ojP1jnJd$G" resolve="Result" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="1xBWOI5uNeD">
+    <property role="EcuMT" value="1758641685199008681" />
+    <property role="3GE5qa" value="RLAlgoritms" />
+    <property role="TrG5h" value="GradientFree" />
+    <property role="R5$K7" value="true" />
     <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
+    <node concept="1TJgyj" id="1xBWOI5uNsV" role="1TKVEi">
+      <property role="IQ2ns" value="1758641685199009595" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="settings" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="65A0jOcuIDr" resolve="Settings" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="1xBWOI5uNoE">
+    <property role="EcuMT" value="1758641685199009322" />
+    <property role="3GE5qa" value="RLAlgoritms" />
+    <property role="TrG5h" value="GeneticAlgorithm" />
+    <property role="R5$K7" value="true" />
+    <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
+    <node concept="1TJgyj" id="1xBWOI5zYLN" role="1TKVEi">
+      <property role="IQ2ns" value="1758641685200366707" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="setting" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="65A0jOcuIDr" resolve="Settings" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="1xBWOI5zYSI">
+    <property role="EcuMT" value="1758641685200367150" />
+    <property role="TrG5h" value="Geneticparameters" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyi" id="1xBWOI5zYSJ" role="1TKVEl">
+      <property role="IQ2nx" value="1758641685200367151" />
+      <property role="TrG5h" value="populationSize" />
+      <ref role="AX2Wp" to="tpck:fKAQMTA" resolve="integer" />
+    </node>
+    <node concept="1TJgyi" id="1xBWOI5zYSK" role="1TKVEl">
+      <property role="IQ2nx" value="1758641685200367152" />
+      <property role="TrG5h" value="mutationProbability" />
+      <ref role="AX2Wp" to="tpee:gc$lTUB" resolve="_FPNumber_String" />
+    </node>
+    <node concept="1TJgyi" id="1xBWOI5zYSL" role="1TKVEl">
+      <property role="IQ2nx" value="1758641685200367153" />
+      <property role="TrG5h" value="crossoverProbability" />
+      <ref role="AX2Wp" to="tpee:gc$lTUB" resolve="_FPNumber_String" />
+    </node>
+    <node concept="1TJgyi" id="1xBWOI5zYSM" role="1TKVEl">
+      <property role="IQ2nx" value="1758641685200367154" />
+      <property role="TrG5h" value="total_episodes" />
+      <ref role="AX2Wp" to="tpck:fKAQMTA" resolve="integer" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="1xBWOI6jBb1">
+    <property role="EcuMT" value="1758641685212852929" />
+    <property role="3GE5qa" value="RLAlgoritms" />
+    <property role="TrG5h" value="EvolutionStrategies" />
+    <property role="R4oN_" value="Evolution Strategies for Policy Optimization Algorithm" />
+    <ref role="1TJDcQ" node="1xBWOI5uNoE" resolve="GeneticAlgorithm" />
+  </node>
+  <node concept="1TIwiD" id="1xBWOI7YJp1">
+    <property role="EcuMT" value="1758641685240936001" />
+    <property role="3GE5qa" value="RLAlgoritms" />
+    <property role="TrG5h" value="HyperNEAT" />
+    <property role="R4oN_" value="Hyper NeuroEvolution of Augmenting Topologies Algorithm" />
+    <ref role="1TJDcQ" node="1xBWOI5uNoE" resolve="GeneticAlgorithm" />
+  </node>
+  <node concept="1TIwiD" id="1xBWOI7YJqk">
+    <property role="EcuMT" value="1758641685240936084" />
+    <property role="3GE5qa" value="RLAlgoritms" />
+    <property role="TrG5h" value="CPG_ES" />
+    <property role="R4oN_" value="Cartesian Genetic Programming - Evolution Strategies Algorithm" />
+    <ref role="1TJDcQ" node="1xBWOI5uNoE" resolve="GeneticAlgorithm" />
   </node>
 </model>
 
