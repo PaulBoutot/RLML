@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Arrays;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.function.Function;
@@ -103,13 +105,26 @@ public class TestMonteCarloControl {
     TestMonteCarloControl obj = new TestMonteCarloControl();
     obj.run();
     obj.printQTableResult();
+    obj.saveQTableResult();
     obj.showPolicy();
 
     long End = System.currentTimeMillis();
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  /*package*/ void run() {
+  public static void runAlgo() {
+    long Begin = System.currentTimeMillis();
+    TestMonteCarloControl obj = new TestMonteCarloControl();
+    obj.run();
+    obj.printQTableResult();
+    obj.saveQTableResult();
+    obj.showPolicy();
+    long End = System.currentTimeMillis();
+    System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
+
+  }
+
+  public double[][] run() {
     {
       // DQN: <todo - update description>
 
@@ -153,6 +168,7 @@ public class TestMonteCarloControl {
           state = nextState;
         }
       }
+      return qTable;
 
     }
   }
@@ -180,6 +196,20 @@ public class TestMonteCarloControl {
 
   /*package*/ int R(int s, int a) {
     return rewards[s][a];
+  }
+
+  /*package*/ void saveQTableResult() {
+    try {
+      File qTableFile = new File("Users/sahilsalma/Desktop/filename.txt");
+      if (qTableFile.createNewFile()) {
+        System.out.println("file created: " + qTableFile.getName());
+      } else {
+        System.out.println("File already exists");
+      }
+    } catch (IOException e) {
+      System.out.println("An error occured" + e);
+      e.printStackTrace();
+    }
   }
 
   /*package*/ void printQTableResult() {

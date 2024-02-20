@@ -16,7 +16,18 @@
         <child id="4194945102978760639" name="agent" index="1hpOZB" />
         <child id="4194945102978760622" name="environment" index="1hpOZQ" />
       </concept>
-      <concept id="5049612793196370220" name="RLML.structure.Result" flags="ng" index="2hFKOS" />
+      <concept id="5049612793196370220" name="RLML.structure.Result" flags="ng" index="2hFKOS">
+        <property id="2289923223936601427" name="value" index="UrZLp" />
+        <property id="3080276168209284274" name="value" index="3ay6DC" />
+        <property id="3080276168165539790" name="value6" index="3R9e$k" />
+        <property id="3080276168165539789" name="value5" index="3R9e$n" />
+        <property id="3080276168165539810" name="value8" index="3R9e$S" />
+        <property id="3080276168165539809" name="value7" index="3R9e$V" />
+        <property id="3080276168165539762" name="value4" index="3R9e_C" />
+        <property id="3080276168165539761" name="value3" index="3R9e_F" />
+        <property id="3080276168165539614" name="value2" index="3R9eB4" />
+        <property id="3080276168157315326" name="value" index="3RCho$" />
+      </concept>
       <concept id="5049612793196370218" name="RLML.structure.Environment" flags="ng" index="2hFKOY">
         <child id="5314687470332607100" name="States" index="30DmD$" />
         <child id="5314687470332607102" name="Actions" index="30DmDA" />
@@ -120,7 +131,17 @@
         </node>
       </node>
     </node>
-    <node concept="2hFKOS" id="7FvB5$A7EQR" role="1hpOYk" />
+    <node concept="2hFKOS" id="7FvB5$A7EQR" role="1hpOYk">
+      <property role="3RCho$" value=" true       RLML.sandbox.PathFindingSARSA$DoubleUtils" />
+      <property role="3ay6DC" value=" " />
+      <property role="3R9eB4" value=" " />
+      <property role="3R9e_F" value=" " />
+      <property role="3R9e_C" value=" " />
+      <property role="3R9e$n" value=" " />
+      <property role="3R9e$k" value=" " />
+      <property role="3R9e$V" value=" " />
+      <property role="3R9e$S" value=" " />
+    </node>
   </node>
   <node concept="2hFKN_" id="7FvB5$A7EZn">
     <property role="TrG5h" value="SimpleExample" />
@@ -150,7 +171,16 @@
         </node>
       </node>
     </node>
-    <node concept="2hFKOS" id="7FvB5$A7EZx" role="1hpOYk" />
+    <node concept="2hFKOS" id="7FvB5$A7EZx" role="1hpOYk">
+      <property role="3ay6DC" value="Gets here to start" />
+      <property role="3R9eB4" value="RLML.sandbox.SimpleExample" />
+      <property role="3R9e_F" value="RLML.sandbox.SimpleExample" />
+      <property role="3R9e_C" value=" " />
+      <property role="3R9e$n" value=" " />
+      <property role="3R9e$k" value=" " />
+      <property role="3R9e$V" value="java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2" />
+      <property role="3R9e$S" value=" " />
+    </node>
   </node>
   <node concept="2hFKN_" id="7FvB5$A7Fcq">
     <property role="TrG5h" value="SimpleGameQLearning" />
@@ -196,7 +226,6 @@
         </node>
       </node>
     </node>
-    <node concept="2hFKOS" id="7FvB5$A7ZNe" role="1hpOYk" />
     <node concept="2hFKOY" id="7FvB5$A7ZN$" role="1hpOZQ">
       <node concept="2KWCs8" id="7FvB5$A7ZN_" role="30DmD$">
         <property role="2KWCsb" value="[A, B, C, D, E, F]" />
@@ -210,6 +239,18 @@
       <node concept="1sM6Dn" id="7FvB5$A7ZNC" role="1sM6DO">
         <property role="1sM6D4" value="[C]" />
       </node>
+    </node>
+    <node concept="2hFKOS" id="2EZlHFsYIdf" role="1hpOYk">
+      <property role="3RCho$" value="Gets here to start" />
+      <property role="3R9eB4" value=" " />
+      <property role="3R9e$V" value=" " />
+      <property role="3R9e_C" value=" " />
+      <property role="3R9e$n" value=" " />
+      <property role="3R9e$k" value=" " />
+      <property role="3R9e$S" value=" " />
+      <property role="3R9e_F" value=" " />
+      <property role="3ay6DC" value="Gets here to start" />
+      <property role="UrZLp" value="Caught class java.lang.NoSuchMethodException: RLML.sandbox.PathFindingQLearning.getResult()" />
     </node>
   </node>
   <node concept="2hFKN_" id="3wJNW2i32k5">

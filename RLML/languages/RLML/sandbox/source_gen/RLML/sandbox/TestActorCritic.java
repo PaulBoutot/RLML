@@ -8,6 +8,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Collections;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.function.Function;
 import java.util.Map;
@@ -103,13 +105,26 @@ public class TestActorCritic {
     TestActorCritic obj = new TestActorCritic();
     obj.run();
     obj.printQTableResult();
+    obj.saveQTableResult();
     obj.showPolicy();
 
     long End = System.currentTimeMillis();
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  /*package*/ void run() {
+  public static void runAlgo() {
+    long Begin = System.currentTimeMillis();
+    TestActorCritic obj = new TestActorCritic();
+    obj.run();
+    obj.printQTableResult();
+    obj.saveQTableResult();
+    obj.showPolicy();
+    long End = System.currentTimeMillis();
+    System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
+
+  }
+
+  public double[][] run() {
     {
       // ActorCritic: Hyper Parameters
       final double alpha = 0.1;
@@ -167,6 +182,8 @@ public class TestActorCritic {
         // Update values
         currentState = nextState;
       }
+      return qTable;
+
     }
   }
 
@@ -193,6 +210,20 @@ public class TestActorCritic {
 
   /*package*/ int R(int s, int a) {
     return rewards[s][a];
+  }
+
+  /*package*/ void saveQTableResult() {
+    try {
+      File qTableFile = new File("Users/sahilsalma/Desktop/filename.txt");
+      if (qTableFile.createNewFile()) {
+        System.out.println("file created: " + qTableFile.getName());
+      } else {
+        System.out.println("File already exists");
+      }
+    } catch (IOException e) {
+      System.out.println("An error occured" + e);
+      e.printStackTrace();
+    }
   }
 
   /*package*/ void printQTableResult() {
