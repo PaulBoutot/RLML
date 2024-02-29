@@ -17,7 +17,7 @@
         <child id="4194945102978760622" name="environment" index="1hpOZQ" />
       </concept>
       <concept id="5049612793196370220" name="RLML.structure.Result" flags="ng" index="2hFKOS">
-        <property id="2289923223936601427" name="value" index="UrZLp" />
+        <property id="2289923223936601427" name="result" index="UrZLp" />
         <property id="3080276168209284274" name="value" index="3ay6DC" />
         <property id="3080276168165539790" name="value6" index="3R9e$k" />
         <property id="3080276168165539789" name="value5" index="3R9e$n" />
@@ -180,6 +180,7 @@
       <property role="3R9e$k" value=" " />
       <property role="3R9e$V" value="java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2" />
       <property role="3R9e$S" value=" " />
+      <property role="UrZLp" value=" " />
     </node>
   </node>
   <node concept="2hFKN_" id="7FvB5$A7Fcq">
@@ -210,47 +211,15 @@
         </node>
       </node>
     </node>
-    <node concept="2hFKOS" id="7FvB5$A7Fc$" role="1hpOYk" />
-  </node>
-  <node concept="2hFKN_" id="7FvB5$A7ZN4">
-    <property role="TrG5h" value="PathFindingQLearning" />
-    <node concept="2hFKOZ" id="7FvB5$A7ZNa" role="1hpOZB">
-      <node concept="1hpOEb" id="7FvB5$A7ZNP" role="1hpNCA">
-        <node concept="1H7eHA" id="7FvB5$A7ZNT" role="1hpNFi">
-          <node concept="1H7eHx" id="7FvB5$A7ZNX" role="1hpNF9">
-            <property role="1hpNF0" value="0.1" />
-            <property role="1hpNF2" value="0.9" />
-            <property role="1hpNTG" value="0.9" />
-            <property role="1hpNT_" value="100000" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="2hFKOY" id="7FvB5$A7ZN$" role="1hpOZQ">
-      <node concept="2KWCs8" id="7FvB5$A7ZN_" role="30DmD$">
-        <property role="2KWCsb" value="[A, B, C, D, E, F]" />
-      </node>
-      <node concept="2KWCs5" id="7FvB5$A7ZNA" role="30DmDA">
-        <property role="2KWCs4" value="[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]]" />
-      </node>
-      <node concept="30DmDJ" id="7FvB5$A7ZNB" role="30DmEp">
-        <property role="30DmDy" value="[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,100,0,0,0]]" />
-      </node>
-      <node concept="1sM6Dn" id="7FvB5$A7ZNC" role="1sM6DO">
-        <property role="1sM6D4" value="[C]" />
-      </node>
-    </node>
-    <node concept="2hFKOS" id="2EZlHFsYIdf" role="1hpOYk">
-      <property role="3RCho$" value="Gets here to start" />
+    <node concept="2hFKOS" id="7FvB5$A7Fc$" role="1hpOYk">
+      <property role="UrZLp" value=" " />
       <property role="3R9eB4" value=" " />
-      <property role="3R9e$V" value=" " />
+      <property role="3R9e_F" value=" " />
       <property role="3R9e_C" value=" " />
       <property role="3R9e$n" value=" " />
       <property role="3R9e$k" value=" " />
+      <property role="3R9e$V" value=" " />
       <property role="3R9e$S" value=" " />
-      <property role="3R9e_F" value=" " />
-      <property role="3ay6DC" value="Gets here to start" />
-      <property role="UrZLp" value="Caught class java.lang.NoSuchMethodException: RLML.sandbox.PathFindingQLearning.getResult()" />
     </node>
   </node>
   <node concept="2hFKN_" id="3wJNW2i32k5">
@@ -341,7 +310,9 @@
         </node>
       </node>
     </node>
-    <node concept="2hFKOS" id="4b2ZscRLN2T" role="1hpOYk" />
+    <node concept="2hFKOS" id="4b2ZscRLN2T" role="1hpOYk">
+      <property role="UrZLp" value="Q-Table Result:&#10;A:  0 0.11 0 &#10;B:  0 98.41 0.01 &#10;C:  0.01 0.51 0.01 &#10;&#10;Policy:&#10;From A go to B&#10;From B go to B&#10;From C go to B&#10;" />
+    </node>
   </node>
   <node concept="2hFKN_" id="4b2ZscROBeY">
     <property role="TrG5h" value="TestMonteCarloControl" />
@@ -432,6 +403,38 @@
       </node>
     </node>
     <node concept="2hFKOS" id="4b2ZscWhD2X" role="1hpOYk" />
+  </node>
+  <node concept="2hFKN_" id="13P5N0dZv8O">
+    <property role="TrG5h" value="PathFindingQLearning" />
+    <node concept="2hFKOY" id="13P5N0dZv8P" role="1hpOZQ">
+      <node concept="2KWCs8" id="13P5N0dZv8Q" role="30DmD$">
+        <property role="2KWCsb" value="[A, B, C, D, E, F]" />
+      </node>
+      <node concept="2KWCs5" id="13P5N0dZv8R" role="30DmDA">
+        <property role="2KWCs4" value="[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]]" />
+      </node>
+      <node concept="30DmDJ" id="13P5N0dZv8S" role="30DmEp">
+        <property role="30DmDy" value="[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,100,0,0,0]]" />
+      </node>
+      <node concept="1sM6Dn" id="13P5N0dZv8T" role="1sM6DO">
+        <property role="1sM6D4" value="[C]" />
+      </node>
+    </node>
+    <node concept="2hFKOZ" id="13P5N0dZv8U" role="1hpOZB">
+      <node concept="1hpOEb" id="13P5N0dZvi5" role="1hpNCA">
+        <node concept="1H7eHA" id="13P5N0dZvi9" role="1hpNFi">
+          <node concept="1H7eHx" id="13P5N0dZvid" role="1hpNF9">
+            <property role="1hpNF0" value="0.1" />
+            <property role="1hpNF2" value="0.9" />
+            <property role="1hpNTG" value="0.9" />
+            <property role="1hpNT_" value="100000" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2hFKOS" id="13P5N0dZv8Y" role="1hpOYk">
+      <property role="UrZLp" value=" " />
+    </node>
   </node>
 </model>
 

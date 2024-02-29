@@ -112,18 +112,6 @@ public class FrozenLake {
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  public static void runAlgo() {
-    long Begin = System.currentTimeMillis();
-    FrozenLake obj = new FrozenLake();
-    obj.run();
-    obj.printQTableResult();
-    obj.saveQTableResult();
-    obj.showPolicy();
-    long End = System.currentTimeMillis();
-    System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
-
-  }
-
   public double[][] run() {
     {
       // Q-learning: When we update the Q(St, At), we will choose the A(t+1) that makes Q(St+1, At+1) estimated
@@ -214,6 +202,14 @@ public class FrozenLake {
     return rewards[s][a];
   }
 
+  public StringBuilder getResult() {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(this.printQTableResult());
+    stringBuilder.append(System.getProperty("line.separator"));
+    stringBuilder.append(this.showPolicy());
+    return stringBuilder;
+  }
+
   /*package*/ void saveQTableResult() {
     try {
       File qTableFile = new File("Users/sahilsalma/Desktop/filename.txt");
@@ -228,16 +224,24 @@ public class FrozenLake {
     }
   }
 
-  /*package*/ void printQTableResult() {
-    System.out.println("Q-Table Result:");
+  public StringBuilder printQTableResult() {
+    StringBuilder qTableStr = new StringBuilder();
+    qTableStr.append("Q-Table Result:");
+    qTableStr.append(System.getProperty("line.separator"));
+
     for (int i = 0; i < qTable.length; i++) {
-      System.out.print("" + states[i] + ":  ");
+      qTableStr.append("" + states[i] + ":  ");
       for (int j = 0; j < qTable[i].length; j++) {
-        System.out.print(df.format(qTable[i][j]) + " ");
+        qTableStr.append(String.format("%4s ", df.format(qTable[i][j])));
       }
-      System.out.println();
+      qTableStr.append(System.getProperty("line.separator"));
     }
+
+    System.out.println(qTableStr.toString());
+    return qTableStr;
   }
+
+
 
   /*package*/ int policy(int state) {
     int[] actionsFromState = actions[state];
@@ -255,13 +259,21 @@ public class FrozenLake {
     return policyGotoState;
   }
 
-  /*package*/ void showPolicy() {
-    System.out.println("Policy:");
+  public StringBuilder showPolicy() {
+    StringBuilder policy = new StringBuilder();
+    policy.append("Policy:");
+    policy.append(System.getProperty("line.separator"));
+
     for (int i = 0; i < states.length; i++) {
       int to = policy(i);
-      System.out.println("From " + states[i] + " go to " + states[to]);
+      policy.append(String.format("From %2s go to %2s", states[i], states[to]));
+      policy.append(System.getProperty("line.separator"));
     }
+
+    System.out.println(policy.toString());
+    return policy;
   }
+
 
   public class ActorCriticAgent implements Serializable {
     private ActorCriticLearner learner;

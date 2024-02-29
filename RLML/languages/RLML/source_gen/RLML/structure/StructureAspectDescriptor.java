@@ -203,14 +203,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.class_(false, false, false);
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/5049612793196370220");
     b.version(3);
-    b.property("value", 0x1fc7710a25a88d53L).type(PrimitiveTypeId.STRING).origin("2289923223936601427").done();
-    b.property("value2", 0x2abf56dadd9bbf1eL).type(PrimitiveTypeId.STRING).origin("3080276168165539614").done();
-    b.property("value3", 0x2abf56dadd9bbfb1L).type(PrimitiveTypeId.STRING).origin("3080276168165539761").done();
-    b.property("value4", 0x2abf56dadd9bbfb2L).type(PrimitiveTypeId.STRING).origin("3080276168165539762").done();
-    b.property("value5", 0x2abf56dadd9bbfcdL).type(PrimitiveTypeId.STRING).origin("3080276168165539789").done();
-    b.property("value6", 0x2abf56dadd9bbfceL).type(PrimitiveTypeId.STRING).origin("3080276168165539790").done();
-    b.property("value7", 0x2abf56dadd9bbfe1L).type(PrimitiveTypeId.STRING).origin("3080276168165539809").done();
-    b.property("value8", 0x2abf56dadd9bbfe2L).type(PrimitiveTypeId.STRING).origin("3080276168165539810").done();
+    b.property("result", 0x1fc7710a25a88d53L).type(PrimitiveTypeId.STRING).origin("2289923223936601427").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForRewards() {
