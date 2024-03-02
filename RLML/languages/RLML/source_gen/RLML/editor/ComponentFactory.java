@@ -19,9 +19,9 @@ import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SProperty;
 
-public class ButtonFactory {
+public class ComponentFactory {
   public static JComponent createRunProgramButton(final EditorContext editorContext, final SNode node) {
-    JButton button = ButtonFactory.createButton(node, editorContext, "Run Program", new Runnable() {
+    JButton button = ComponentFactory.createButton(node, editorContext, "Run Program", new Runnable() {
       @Override
       public void run() {
 
@@ -33,7 +33,7 @@ public class ButtonFactory {
     return button;
   }
   public static JComponent createClearButton(final EditorContext editorContext, final SNode node) {
-    JButton button = ButtonFactory.createButton(node, editorContext, "Clear Result", new Runnable() {
+    JButton button = ComponentFactory.createButton(node, editorContext, "Clear Result", new Runnable() {
       @Override
       public void run() {
         SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.result$uOrF), PROPS.result$tVy0, " ");
