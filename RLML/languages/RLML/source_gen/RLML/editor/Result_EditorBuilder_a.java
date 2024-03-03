@@ -59,6 +59,6 @@ import javax.swing.JComponent;
     return editorCell;
   }
   private JComponent _QueryFunction_JComponent_ouom3r_a1a() {
-    return ButtonFactory.createResultArea(myNode);
+    return ComponentFactory.createResultArea(myNode);
   }
 }

@@ -25,6 +25,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptRLAgent = createDescriptorForRLAgent();
   /*package*/ final ConceptDescriptor myConceptRLAlgorithm = createDescriptorForRLAlgorithm();
   /*package*/ final ConceptDescriptor myConceptRLML = createDescriptorForRLML();
+  /*package*/ final ConceptDescriptor myConceptRLMLComparator = createDescriptorForRLMLComparator();
   /*package*/ final ConceptDescriptor myConceptResult = createDescriptorForResult();
   /*package*/ final ConceptDescriptor myConceptRewards = createDescriptorForRewards();
   /*package*/ final ConceptDescriptor myConceptSARSA = createDescriptorForSARSA();
@@ -44,7 +45,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptActions, myConceptActorCritic, myConceptDQN, myConceptDoneStates, myConceptEnvironment, myConceptHyperparameters, myConceptMonteCarloControl, myConceptQLearning, myConceptRLAgent, myConceptRLAlgorithm, myConceptRLML, myConceptResult, myConceptRewards, myConceptSARSA, myConceptSettings, myConceptStates);
+    return Arrays.asList(myConceptActions, myConceptActorCritic, myConceptDQN, myConceptDoneStates, myConceptEnvironment, myConceptHyperparameters, myConceptMonteCarloControl, myConceptQLearning, myConceptRLAgent, myConceptRLAlgorithm, myConceptRLML, myConceptRLMLComparator, myConceptResult, myConceptRewards, myConceptSARSA, myConceptSettings, myConceptStates);
   }
 
   @Override
@@ -73,6 +74,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptRLAlgorithm;
       case LanguageConceptSwitch.RLML:
         return myConceptRLML;
+      case LanguageConceptSwitch.RLMLComparator:
+        return myConceptRLMLComparator;
       case LanguageConceptSwitch.Result:
         return myConceptResult;
       case LanguageConceptSwitch.Rewards:
@@ -106,6 +109,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.class_(false, false, false);
     // extends: RLML.structure.RLAlgorithm
     b.super_(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x6166013d0c7ae9d6L);
+    b.parent(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x6e62cf10d25a65e0L);
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/4810686366881361394");
     b.version(3);
     return b.create();
@@ -115,6 +119,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.class_(false, false, false);
     // extends: RLML.structure.RLAlgorithm
     b.super_(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x6166013d0c7ae9d6L);
+    b.parent(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x6e62cf10d25a65e0L);
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/4754067750975714854");
     b.version(3);
     return b.create();
@@ -155,6 +160,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.class_(false, false, false);
     // extends: RLML.structure.RLAlgorithm
     b.super_(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x6166013d0c7ae9d6L);
+    b.parent(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x6e62cf10d25a65e0L);
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/4810686366881886308");
     b.version(3);
     return b.create();
@@ -166,6 +172,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.super_(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x6166013d0c7ae9d6L);
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/4194945102978759379");
     b.version(3);
+    b.alias("QLearning");
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForRLAgent() {
@@ -193,9 +200,25 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.parent(0x4caf0310491e41f5L, 0x8a9b2006b3a94898L, 0x40c1a7cb987d20d5L);
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/5049612793196370161");
     b.version(3);
+    b.property("useFile", 0x10f517300f490204L).type(PrimitiveTypeId.BOOLEAN).origin("1221908369083269636").done();
+    b.property("displayFileStatus", 0x10f517300f50b65bL).type(PrimitiveTypeId.STRING).origin("1221908369083774555").done();
     b.aggregate("environment", 0x3a3770586b503faeL).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92aL).optional(false).ordered(true).multiple(false).origin("4194945102978760622").done();
     b.aggregate("agent", 0x3a3770586b503fbfL).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92bL).optional(false).ordered(true).multiple(false).origin("4194945102978760639").done();
     b.aggregate("result", 0x3a3770586b503fccL).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92cL).optional(false).ordered(true).multiple(false).origin("4194945102978760652").done();
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForRLMLComparator() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("RLML", "RLMLComparator", 0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x10f517300f75a927L);
+    b.class_(false, false, true);
+    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
+    b.parent(0x4caf0310491e41f5L, 0x8a9b2006b3a94898L, 0x40c1a7cb987d20d5L);
+    b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/1221908369086196007");
+    b.version(3);
+    b.property("useFile", 0x10f517300f75a943L).type(PrimitiveTypeId.BOOLEAN).origin("1221908369086196035").done();
+    b.property("displayFileStatus", 0x10f517300f75a944L).type(PrimitiveTypeId.STRING).origin("1221908369086196036").done();
+    b.aggregate("environment", 0x10f517300f75a947L).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92aL).optional(false).ordered(true).multiple(false).origin("1221908369086196039").done();
+    b.aggregate("agent", 0x10f517300f75a948L).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92bL).optional(false).ordered(true).multiple(true).origin("1221908369086196040").done();
+    b.aggregate("result", 0x10f517300f75a949L).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92cL).optional(false).ordered(true).multiple(true).origin("1221908369086196041").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForResult() {
@@ -221,6 +244,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.super_(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x6166013d0c7ae9d6L);
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/7018298431017511542");
     b.version(3);
+    b.alias("SARASA");
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForSettings() {

@@ -20,11 +20,12 @@ public final class LanguageConceptSwitch {
   public static final int RLAgent = 8;
   public static final int RLAlgorithm = 9;
   public static final int RLML = 10;
-  public static final int Result = 11;
-  public static final int Rewards = 12;
-  public static final int SARSA = 13;
-  public static final int Settings = 14;
-  public static final int States = 15;
+  public static final int RLMLComparator = 11;
+  public static final int Result = 12;
+  public static final int Rewards = 13;
+  public static final int SARSA = 14;
+  public static final int Settings = 15;
+  public static final int States = 16;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L);
@@ -39,6 +40,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x4613d414d7bcd92bL, RLAgent);
     builder.put(0x6166013d0c7ae9d6L, RLAlgorithm);
     builder.put(0x4613d414d7bcd8f1L, RLML);
+    builder.put(0x10f517300f75a927L, RLMLComparator);
     builder.put(0x4613d414d7bcd92cL, Result);
     builder.put(0x49c190188964fa77L, Rewards);
     builder.put(0x6166013d0c7aea76L, SARSA);

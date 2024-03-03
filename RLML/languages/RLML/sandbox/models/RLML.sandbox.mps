@@ -3,6 +3,7 @@
   <persistence version="9" />
   <languages>
     <use id="3c2f74fb-565a-4cb8-8a81-42024cc7aa10" name="RLML" version="0" />
+    <use id="3b1a18ff-6fd4-4977-ba7e-a7ddc907c639" name="com.juliuscanute.python" version="0" />
   </languages>
   <imports>
     <import index="9z78" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:javax.swing.border(JDK/)" />
@@ -12,6 +13,7 @@
   <registry>
     <language id="3c2f74fb-565a-4cb8-8a81-42024cc7aa10" name="RLML">
       <concept id="5049612793196370161" name="RLML.structure.RLML" flags="ng" index="2hFKN_">
+        <property id="1221908369083774555" name="displayFileStatus" index="vDq5F" />
         <child id="4194945102978760652" name="result" index="1hpOYk" />
         <child id="4194945102978760639" name="agent" index="1hpOZB" />
         <child id="4194945102978760622" name="environment" index="1hpOZQ" />
@@ -36,6 +38,11 @@
       </concept>
       <concept id="5049612793196370219" name="RLML.structure.RLAgent" flags="ng" index="2hFKOZ">
         <child id="4194945102978763390" name="algorithm" index="1hpNCA" />
+      </concept>
+      <concept id="1221908369086196007" name="RLML.structure.RLMLComparator" flags="ng" index="vwbSn">
+        <child id="1221908369086196039" name="environment" index="vwbTR" />
+        <child id="1221908369086196040" name="agent" index="vwbTS" />
+        <child id="1221908369086196041" name="result" index="vwbTT" />
       </concept>
       <concept id="4754067750975714854" name="RLML.structure.DQN" flags="ng" index="IXu58" />
       <concept id="2123160928991345816" name="RLML.structure.Actions" flags="ng" index="2KWCs5">
@@ -120,9 +127,10 @@
       </node>
     </node>
     <node concept="2hFKOZ" id="7FvB5$A7EQN" role="1hpOZB">
-      <node concept="1H7eHb" id="7FvB5$A7ESr" role="1hpNCA">
-        <node concept="1H7eHA" id="7FvB5$A7ESv" role="1hpNFi">
-          <node concept="1H7eHx" id="7FvB5$A7ESz" role="1hpNF9">
+      <node concept="1H7eHb" id="13P5N0faKGZ" role="1hpNCA">
+        <property role="TrG5h" value="SARSA" />
+        <node concept="1H7eHA" id="13P5N0faKH1" role="1hpNFi">
+          <node concept="1H7eHx" id="13P5N0faKH3" role="1hpNF9">
             <property role="1hpNF0" value="0.1" />
             <property role="1hpNF2" value="0.9" />
             <property role="1hpNTG" value="0.9" />
@@ -141,6 +149,7 @@
       <property role="3R9e$k" value=" " />
       <property role="3R9e$V" value=" " />
       <property role="3R9e$S" value=" " />
+      <property role="UrZLp" value="Q-Table Result:&#10;A:  13.46 22.17    0 10.21 14.72 24.43 &#10;B:  10.41 28.34  100 9.21 11.36 37.32 &#10;C:     0    0    0    0    0    0 &#10;D:  12.39 7.89    0 12.69 15.17 6.64 &#10;E:  16.34 24.34    0 7.57 15.22 31.78 &#10;F:  8.17 65.66  100 5.95 5.43 36.04 &#10;&#10;Policy:&#10;From  A go to  B&#10;From  B go to  C&#10;From  C go to  C&#10;From  D go to  E&#10;From  E go to  F&#10;From  F go to  C&#10;" />
     </node>
   </node>
   <node concept="2hFKN_" id="7FvB5$A7EZn">
@@ -180,23 +189,23 @@
       <property role="3R9e$k" value=" " />
       <property role="3R9e$V" value="java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2" />
       <property role="3R9e$S" value=" " />
-      <property role="UrZLp" value=" " />
+      <property role="UrZLp" value="Q-Table Result:&#10;A:     0    0 &#10;B:     0    0 &#10;&#10;Policy:&#10;From  A go to  A&#10;From  B go to  B&#10;" />
     </node>
   </node>
   <node concept="2hFKN_" id="7FvB5$A7Fcq">
     <property role="TrG5h" value="SimpleGameQLearning" />
     <node concept="2hFKOY" id="7FvB5$A7Fcr" role="1hpOZQ">
       <node concept="2KWCs8" id="7FvB5$A7Fcs" role="30DmD$">
-        <property role="2KWCsb" value="[A, B, C, D, E, F, G, H, I]" />
+        <property role="2KWCsb" value="[A, B, C, D, E, F] " />
       </node>
       <node concept="2KWCs5" id="7FvB5$A7Fct" role="30DmDA">
-        <property role="2KWCs4" value="[[1,3], [0,2,4], [1,5], [0,4,6], [1,3,5,7], [2,4,8], [3,7], [4,6,8], [5,7]]" />
+        <property role="2KWCs4" value="[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] " />
       </node>
       <node concept="30DmDJ" id="7FvB5$A7Fcu" role="30DmEp">
-        <property role="30DmDy" value="[[0,0,0,0,0,0,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0]]" />
+        <property role="30DmDy" value="[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]] " />
       </node>
       <node concept="1sM6Dn" id="7FvB5$A7Fcv" role="1sM6DO">
-        <property role="1sM6D4" value="[C]" />
+        <property role="1sM6D4" value="[C] " />
       </node>
     </node>
     <node concept="2hFKOZ" id="7FvB5$A7Fcw" role="1hpOZB">
@@ -212,7 +221,7 @@
       </node>
     </node>
     <node concept="2hFKOS" id="7FvB5$A7Fc$" role="1hpOYk">
-      <property role="UrZLp" value=" " />
+      <property role="UrZLp" value="Q-Table Result:&#10;A:     0   90    0 72.9    0    0 &#10;B:    81    0  100    0   81    0 &#10;C:     0    0    0    0    0    0 &#10;D:    81    0    0    0   81    0 &#10;E:     0   90    0 72.9    0   90 &#10;F:     0    0  100    0   81    0 &#10;&#10;Policy:&#10;From  A go to  B&#10;From  B go to  C&#10;From  C go to  C&#10;From  D go to  A&#10;From  E go to  B&#10;From  F go to  C&#10;" />
       <property role="3R9eB4" value=" " />
       <property role="3R9e_F" value=" " />
       <property role="3R9e_C" value=" " />
@@ -286,16 +295,16 @@
     <property role="TrG5h" value="TestActorCritic" />
     <node concept="2hFKOY" id="4b2ZscRLN2K" role="1hpOZQ">
       <node concept="2KWCs8" id="4b2ZscRLN2L" role="30DmD$">
-        <property role="2KWCsb" value="[A,B,C]" />
+        <property role="2KWCsb" value="[A, B, C, D, E, F] " />
       </node>
       <node concept="2KWCs5" id="4b2ZscRLN2M" role="30DmDA">
-        <property role="2KWCs4" value="[[0,1,2],[0,1,2],[0,1,2]]" />
+        <property role="2KWCs4" value="[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] " />
       </node>
       <node concept="30DmDJ" id="4b2ZscRLN2N" role="30DmEp">
-        <property role="30DmDy" value="[[0,1,0],[0,1,0],[0,1,0]]" />
+        <property role="30DmDy" value="[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]] " />
       </node>
       <node concept="1sM6Dn" id="4b2ZscRLN2O" role="1sM6DO">
-        <property role="1sM6D4" value="[B]" />
+        <property role="1sM6D4" value="[C] " />
       </node>
     </node>
     <node concept="2hFKOZ" id="4b2ZscRLN2P" role="1hpOZB">
@@ -346,6 +355,7 @@
   </node>
   <node concept="2hFKN_" id="4b2ZscVrPDZ">
     <property role="TrG5h" value="FrozenLakeActorCritic" />
+    <property role="vDq5F" value="" />
     <node concept="2hFKOY" id="4b2ZscVrPE0" role="1hpOZQ">
       <node concept="2KWCs8" id="4b2ZscVrPE1" role="30DmD$">
         <property role="2KWCsb" value="[S, F, F, F, F, H, F, H, F, F, F, H, H, F, F, G] " />
@@ -361,21 +371,25 @@
       </node>
     </node>
     <node concept="2hFKOZ" id="4b2ZscVrPE5" role="1hpOZB">
-      <node concept="1P1t0L" id="4b2ZscVrPFk" role="1hpNCA">
-        <node concept="1H7eHA" id="4b2ZscVrPFm" role="1hpNFi">
-          <node concept="1H7eHx" id="4b2ZscVrPFo" role="1hpNF9">
+      <node concept="1hpOEb" id="13P5N0f5lmg" role="1hpNCA">
+        <property role="TrG5h" value="QLearning" />
+        <node concept="1H7eHA" id="13P5N0f5lmi" role="1hpNFi">
+          <node concept="1H7eHx" id="13P5N0f5lmk" role="1hpNF9">
             <property role="1hpNF0" value="0.1" />
             <property role="1hpNF2" value="0.9" />
-            <property role="1hpNTG" value="0.9" />
-            <property role="1hpNT_" value="1000" />
+            <property role="1hpNTG" value="0.1" />
+            <property role="1hpNT_" value="10000" />
           </node>
         </node>
       </node>
     </node>
-    <node concept="2hFKOS" id="4b2ZscVrPE9" role="1hpOYk" />
+    <node concept="2hFKOS" id="4b2ZscVrPE9" role="1hpOYk">
+      <property role="UrZLp" value="Q-Table Result:&#10;S:     0 0.59    0    0 0.59    0    0    0    0    0    0    0    0    0    0    0 &#10;F:  0.53    0 0.66    0    0 0.66    0    0    0    0    0    0    0    0    0    0 &#10;F:     0 0.59    0 0.73    0    0 0.73    0    0    0    0    0    0    0    0    0 &#10;F:     0    0 0.66    0    0    0    0 0.81    0    0    0    0    0    0    0    0 &#10;F:  0.53    0    0    0    0 0.66    0    0 0.66    0    0    0    0    0    0    0 &#10;H:     0 0.59    0    0 0.59    0 0.73    0    0 0.73    0    0    0    0    0    0 &#10;F:     0    0 0.66    0    0 0.66    0 0.81    0    0 0.81    0    0    0    0    0 &#10;H:     0    0    0 0.73    0    0 0.73    0    0    0    0  0.9    0    0    0    0 &#10;F:     0    0    0    0 0.59    0    0    0    0 0.73    0    0 0.73    0    0    0 &#10;F:     0    0    0    0    0 0.66    0    0 0.66    0 0.81    0    0 0.81    0    0 &#10;F:     0    0    0    0    0    0 0.73    0    0 0.73    0  0.9    0    0  0.9    0 &#10;H:     0    0    0    0    0    0    0 0.81    0    0 0.81    0    0    0    0    1 &#10;H:     0    0    0    0    0    0    0    0 0.66    0    0    0    0 0.81    0    0 &#10;F:     0    0    0    0    0    0    0    0    0 0.73    0    0 0.73    0  0.9    0 &#10;F:     0    0    0    0    0    0    0    0    0    0 0.81    0    0 0.81    0    1 &#10;G:     0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0 &#10;&#10;Policy:&#10;From  S go to  F&#10;From  F go to  F&#10;From  F go to  F&#10;From  F go to  H&#10;From  F go to  F&#10;From  H go to  F&#10;From  F go to  F&#10;From  H go to  H&#10;From  F go to  F&#10;From  F go to  F&#10;From  F go to  F&#10;From  H go to  G&#10;From  H go to  F&#10;From  F go to  F&#10;From  F go to  G&#10;From  G go to  G&#10;" />
+    </node>
   </node>
   <node concept="2hFKN_" id="4b2ZscWhD2N">
     <property role="TrG5h" value="PathFindingActorCritic" />
+    <property role="vDq5F" value="" />
     <node concept="2hFKOY" id="4b2ZscWhD2O" role="1hpOZQ">
       <node concept="2KWCs8" id="4b2ZscWhD2P" role="30DmD$">
         <property role="2KWCsb" value="[A, B, C, D, E, F]" />
@@ -391,9 +405,10 @@
       </node>
     </node>
     <node concept="2hFKOZ" id="4b2ZscWhD2T" role="1hpOZB">
-      <node concept="1P1t0L" id="4b2ZscWhD4S" role="1hpNCA">
-        <node concept="1H7eHA" id="4b2ZscWhD4U" role="1hpNFi">
-          <node concept="1H7eHx" id="4b2ZscWhD4W" role="1hpNF9">
+      <node concept="1P1t0L" id="13P5N0fgJ9r" role="1hpNCA">
+        <property role="TrG5h" value="ActorCritic" />
+        <node concept="1H7eHA" id="13P5N0fgJ9t" role="1hpNFi">
+          <node concept="1H7eHx" id="13P5N0fgJ9v" role="1hpNF9">
             <property role="1hpNF0" value="0.3" />
             <property role="1hpNF2" value="0.5" />
             <property role="1hpNTG" value="0.9" />
@@ -402,22 +417,25 @@
         </node>
       </node>
     </node>
-    <node concept="2hFKOS" id="4b2ZscWhD2X" role="1hpOYk" />
+    <node concept="2hFKOS" id="4b2ZscWhD2X" role="1hpOYk">
+      <property role="UrZLp" value=" " />
+    </node>
   </node>
   <node concept="2hFKN_" id="13P5N0dZv8O">
     <property role="TrG5h" value="PathFindingQLearning" />
+    <property role="vDq5F" value="Selected file successfully processed, make sure data constraints are followed" />
     <node concept="2hFKOY" id="13P5N0dZv8P" role="1hpOZQ">
       <node concept="2KWCs8" id="13P5N0dZv8Q" role="30DmD$">
-        <property role="2KWCsb" value="[A, B, C, D, E, F]" />
+        <property role="2KWCsb" value="[A, B, C, D, E, F] " />
       </node>
       <node concept="2KWCs5" id="13P5N0dZv8R" role="30DmDA">
-        <property role="2KWCs4" value="[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]]" />
+        <property role="2KWCs4" value="[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] " />
       </node>
       <node concept="30DmDJ" id="13P5N0dZv8S" role="30DmEp">
-        <property role="30DmDy" value="[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,100,0,0,0]]" />
+        <property role="30DmDy" value="[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]] " />
       </node>
       <node concept="1sM6Dn" id="13P5N0dZv8T" role="1sM6DO">
-        <property role="1sM6D4" value="[C]" />
+        <property role="1sM6D4" value="[C] " />
       </node>
     </node>
     <node concept="2hFKOZ" id="13P5N0dZv8U" role="1hpOZB">
@@ -435,6 +453,41 @@
     <node concept="2hFKOS" id="13P5N0dZv8Y" role="1hpOYk">
       <property role="UrZLp" value=" " />
     </node>
+  </node>
+  <node concept="vwbSn" id="13P5N0ftH0e">
+    <node concept="2hFKOY" id="13P5N0ftH0f" role="vwbTR">
+      <node concept="2KWCs8" id="13P5N0ftH0g" role="30DmD$" />
+      <node concept="2KWCs5" id="13P5N0ftH0h" role="30DmDA" />
+      <node concept="30DmDJ" id="13P5N0ftH0i" role="30DmEp" />
+      <node concept="1sM6Dn" id="13P5N0ftH0j" role="1sM6DO" />
+    </node>
+    <node concept="2hFKOZ" id="13P5N0ftH0k" role="vwbTS">
+      <node concept="1hpOEb" id="13P5N0ftH0p" role="1hpNCA">
+        <property role="TrG5h" value="QLearning" />
+        <node concept="1H7eHA" id="13P5N0ftH0t" role="1hpNFi">
+          <node concept="1H7eHx" id="13P5N0ftH0x" role="1hpNF9">
+            <property role="1hpNF0" value="0.1" />
+            <property role="1hpNF2" value="0.1" />
+            <property role="1hpNTG" value="0.1" />
+            <property role="1hpNT_" value="10000" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2hFKOZ" id="13P5N0ftH0C" role="vwbTS">
+      <node concept="1H7eHb" id="13P5N0ftH0O" role="1hpNCA">
+        <property role="TrG5h" value="SARSA" />
+        <node concept="1H7eHA" id="13P5N0ftH0S" role="1hpNFi">
+          <node concept="1H7eHx" id="13P5N0ftH0W" role="1hpNF9">
+            <property role="1hpNF0" value="0.9" />
+            <property role="1hpNF2" value="0.1" />
+            <property role="1hpNTG" value="0.9" />
+            <property role="1hpNT_" value="10000" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2hFKOS" id="13P5N0ftH0o" role="vwbTT" />
   </node>
 </model>
 

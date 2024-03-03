@@ -17,6 +17,7 @@
   </dependencies>
   <languageVersions>
     <language slang="l:3c2f74fb-565a-4cb8-8a81-42024cc7aa10:RLML" version="0" />
+    <language slang="l:3b1a18ff-6fd4-4977-ba7e-a7ddc907c639:com.juliuscanute.python" version="0" />
     <language slang="l:4caf0310-491e-41f5-8a9b-2006b3a94898:jetbrains.mps.execution.util" version="0" />
     <language slang="l:ceab5195-25ea-4f22-9b92-103b95ca8c0c:jetbrains.mps.lang.core" version="2" />
   </languageVersions>
@@ -28,6 +29,7 @@
     <module reference="3c2f74fb-565a-4cb8-8a81-42024cc7aa10(RLML)" version="0" />
     <module reference="fa59b5cc-690b-4d1d-87b2-02fad3c7ed0b(RLML.sandbox)" version="0" />
     <module reference="990507d3-3527-4c54-bfe9-0ca3c9c6247a(com.dslfoundry.plaintextgen)" version="0" />
+    <module reference="3b1a18ff-6fd4-4977-ba7e-a7ddc907c639(com.juliuscanute.python)" version="0" />
     <module reference="4caf0310-491e-41f5-8a9b-2006b3a94898(jetbrains.mps.execution.util)" version="0" />
     <module reference="d936855b-48da-4812-a8a0-2bfddd633ac5(jetbrains.mps.lang.behavior.api)" version="0" />
     <module reference="ceab5195-25ea-4f22-9b92-103b95ca8c0c(jetbrains.mps.lang.core)" version="0" />

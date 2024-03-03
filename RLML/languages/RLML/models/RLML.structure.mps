@@ -8,6 +8,7 @@
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
     <import index="4fqr" ref="r:fa713d69-08ea-4732-b1f2-cb07f9e103ef(jetbrains.mps.execution.util.structure)" implicit="true" />
+    <import index="tpce" ref="r:00000000-0000-4000-0000-011c89590292(jetbrains.mps.lang.structure.structure)" implicit="true" />
   </imports>
   <registry>
     <language id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure">
@@ -79,6 +80,16 @@
     </node>
     <node concept="PrWs8" id="1QZCWFQniuL" role="PzmwI">
       <ref role="PrY4T" to="4fqr:431DWIovi3l" resolve="IMainClass" />
+    </node>
+    <node concept="1TJgyi" id="13P5N0fig84" role="1TKVEl">
+      <property role="IQ2nx" value="1221908369083269636" />
+      <property role="TrG5h" value="useFile" />
+      <ref role="AX2Wp" to="tpck:fKAQMTB" resolve="boolean" />
+    </node>
+    <node concept="1TJgyi" id="13P5N0fkbpr" role="1TKVEl">
+      <property role="IQ2nx" value="1221908369083774555" />
+      <property role="TrG5h" value="displayFileStatus" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
     </node>
   </node>
   <node concept="1TIwiD" id="4ojP1jnJd$E">
@@ -201,6 +212,7 @@
     <property role="TrG5h" value="SARSA" />
     <property role="3GE5qa" value="RLAlgoritms" />
     <property role="R4oN_" value="SARSA - On-policy TD Control Algorithm" />
+    <property role="34LRSv" value="SARASA" />
     <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
   </node>
   <node concept="1TIwiD" id="3CRs5xFk3Fj">
@@ -208,6 +220,7 @@
     <property role="3GE5qa" value="RLAlgoritms" />
     <property role="TrG5h" value="QLearning" />
     <property role="R4oN_" value="Q-Learning - Off-policy TD Control Algorithm" />
+    <property role="34LRSv" value="QLearning" />
     <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
   </node>
   <node concept="1TIwiD" id="47TPQTJ33oA">
@@ -216,6 +229,9 @@
     <property role="TrG5h" value="DQN" />
     <property role="R4oN_" value="RL DQN Algorithm" />
     <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
+    <node concept="PrWs8" id="13P5N0eVS3O" role="PzmwI">
+      <ref role="PrY4T" to="tpce:6TyNL3imAnw" resolve="INamedAspect" />
+    </node>
   </node>
   <node concept="1TIwiD" id="1PQYTQHx7Ml">
     <property role="EcuMT" value="2123160928991345813" />
@@ -267,6 +283,9 @@
     <property role="TrG5h" value="ActorCritic" />
     <property role="R4oN_" value="RL Actor Critic Algorithm" />
     <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
+    <node concept="PrWs8" id="13P5N0eVS2n" role="PzmwI">
+      <ref role="PrY4T" to="tpce:6TyNL3imAnw" resolve="INamedAspect" />
+    </node>
   </node>
   <node concept="1TIwiD" id="4b2ZscRNN1$">
     <property role="EcuMT" value="4810686366881886308" />
@@ -274,6 +293,52 @@
     <property role="TrG5h" value="MonteCarloControl" />
     <property role="R4oN_" value="RL Monte Carlo Control Algorithm" />
     <ref role="1TJDcQ" node="65A0jOcuIBm" resolve="RLAlgorithm" />
+    <node concept="PrWs8" id="13P5N0eVS61" role="PzmwI">
+      <ref role="PrY4T" to="tpce:6TyNL3imAnw" resolve="INamedAspect" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="13P5N0ftq$B">
+    <property role="EcuMT" value="1221908369086196007" />
+    <property role="TrG5h" value="RLMLComparator" />
+    <property role="19KtqR" value="true" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="1TJgyj" id="13P5N0ftq_7" role="1TKVEi">
+      <property role="IQ2ns" value="1221908369086196039" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="environment" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="4ojP1jnJd$E" resolve="Environment" />
+    </node>
+    <node concept="1TJgyj" id="13P5N0ftq_8" role="1TKVEi">
+      <property role="IQ2ns" value="1221908369086196040" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="agent" />
+      <property role="20lbJX" value="fLJekj6/_1__n" />
+      <ref role="20lvS9" node="4ojP1jnJd$F" resolve="RLAgent" />
+    </node>
+    <node concept="1TJgyj" id="13P5N0ftq_9" role="1TKVEi">
+      <property role="IQ2ns" value="1221908369086196041" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="result" />
+      <property role="20lbJX" value="fLJekj6/_1__n" />
+      <ref role="20lvS9" node="4ojP1jnJd$G" resolve="Result" />
+    </node>
+    <node concept="1TJgyi" id="13P5N0ftq_3" role="1TKVEl">
+      <property role="IQ2nx" value="1221908369086196035" />
+      <property role="TrG5h" value="useFile" />
+      <ref role="AX2Wp" to="tpck:fKAQMTB" resolve="boolean" />
+    </node>
+    <node concept="1TJgyi" id="13P5N0ftq_4" role="1TKVEl">
+      <property role="IQ2nx" value="1221908369086196036" />
+      <property role="TrG5h" value="displayFileStatus" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
+    <node concept="PrWs8" id="13P5N0ftsEu" role="PzmwI">
+      <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
+    </node>
+    <node concept="PrWs8" id="13P5N0ftsEw" role="PzmwI">
+      <ref role="PrY4T" to="4fqr:431DWIovi3l" resolve="IMainClass" />
+    </node>
   </node>
 </model>
 
