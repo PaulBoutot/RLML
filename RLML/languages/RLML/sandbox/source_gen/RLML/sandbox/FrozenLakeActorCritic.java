@@ -5,15 +5,15 @@ package RLML.sandbox;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Collections;
+import java.util.Arrays;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class FrozenLakeActorCritic {
   /*package*/ final DecimalFormat df = new DecimalFormat("#.##");
@@ -114,62 +114,64 @@ public class FrozenLakeActorCritic {
 
   public double[][] run() {
     {
-      // ActorCritic: Hyper Parameters
+      // Q-learning: When we update the Q(St, At), we will choose the A(t+1) that makes Q(St+1, At+1) estimated
+      // biggest. But when we get to state S(t+1), we have the probability that does not choose the action A(t+1).
+      // For example, if its policy is Epsilon-Greedy algorithm, then in state S(t+1), the action A(t+1) is selected
+      // with the probability = (1 — epsilon) + (epsilon / k), in contrast, other actions will be selected.
+
       final double alpha = 0.1;
       final double gamma = 0.9;
-      final int episodes = 1000;
+      boolean done = false;
+      Random rand = new Random();
 
-      // Actor Critic Agent was initialized in the init function
-      // Set properties of agent
-      agent.getLearner().getP().setAlpha(alpha);
-      agent.getLearner().getP().setGamma(gamma);
+      // Train episodes
+      for (int i = 0; i < 10000; i++) {
 
-      // Set state values to zero
-      for (int stateId = 0; stateId < statesCount; ++stateId) {
-        stateValues.set(stateId, 0);
+        // For each episode: select random initial state
+        int state = rand.nextInt(statesCount);
+
+        done = false;
+        // Do while not reach goal state
+        while (!(done)) {
+
+          // Select one among all possible actions for the current state
+          // Selection strategy is random in this example
+          // Action outcome is set to deterministic in this example
+          // Transition probability is 1
+          int index = rand.nextInt(actions[state].length);
+          int action = actions[state][index];
+
+          int nextState = action;
+          int r = rewards[state][action];
+
+          if (Arrays.asList(doneStates).contains(states[nextState])) {
+            done = true;
+          }
+
+          // Using this possible action, consider going to the next state
+          double q = qTable[state][action];
+
+          // Get maximum Q-value of this next state, based on all possible actions from next state
+          int[] actionsFromNextState = actions[nextState];
+          double maxValue = Double.MIN_VALUE;
+          for (int j = 0; j < actionsFromNextState.length; j++) {
+            int nextPossibleState = actionsFromNextState[j];
+            double value = qTable[nextState][nextPossibleState];
+            if (value > maxValue) {
+              maxValue = value;
+            }
+          }
+          double maxQ = maxValue;
+
+          // Q-Learning Computation 
+          double value = q + alpha * (r + gamma * maxQ - q);
+          qTable[state][action] = value;
+
+          // Set the next state as the current state
+          state = nextState;
+        }
       }
 
-      // Run Episodes
-      Random random = new Random();
-
-      //  Initial State of the agent
-      int currentState = random.nextInt(statesCount);
-      agent.start(currentState);
-
-      for (int i = 0; i < episodes; i++) {
-        //  Calculate the current actions available at current state.
-        Set<Integer> actionsAtState = new HashSet<Integer>();
-        Integer[] boxedActions = new Integer[actions[currentState].length];
-        for (int j = 0; j < actions[currentState].length; j++) {
-          boxedActions[j] = actions[currentState][j];
-        }
-        Collections.addAll(actionsAtState, boxedActions);
-
-        // Choose action to perform with agent
-        int action = agent.selectAction(actionsAtState);
-
-        // Get new state and the reward
-        int nextState = action;
-        int r = rewards[currentState][action];
-
-        // Get next possible actions at next state
-        Set<Integer> actionsAtNextState = new HashSet<Integer>();
-        Integer[] boxedActions2 = new Integer[actions[currentState].length];
-        for (int j = 0; j < actions[currentState].length; j++) {
-          boxedActions2[j] = actions[currentState][j];
-        }
-        Collections.addAll(actionsAtNextState, boxedActions2);
-
-        // Update the agent
-        agent.update(action, nextState, actionsAtNextState, r, stateValues);
-
-        // Update qTable (probably wrong)
-        double value = agent.getLearner().getP().getQ(currentState, action);
-        qTable[currentState][action] = value;
-
-        // Update values
-        currentState = nextState;
-      }
       return qTable;
 
     }

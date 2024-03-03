@@ -1,6 +1,7 @@
 
 import random
 import numpy as np
+import re
 
 def init() :
   strStates = "[A, B, C, D, E, F]".replace(" ", str()).replace("[", str()).replace("]", str())
@@ -29,7 +30,9 @@ def generateEmptyQtable(stateCount) :
 
 def stringToArrayList(dataString) :
   res = []
-  dataArr = dataString.replace("[[", " ").replace("]]", " ").replace(",[", " ").replace(", [", " ").split("]")
+  pattern = ",\\s*\\[|\\[\\[|\\]\\]"
+  dataString = re.sub(pattern, str(), dataString)
+  dataArr = dataString.split("]")
   process = []
   for value in dataArr :
     process = value.split(",")
@@ -51,35 +54,84 @@ def setValueDoubleArray(array, i, j, value) :
   dummy = array[i]
   setArrayValue(dummy, j, value)
   
+def runSarasa(qTable, stateValue, doneStates, actions, rewards) :
+  alpha = 0.1
+  gamma = 0.9
+  epsilon = 0.9
+  total_episodes = 100000
+  
+  state = " "
+  index = " "
+  notDone = True
+  next_state = " "
+  action = " "
+  reward = " "
+  index2 = " "
+  nextAction = " "
+  value = " "
+  
+  for episode in range(total_episodes) :
+    state = random.randint(0, len(stateValue) - 1)
+    index = random.randint(0, len(actions[state]) - 1)
+    action = getValueDoubleArray(actions, state, index)
+    
+    notDone = True
+    while notDone :
+      next_state = action
+      reward = getValueDoubleArray(rewards, state, action)
+      
+      if stateValue[next_state] in doneStates :
+        notDone = False
+        
+      index2 = random.randint(0, len(actions[next_state]) - 1)
+      nextAction = getValueDoubleArray(actions, next_state, index2)
+      
+      value = getValueDoubleArray(qTable, state, action) + alpha * (reward + gamma * getValueDoubleArray(qTable, next_state, nextAction) - getValueDoubleArray(qTable, state, action))
+      
+      setValueDoubleArray(qTable, state, action, value)
+      
+      action = nextAction
+      state = next_state
+  
+  
 def runQLearning(qTable, stateValue, doneStates, actions, rewards) :
   alpha = 0.1
   gamma = 0.9
   epsilon = 0.9
-  total_episodes = 1000000
+  total_episodes = 100000
   
-  current_state = " "
+  state = " "
   next_state = " "
-  old_value = " "
-  future_rewards = " "
   reward = " "
+  action = " "
+  max_value = " "
+  value = " "
+  index = 0
+  notDone = True
   for episode in range(total_episodes) :
-    current_state = random.choice(range(len(stateValue)))
-    
-    while stateValue[current_state] not in doneStates :
-      if random.uniform(0, 1) < epsilon :
-        next_state = random.choice(actions[current_state])
-      else :
-        next_state = np.argmax(qTable[current_state])
+    state = random.randint(0, len(stateValue) - 1)
+    notDone = True
+    while notDone :
+      index = random.randint(0, len(actions[state]) - 1)
+      action = getValueDoubleArray(actions, state, index)
       
-      reward = getValueDoubleArray(rewards, current_state, next_state)
+      next_state = action
+      reward = getValueDoubleArray(rewards, state, action)
       
-      old_value = getValueDoubleArray(qTable, current_state, next_state)
+      if stateValue[next_state] in doneStates :
+        notDone = False
+        
+      max_value = float("-inf")
+      for nextPossibleState in actions[next_state] :
+        value = getValueDoubleArray(qTable, next_state, nextPossibleState)
+        if value > max_value :
+          max_value = value
       
-      future_rewards = max(qTable[next_state])
+      value = getValueDoubleArray(qTable, state, action) + alpha * (reward + gamma * max_value - getValueDoubleArray(qTable, state, action))
       
-      setValueDoubleArray(qTable, current_state, next_state, old_value + alpha * (reward + gamma * future_rewards - old_value))
+      setValueDoubleArray(qTable, state, action, value)
       
-      current_state = next_state
+      state = next_state
   return qTable
   
 def policy(state, actionList, qTable) :
@@ -98,7 +150,7 @@ def policy(state, actionList, qTable) :
   return policy_go_to_state
   
 def showPolicy(stateList, actionList, qTable) :
-  print("Policy")
+  print("Policy\n")
   for i in range(len(stateList)) :
     print("From {0:2s} go to {1:2s}".format(stateList[i], stateList[policy(i, actionList, qTable)]))
   print()
@@ -111,6 +163,74 @@ def printQTable(stateValue, qTable) :
       print("{0:6.2f}".format(getValueDoubleArray(qTable, i, j), " "), end = " ")
     print()
 
+def runActionCritic(qTable, stateList, doneStates, actions, rewards) :
+  total_episodes = 100000
+  current_state = " "
+  action = " "
+  next_state = " "
+  reward = " "
+  for _ in range(total_episodes) :
+    current_state = stateList[0]
+    while current_state not in doneStates :
+      action = actor_critic_choose_action(qTable, stateList, current_state, actions)
+      next_state = stateList[action]
+      reward = getValueDoubleArray(rewards, stateList.index(current_state), action)
+      actor_critic_update(qTable, stateList, current_state, next_state, actions, reward, action)
+      current_state = next_state
+      
+      
+
+def maxBestAction(qTable, arr, state_index) :
+  best_action = None
+  max_q_value = float('-inf')
+  q_value = " "
+  for action in arr :
+    q_value = getValueDoubleArray(qTable, state_index, action)
+    if q_value > max_q_value :
+      max_q_value = q_value
+      best_action = action
+  return best_action
+  
+
+def actor_critic_choose_action(qTable, stateList, current_state, actionList) :
+  epsilon = 0.9
+  state_index = stateList.index(current_state)
+  actions = actionList[state_index]
+  
+  if random.uniform(0, 1) < epsilon :
+    return random.choice(actions)
+  else :
+    return maxBestAction(qTable, actions, state_index)
+  
+def actor_critic_update(qTable, stateList, current_state, next_state, actionList, reward, action) :
+  alpha = 0.1
+  gamma = 0.9
+  
+  state_index = stateList.index(current_state)
+  next_state_index = stateList.index(next_state)
+  next_actions = actionList[next_state_index]
+  best_next_action = maxBestAction(qTable, next_actions, next_state_index)
+  td_target = reward + gamma * getValueDoubleArray(qTable, next_state_index, best_next_action)
+  td_error = td_target - getValueDoubleArray(qTable, state_index, action)
+  setValueDoubleArray(qTable, state_index, action, getValueDoubleArray(qTable, state_index, action) + alpha * td_error)
+  
+
+
+def pickAndRunAlgorithm(name, qTable, stateList, doneStates, actions, rewards) :
+  if name == 'QLearning' :
+    runQLearning(qTable, stateList, doneStates, actions, rewards)
+  elif name == 'SARSA' :
+    runSarasa(qTable, stateList, doneStates, actions, rewards)
+  elif name == 'ActorCritic' :
+    runActionCritic(qTable, stateList, doneStates, actions, rewards)
+  else :
+    print("\nALGORITHM NOT DEFINED YET\n")
+    return None
+  printQTable(stateList, qTable)
+  print()
+  showPolicy(stateList, actions, qTable)
+  
+  
 allInitialValues = init()
 
 stateList = allInitialValues[0]
@@ -119,11 +239,10 @@ actionList = allInitialValues[2]
 rewardList = allInitialValues[3]
 qTable = allInitialValues[4]
 
+chosenAlgorithm = "SARSA"
 
-runQLearning(qTable, stateList, doneStatesList, actionList, rewardList)
+pickAndRunAlgorithm(chosenAlgorithm, qTable, stateList, doneStatesList, actionList, rewardList)
 
-printQTable(stateList, qTable)
-showPolicy(stateList, actionList, qTable)
 
 
 
