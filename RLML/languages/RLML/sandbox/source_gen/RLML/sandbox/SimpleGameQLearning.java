@@ -38,7 +38,7 @@ public class SimpleGameQLearning {
   /*package*/ void init() {
     // Set parameters and environment reward matrix R
     // Remove all spaces, then remove first open brackets [, and last closed bracket ]
-    String str = "[A, B, C, D, E, F, G, H, I]".replaceAll("\\s+", "");
+    String str = "[A, B, C, D, E, F] ".replaceAll("\\s+", "");
     str = str.substring(1, str.length() - 1);
     states = str.split(",");
 
@@ -47,12 +47,12 @@ public class SimpleGameQLearning {
     actionsCount = states.length;
 
     // Done states; goal state or states that will end the game
-    String doneStr = "[C]".replaceAll("\\s+", "");
+    String doneStr = "[C] ".replaceAll("\\s+", "");
     doneStr = doneStr.substring(1, doneStr.length() - 1);
     doneStates = doneStr.split(",");
 
-    rewards = strToArrArr("[[0,0,0,0,0,0,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0]]", rewardsArrLst);
-    actions = strToArrArr("[[1,3], [0,2,4], [1,5], [0,4,6], [1,3,5,7], [2,4,8], [3,7], [4,6,8], [5,7]]", actionsArrLst);
+    rewards = strToArrArr("[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]] ", rewardsArrLst);
+    actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] ", actionsArrLst);
     //  Initialize matrix Q as zero matrix
     qTable = new double[statesCount][statesCount];
     // Initialize actor critic agent

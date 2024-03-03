@@ -164,7 +164,7 @@ def printQTable(stateValue, qTable) :
     print()
 
 def runActionCritic(qTable, stateList, doneStates, actions, rewards) :
-  total_episodes = 100
+  total_episodes = 10000000
   current_state = " "
   action = " "
   next_state = " "

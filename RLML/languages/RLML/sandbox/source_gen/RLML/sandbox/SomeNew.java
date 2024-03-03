@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class PathFindingQLearning {
+public class SomeNew {
   /*package*/ final DecimalFormat df = new DecimalFormat("#.##");
 
   /*package*/ String[] states;
@@ -31,7 +31,7 @@ public class PathFindingQLearning {
   /*package*/ ActorCriticAgent agent;
   /*package*/ Vec stateValues;
 
-  public PathFindingQLearning() {
+  public SomeNew() {
     init();
   }
 
@@ -102,7 +102,7 @@ public class PathFindingQLearning {
 
   public static void main(String[] args) {
     long Begin = System.currentTimeMillis();
-    PathFindingQLearning obj = new PathFindingQLearning();
+    SomeNew obj = new SomeNew();
     obj.run();
     obj.printQTableResult();
     obj.saveQTableResult();
@@ -120,12 +120,12 @@ public class PathFindingQLearning {
       // with the probability = (1 — epsilon) + (epsilon / k), in contrast, other actions will be selected.
 
       final double alpha = 0.1;
-      final double gamma = 0.9;
+      final double gamma = 0.3;
       boolean done = false;
       Random rand = new Random();
 
       // Train episodes
-      for (int i = 0; i < 100000; i++) {
+      for (int i = 0; i < 20000; i++) {
 
         // For each episode: select random initial state
         int state = rand.nextInt(statesCount);
@@ -496,8 +496,8 @@ public class PathFindingQLearning {
 
 
   /*package*/ interface ActionSelectionStrategy extends Serializable {
-    PathFindingQLearning.IndexValue selectAction(int stateId, PathFindingQLearning.QModel model, Set<Integer> actionsAtState);
-    PathFindingQLearning.IndexValue selectAction(int stateId, PathFindingQLearning.UtilityModel model, Set<Integer> actionsAtState);
+    SomeNew.IndexValue selectAction(int stateId, SomeNew.QModel model, Set<Integer> actionsAtState);
+    SomeNew.IndexValue selectAction(int stateId, SomeNew.UtilityModel model, Set<Integer> actionsAtState);
     String getPrototype();
     Map<String, String> getAttributes();
   }
