@@ -112,7 +112,7 @@ public class PathFindingActorCritic {
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  public double[][] run() {
+  public void run() {
     {
       // ActorCritic: Hyper Parameters
       final double alpha = 0.3;
@@ -170,8 +170,6 @@ public class PathFindingActorCritic {
         // Update values
         currentState = nextState;
       }
-      return qTable;
-
     }
   }
 

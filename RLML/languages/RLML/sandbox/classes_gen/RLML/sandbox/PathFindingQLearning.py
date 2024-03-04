@@ -239,7 +239,7 @@ actionList = allInitialValues[2]
 rewardList = allInitialValues[3]
 qTable = allInitialValues[4]
 
-chosenAlgorithm = "j"
+chosenAlgorithm = "NoName"
 
 pickAndRunAlgorithm(chosenAlgorithm, qTable, stateList, doneStatesList, actionList, rewardList)
 

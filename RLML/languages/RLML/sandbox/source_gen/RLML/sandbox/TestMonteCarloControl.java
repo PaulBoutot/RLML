@@ -112,7 +112,7 @@ public class TestMonteCarloControl {
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  public double[][] run() {
+  public void run() {
     {
       // DQN: <todo - update description>
 
@@ -156,8 +156,6 @@ public class TestMonteCarloControl {
           state = nextState;
         }
       }
-      return qTable;
-
     }
   }
 

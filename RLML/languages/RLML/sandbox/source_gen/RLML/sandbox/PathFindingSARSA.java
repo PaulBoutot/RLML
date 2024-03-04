@@ -112,7 +112,7 @@ public class PathFindingSARSA {
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  public double[][] run() {
+  public void run() {
     {
       // SARSA : We will choose the current action At and the next action A(t+1) using the same policy.
       // And thus, in the state S(t+1), its action will be A(t+1) which is selected while updating 
@@ -163,8 +163,6 @@ public class PathFindingSARSA {
           action = nextAction;
         }
       }
-      return qTable;
-
     }
   }
 

@@ -12,7 +12,6 @@ import jetbrains.mps.lang.core.behavior.INamedConcept__BehaviorDescriptor;
 import java.lang.reflect.Method;
 
 public class RunProgram {
-
   public static StringBuilder runMyProgram(final SNode rlml, SRepository repository) {
     SModule module = SNodeOperations.getModel(rlml).getModule();
     if (!(module instanceof ReloadableModule)) {
@@ -30,6 +29,35 @@ public class RunProgram {
 
         Method getResultMethod = theClass.getMethod("getResult");
         Object resultObject = getResultMethod.invoke(instance);
+        StringBuilder str = (StringBuilder) resultObject;
+
+        return str;
+
+      } catch (Exception ex) {
+        return new StringBuilder("Caught " + ex.getClass() + ": " + ex.getMessage());
+      }
+
+    }
+  }
+
+  public static StringBuilder runMyProgramCompare(final SNode rlmlComparator, SRepository repository) {
+    SModule module = SNodeOperations.getModel(rlmlComparator).getModule();
+    if (!(module instanceof ReloadableModule)) {
+      return new StringBuilder("Module not reloadable, cannot obtain class loader");
+    } else {
+
+      try {
+        final Wrappers._T<String> fqName = new Wrappers._T<String>();
+        repository.getModelAccess().runReadAction(() -> fqName.value = INamedConcept__BehaviorDescriptor.getFqName_idhEwIO9y.invoke(rlmlComparator));
+        Class<?> theClass = ((ReloadableModule) module).getClass(fqName.value);
+        Object instance = theClass.getConstructor().newInstance();
+
+        Method getRunMethod = theClass.getMethod("run");
+        getRunMethod.invoke(instance);
+
+        Method getResultMethod = theClass.getMethod("getResult");
+        Object resultObject = getResultMethod.invoke(instance);
+
         StringBuilder str = (StringBuilder) resultObject;
 
         return str;

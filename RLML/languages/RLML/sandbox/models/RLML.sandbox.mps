@@ -40,6 +40,7 @@
         <child id="4194945102978763390" name="algorithm" index="1hpNCA" />
       </concept>
       <concept id="1221908369086196007" name="RLML.structure.RLMLComparator" flags="ng" index="vwbSn">
+        <property id="1221908369086196036" name="displayFileStatus" index="vwbTO" />
         <child id="1221908369086196039" name="environment" index="vwbTR" />
         <child id="1221908369086196040" name="agent" index="vwbTS" />
         <child id="1221908369086196041" name="result" index="vwbTT" />
@@ -194,6 +195,7 @@
   </node>
   <node concept="2hFKN_" id="7FvB5$A7Fcq">
     <property role="TrG5h" value="SimpleGameQLearning" />
+    <property role="vDq5F" value="" />
     <node concept="2hFKOY" id="7FvB5$A7Fcr" role="1hpOZQ">
       <node concept="2KWCs8" id="7FvB5$A7Fcs" role="30DmD$">
         <property role="2KWCsb" value="[A, B, C, D, E, F] " />
@@ -451,15 +453,31 @@
       </node>
     </node>
     <node concept="2hFKOS" id="13P5N0dZv8Y" role="1hpOYk">
-      <property role="UrZLp" value=" " />
+      <property role="UrZLp" value="Q-Table Result:&#10;A:     0   90    0 72.9    0    0 &#10;B:    81    0  100    0   81    0 &#10;C:     0    0    0    0    0    0 &#10;D:    81    0    0    0   81    0 &#10;E:     0   90    0 72.9    0   90 &#10;F:     0    0  100    0   81    0 &#10;&#10;Policy:&#10;From  A go to  B&#10;From  B go to  C&#10;From  C go to  C&#10;From  D go to  A&#10;From  E go to  B&#10;From  F go to  C&#10;" />
     </node>
   </node>
   <node concept="vwbSn" id="13P5N0ftH0e">
+    <property role="TrG5h" value="SomeCompare" />
+    <property role="vwbTO" value="Selected file successfully processed, make sure data constraints are followed" />
+    <node concept="2hFKOS" id="oyy7hcxcG5" role="vwbTT">
+      <property role="UrZLp" value="Algorithm Name: QLearning&#10;Q-Table Result:&#10;A:     0   10    0  0.1    0    0 &#10;B:     1    0  100    0    1    0 &#10;C:     0    0    0    0    0    0 &#10;D:     1    0    0    0    1    0 &#10;E:     0   10    0  0.1    0   10 &#10;F:     0    0  100    0    1    0 &#10;&#10;Policy:&#10;From  A go to  B&#10;From  B go to  C&#10;From  C go to  C&#10;From  D go to  A&#10;From  E go to  B&#10;From  F go to  C&#10;" />
+    </node>
+    <node concept="2hFKOS" id="oyy7hcxcGR" role="vwbTT">
+      <property role="UrZLp" value="Algorithm Name: SARSA&#10;Q-Table Result:&#10;A:     0    0    0    0 0.07 0.02 &#10;B:     0 0.01  100    0    0 0.99 &#10;C:     0    0    0    0    0    0 &#10;D:     0    0    0    0    0    0 &#10;E:  0.02  0.1    0    0 0.07 0.16 &#10;F:     0 0.09  100    0    0 0.09 &#10;&#10;Policy:&#10;From  A go to  B&#10;From  B go to  C&#10;From  C go to  C&#10;From  D go to  E&#10;From  E go to  F&#10;From  F go to  C&#10;" />
+    </node>
     <node concept="2hFKOY" id="13P5N0ftH0f" role="vwbTR">
-      <node concept="2KWCs8" id="13P5N0ftH0g" role="30DmD$" />
-      <node concept="2KWCs5" id="13P5N0ftH0h" role="30DmDA" />
-      <node concept="30DmDJ" id="13P5N0ftH0i" role="30DmEp" />
-      <node concept="1sM6Dn" id="13P5N0ftH0j" role="1sM6DO" />
+      <node concept="2KWCs8" id="13P5N0ftH0g" role="30DmD$">
+        <property role="2KWCsb" value="[A, B, C, D, E, F] " />
+      </node>
+      <node concept="2KWCs5" id="13P5N0ftH0h" role="30DmDA">
+        <property role="2KWCs4" value="[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] " />
+      </node>
+      <node concept="30DmDJ" id="13P5N0ftH0i" role="30DmEp">
+        <property role="30DmDy" value="[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]] " />
+      </node>
+      <node concept="1sM6Dn" id="13P5N0ftH0j" role="1sM6DO">
+        <property role="1sM6D4" value="[C] " />
+      </node>
     </node>
     <node concept="2hFKOZ" id="13P5N0ftH0k" role="vwbTS">
       <node concept="1hpOEb" id="13P5N0ftH0p" role="1hpNCA">
@@ -487,7 +505,6 @@
         </node>
       </node>
     </node>
-    <node concept="2hFKOS" id="13P5N0ftH0o" role="vwbTT" />
   </node>
 </model>
 

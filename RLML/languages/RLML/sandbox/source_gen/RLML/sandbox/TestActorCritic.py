@@ -4,18 +4,18 @@ import numpy as np
 import re
 
 def init() :
-  strStates = "[A,B,C]".replace(" ", str()).replace("[", str()).replace("]", str())
+  strStates = "[A, B, C, D, E, F] ".replace(" ", str()).replace("[", str()).replace("]", str())
   states = strStates.split(",")
   
   
   state_count = len(states)
   actions_count = len(states)
   
-  strDone = "[B]".replace(" ", str()).replace("[", str()).replace("]", str())
+  strDone = "[C] ".replace(" ", str()).replace("[", str()).replace("]", str())
   doneStates = strDone.split(",")
   
-  rewards = stringToArrayList("[[0,1,0],[0,1,0],[0,1,0]]")
-  actions = stringToArrayList("[[0,1,2],[0,1,2],[0,1,2]]")
+  rewards = stringToArrayList("[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]] ")
+  actions = stringToArrayList("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] ")
   
   qTable = generateEmptyQtable(state_count)
   

@@ -112,7 +112,7 @@ public class SimpleGameQLearning {
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  public double[][] run() {
+  public void run() {
     {
       // Q-learning: When we update the Q(St, At), we will choose the A(t+1) that makes Q(St+1, At+1) estimated
       // biggest. But when we get to state S(t+1), we have the probability that does not choose the action A(t+1).
@@ -171,9 +171,6 @@ public class SimpleGameQLearning {
           state = nextState;
         }
       }
-
-      return qTable;
-
     }
   }
 

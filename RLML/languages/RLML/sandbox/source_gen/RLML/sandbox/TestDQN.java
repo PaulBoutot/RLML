@@ -112,7 +112,7 @@ public class TestDQN {
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  public double[][] run() {
+  public void run() {
     {
       // DQN: <todo - update description>
 
@@ -149,8 +149,6 @@ public class TestDQN {
           state = nextState;
         }
       }
-      return qTable;
-
     }
   }
 

@@ -114,6 +114,13 @@
     <language slang="l:f4ad079d-bc71-4ffb-9600-9328705cf998:jetbrains.mps.lang.descriptor" version="0" />
     <language slang="l:18bc6592-03a6-4e29-a83a-7ff23bde13ba:jetbrains.mps.lang.editor" version="14" />
     <language slang="l:602c36ad-cc55-47ff-8c40-73d7f12f035c:jetbrains.mps.lang.editor.forms" version="0" />
+    <language slang="l:cd17a113-ca4e-472f-a8de-c49008f9eea8:jetbrains.mps.lang.feedback" version="0" />
+    <language slang="l:16e76fe3-9534-4def-afb7-925a169a7c0b:jetbrains.mps.lang.feedback.messages" version="0" />
+    <language slang="l:033598a4-76a9-47e1-ac89-a300c0fceab8:jetbrains.mps.lang.feedback.problem" version="0" />
+    <language slang="l:cddf55b3-117e-46ec-837c-ff50eb7b89b0:jetbrains.mps.lang.feedback.problem.childAndProp" version="0" />
+    <language slang="l:feec32f9-bc8f-4da8-8efd-7f3f9dd4101b:jetbrains.mps.lang.feedback.problem.scopes" version="0" />
+    <language slang="l:7127d409-29f0-43e8-917f-f016ea288944:jetbrains.mps.lang.feedback.problem.structural" version="0" />
+    <language slang="l:517077fd-e44f-4338-a475-1d29781dfdb8:jetbrains.mps.lang.feedback.skeleton" version="0" />
     <language slang="l:ad93155d-79b2-4759-b10c-55123e763903:jetbrains.mps.lang.messages" version="0" />
     <language slang="l:446c26eb-2b7b-4bf0-9b35-f83fa582753e:jetbrains.mps.lang.modelapi" version="0" />
     <language slang="l:d4615e3b-d671-4ba9-af01-2b78369b0ba7:jetbrains.mps.lang.pattern" version="2" />

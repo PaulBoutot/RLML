@@ -10,35 +10,64 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <root nodeRef="r:8667abb6-ba4c-47d7-97bd-520d3d3be598(RLML.util)/7032693678566307227">
     <file name="RunProgram.java">
-      <node id="722930861324966490" at="16,86,17,64" concept="3" />
-      <node id="2173015607136159968" at="18,48,19,84" concept="4" />
-      <node id="7032693678566502876" at="20,12,21,0" concept="5" />
-      <node id="722930861325409021" at="22,11,23,69" concept="3" />
-      <node id="722930861325418643" at="23,69,24,139" concept="1" />
-      <node id="722930861325061622" at="24,139,25,79" concept="3" />
-      <node id="722930861325203216" at="25,79,26,66" concept="3" />
-      <node id="7032693678571802693" at="26,66,27,0" concept="5" />
-      <node id="7032693678571800822" at="27,0,28,56" concept="3" />
-      <node id="7032693678571810260" at="28,56,29,38" concept="1" />
-      <node id="2289923223937870518" at="29,38,30,0" concept="5" />
-      <node id="722930861325233150" at="30,0,31,65" concept="3" />
-      <node id="722930861325248466" at="31,65,32,63" concept="3" />
-      <node id="2173015607135858003" at="32,63,33,57" concept="3" />
-      <node id="3080276168185926555" at="33,57,34,0" concept="5" />
-      <node id="722930861325277912" at="34,0,35,19" concept="4" />
-      <node id="7032693678566498574" at="35,19,36,0" concept="5" />
-      <node id="2173015607136166156" at="37,30,38,85" concept="4" />
-      <node id="7032693678566503626" at="39,7,40,0" concept="5" />
-      <node id="722930861325123814" at="21,0,39,7" concept="7" />
-      <node id="722930861325038499" at="20,10,41,5" concept="0" />
-      <node id="722930861324972617" at="17,64,41,5" concept="2" />
-      <node id="722930861325227936" at="16,0,43,0" concept="6" trace="runMyProgram#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/lang/StringBuilder;" />
-      <scope id="722930861324972619" at="18,48,19,84" />
-      <scope id="722930861325128355" at="37,30,38,85" />
-      <scope id="722930861325128352" at="37,7,39,7">
+      <node id="722930861324966490" at="15,86,16,64" concept="3" />
+      <node id="2173015607136159968" at="17,48,18,84" concept="4" />
+      <node id="7032693678566502876" at="19,12,20,0" concept="5" />
+      <node id="722930861325409021" at="21,11,22,69" concept="3" />
+      <node id="722930861325418643" at="22,69,23,139" concept="1" />
+      <node id="722930861325061622" at="23,139,24,79" concept="3" />
+      <node id="722930861325203216" at="24,79,25,66" concept="3" />
+      <node id="7032693678571802693" at="25,66,26,0" concept="5" />
+      <node id="7032693678571800822" at="26,0,27,56" concept="3" />
+      <node id="7032693678571810260" at="27,56,28,38" concept="1" />
+      <node id="2289923223937870518" at="28,38,29,0" concept="5" />
+      <node id="722930861325233150" at="29,0,30,65" concept="3" />
+      <node id="722930861325248466" at="30,65,31,63" concept="3" />
+      <node id="2173015607135858003" at="31,63,32,57" concept="3" />
+      <node id="3080276168185926555" at="32,57,33,0" concept="5" />
+      <node id="722930861325277912" at="33,0,34,19" concept="4" />
+      <node id="7032693678566498574" at="34,19,35,0" concept="5" />
+      <node id="2173015607136166156" at="36,30,37,85" concept="4" />
+      <node id="7032693678566503626" at="38,7,39,0" concept="5" />
+      <node id="442065746490389959" at="43,103,44,74" concept="3" />
+      <node id="442065746512799582" at="45,48,46,84" concept="4" />
+      <node id="442065746490389980" at="47,12,48,0" concept="5" />
+      <node id="442065746490390002" at="49,11,50,69" concept="3" />
+      <node id="442065746490390005" at="50,69,51,149" concept="1" />
+      <node id="442065746490390015" at="51,149,52,79" concept="3" />
+      <node id="442065746490390026" at="52,79,53,66" concept="3" />
+      <node id="442065746490390034" at="53,66,54,0" concept="5" />
+      <node id="442065746490390035" at="54,0,55,56" concept="3" />
+      <node id="442065746490390042" at="55,56,56,38" concept="1" />
+      <node id="442065746490390047" at="56,38,57,0" concept="5" />
+      <node id="442065746490390048" at="57,0,58,65" concept="3" />
+      <node id="442065746490390055" at="58,65,59,63" concept="3" />
+      <node id="442065746500625591" at="59,63,60,0" concept="5" />
+      <node id="442065746490390062" at="60,0,61,57" concept="3" />
+      <node id="442065746490390068" at="61,57,62,0" concept="5" />
+      <node id="442065746490390069" at="62,0,63,19" concept="4" />
+      <node id="442065746490390071" at="63,19,64,0" concept="5" />
+      <node id="442065746500698017" at="65,30,66,85" concept="4" />
+      <node id="442065746490390072" at="67,7,68,0" concept="5" />
+      <node id="722930861325123814" at="20,0,38,7" concept="7" />
+      <node id="442065746490389981" at="48,0,67,7" concept="7" />
+      <node id="722930861325038499" at="19,10,40,5" concept="0" />
+      <node id="442065746490389978" at="47,10,69,5" concept="0" />
+      <node id="722930861324972617" at="16,64,40,5" concept="2" />
+      <node id="442065746490389968" at="44,74,69,5" concept="2" />
+      <node id="722930861325227936" at="15,0,42,0" concept="6" trace="runMyProgram#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/lang/StringBuilder;" />
+      <node id="442065746490389957" at="43,0,71,0" concept="6" trace="runMyProgramCompare#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/lang/StringBuilder;" />
+      <scope id="722930861324972619" at="17,48,18,84" />
+      <scope id="722930861325128355" at="36,30,37,85" />
+      <scope id="442065746490389969" at="45,48,46,84" />
+      <scope id="442065746490389986" at="65,30,66,85" />
+      <scope id="722930861325128352" at="36,7,38,7">
         <var name="ex" id="722930861325128353" />
       </scope>
-      <scope id="722930861325123816" at="22,11,36,0">
+      <scope id="442065746490389982" at="65,7,67,7">
+        <var name="ex" id="442065746490389983" />
+      </scope>
+      <scope id="722930861325123816" at="21,11,35,0">
         <var name="fqName" id="722930861325409022" />
         <var name="getResultMethod" id="722930861325233151" />
         <var name="getRunMethod" id="7032693678571800823" />
@@ -47,15 +76,32 @@
         <var name="str" id="2173015607135835832" />
         <var name="theClass" id="722930861325061623" />
       </scope>
-      <scope id="722930861325038500" at="20,12,40,0" />
-      <scope id="722930861325227939" at="16,86,41,5">
+      <scope id="442065746490390001" at="49,11,64,0">
+        <var name="fqName" id="442065746490390003" />
+        <var name="getResultMethod" id="442065746490390049" />
+        <var name="getRunMethod" id="442065746490390036" />
+        <var name="instance" id="442065746490390027" />
+        <var name="resultObject" id="442065746490390056" />
+        <var name="str" id="442065746490390063" />
+        <var name="theClass" id="442065746490390016" />
+      </scope>
+      <scope id="722930861325038500" at="19,12,39,0" />
+      <scope id="442065746490389979" at="47,12,68,0" />
+      <scope id="722930861325227939" at="15,86,40,5">
         <var name="module" id="722930861324966491" />
       </scope>
-      <scope id="722930861325227936" at="16,0,43,0">
+      <scope id="442065746490389958" at="43,103,69,5">
+        <var name="module" id="442065746490389960" />
+      </scope>
+      <scope id="722930861325227936" at="15,0,42,0">
         <var name="repository" id="722930861325434263" />
         <var name="rlml" id="722930861325227963" />
       </scope>
-      <unit id="7032693678566307227" at="14,0,45,0" name="RLML.util.RunProgram" />
+      <scope id="442065746490389957" at="43,0,71,0">
+        <var name="repository" id="442065746490390077" />
+        <var name="rlmlComparator" id="442065746490390075" />
+      </scope>
+      <unit id="7032693678566307227" at="14,0,73,0" name="RLML.util.RunProgram" />
     </file>
   </root>
 </debug-info>

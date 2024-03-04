@@ -38,7 +38,7 @@ public class TestActorCritic {
   /*package*/ void init() {
     // Set parameters and environment reward matrix R
     // Remove all spaces, then remove first open brackets [, and last closed bracket ]
-    String str = "[A,B,C]".replaceAll("\\s+", "");
+    String str = "[A, B, C, D, E, F] ".replaceAll("\\s+", "");
     str = str.substring(1, str.length() - 1);
     states = str.split(",");
 
@@ -47,12 +47,12 @@ public class TestActorCritic {
     actionsCount = states.length;
 
     // Done states; goal state or states that will end the game
-    String doneStr = "[B]".replaceAll("\\s+", "");
+    String doneStr = "[C] ".replaceAll("\\s+", "");
     doneStr = doneStr.substring(1, doneStr.length() - 1);
     doneStates = doneStr.split(",");
 
-    rewards = strToArrArr("[[0,1,0],[0,1,0],[0,1,0]]", rewardsArrLst);
-    actions = strToArrArr("[[0,1,2],[0,1,2],[0,1,2]]", actionsArrLst);
+    rewards = strToArrArr("[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]] ", rewardsArrLst);
+    actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] ", actionsArrLst);
     //  Initialize matrix Q as zero matrix
     qTable = new double[statesCount][statesCount];
     // Initialize actor critic agent
@@ -112,7 +112,7 @@ public class TestActorCritic {
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  public double[][] run() {
+  public void run() {
     {
       // ActorCritic: Hyper Parameters
       final double alpha = 0.1;
@@ -170,8 +170,6 @@ public class TestActorCritic {
         // Update values
         currentState = nextState;
       }
-      return qTable;
-
     }
   }
 
