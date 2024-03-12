@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="a76732eplacq41w5pe89y7yztoyvnr6">
-  <files names="FrozenLake.java:FrozenLake.py:FrozenLakeActorCritic.java:FrozenLakeActorCritic.py:PathFindingActorCritic.java:PathFindingActorCritic.py:PathFindingQLearning.java:PathFindingQLearning.py:PathFindingSARSA.java:PathFindingSARSA.py:SimpleExample.java:SimpleExample.py:SimpleGameQLearning.java:SimpleGameQLearning.py:SomeCompare.java:TESTSARSA.java:TESTSARSA.py:TestActorCritic.java:TestActorCritic.py:TestDQN.java:TestDQN.py:TestMonteCarloControl.java:TestMonteCarloControl.py" />
+<product version="3" modelHash="-7a1p7vcismdrkh0iotgvy7i4up7vaee">
+  <files names="Data.java:Data.py:DemoSarsa.java:DemoSarsa.py:FrozenLake.java:FrozenLake.py:FrozenLakeActorCritic.java:FrozenLakeActorCritic.py:PathFindingActorCritic.java:PathFindingActorCritic.py:PathFindingCompareQLearningAndSARSA.java:PathFindingQLearning.java:PathFindingQLearning.py:PathFindingSARSA.java:PathFindingSARSA.py:SimpleExample.java:SimpleExample.py:SimpleGameQLearning.java:SimpleGameQLearning.py:SomeCompare.java:TESTSARSA.java:TESTSARSA.py:TestActorCritic.java:TestActorCritic.py:TestDQN.java:TestDQN.py:TestMonteCarloControl.java:TestMonteCarloControl.py" />
 </product>
 

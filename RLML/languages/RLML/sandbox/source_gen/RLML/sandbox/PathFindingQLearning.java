@@ -114,61 +114,53 @@ public class PathFindingQLearning {
 
   public void run() {
     {
-      // Q-learning: When we update the Q(St, At), we will choose the A(t+1) that makes Q(St+1, At+1) estimated
-      // biggest. But when we get to state S(t+1), we have the probability that does not choose the action A(t+1).
-      // For example, if its policy is Epsilon-Greedy algorithm, then in state S(t+1), the action A(t+1) is selected
-      // with the probability = (1 — epsilon) + (epsilon / k), in contrast, other actions will be selected.
+      // SARSA : We will choose the current action At and the next action A(t+1) using the same policy.
+      // And thus, in the state S(t+1), its action will be A(t+1) which is selected while updating 
+      // the action-state value of St.
 
       final double alpha = 0.1;
-      final double gamma = 0.9;
+      final double gamma = 0.3;
       boolean done = false;
       Random rand = new Random();
 
       // Train episodes
-      for (int i = 0; i < 100000; i++) {
+      for (int i = 0; i < 1000; i++) {
 
         // For each episode: select random initial state
         int state = rand.nextInt(statesCount);
 
-        done = false;
-        // Do while not reach goal state
-        while (!(done)) {
+        int index = rand.nextInt(actions[state].length);
+        // Initial action, the rest is calculated while preparing the Q_Table
+        int action = actions[state][index];
 
-          // Select one among all possible actions for the current state
-          // Selection strategy is random in this example
-          // Action outcome is set to deterministic in this example
-          // Transition probability is 1
-          int index = rand.nextInt(actions[state].length);
-          int action = actions[state][index];
+        done = false;
+        // Do while not reach goal state o
+        while (!(done)) {
 
           int nextState = action;
           int r = rewards[state][action];
-
           if (Arrays.asList(doneStates).contains(states[nextState])) {
             done = true;
           }
 
-          // Using this possible action, consider going to the next state
+          // Using this possible action, consider to go to the next state
           double q = qTable[state][action];
 
-          // Get maximum Q-value of this next state, based on all possible actions from next state
-          int[] actionsFromNextState = actions[nextState];
-          double maxValue = Double.MIN_VALUE;
-          for (int j = 0; j < actionsFromNextState.length; j++) {
-            int nextPossibleState = actionsFromNextState[j];
-            double value = qTable[nextState][nextPossibleState];
-            if (value > maxValue) {
-              maxValue = value;
-            }
-          }
-          double maxQ = maxValue;
+          // Select one action among all possible actions for the current state
+          // Selection strategy is random in this example
+          // Action outcome is set to deterministic in this example
+          // Transition probability is 1
+          int index2 = rand.nextInt(actions[state].length);
+          int nextAction = actions[state][index2];
+          double q2 = qTable[nextState][nextAction];
 
-          // Q-Learning Computation 
-          double value = q + alpha * (r + gamma * maxQ - q);
+          // SARSA Computation 
+          double value = q + alpha * (r + gamma * q2 - q);
           qTable[state][action] = value;
 
           // Set the next state as the current state
           state = nextState;
+          action = nextAction;
         }
       }
     }

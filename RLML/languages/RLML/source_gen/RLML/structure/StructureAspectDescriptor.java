@@ -201,6 +201,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/5049612793196370161");
     b.version(3);
     b.property("useFile", 0x10f517300f490204L).type(PrimitiveTypeId.BOOLEAN).origin("1221908369083269636").done();
+    b.property("languageSelection", 0x664b083071203caeL).type(PrimitiveTypeId.BOOLEAN).origin("7370994219271339182").done();
     b.property("displayFileStatus", 0x10f517300f50b65bL).type(PrimitiveTypeId.STRING).origin("1221908369083774555").done();
     b.aggregate("environment", 0x3a3770586b503faeL).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92aL).optional(false).ordered(true).multiple(false).origin("4194945102978760622").done();
     b.aggregate("agent", 0x3a3770586b503fbfL).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92bL).optional(false).ordered(true).multiple(false).origin("4194945102978760639").done();
@@ -215,6 +216,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/1221908369086196007");
     b.version(3);
     b.property("useFile", 0x10f517300f75a943L).type(PrimitiveTypeId.BOOLEAN).origin("1221908369086196035").done();
+    b.property("languageSelection", 0x24a8ad3fe6081f81L).type(PrimitiveTypeId.BOOLEAN).origin("2641551671406632833").done();
     b.property("displayFileStatus", 0x10f517300f75a944L).type(PrimitiveTypeId.STRING).origin("1221908369086196036").done();
     b.aggregate("environment", 0x10f517300f75a947L).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92aL).optional(false).ordered(true).multiple(false).origin("1221908369086196039").done();
     b.aggregate("agent", 0x10f517300f75a948L).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92bL).optional(false).ordered(true).multiple(true).origin("1221908369086196040").done();

@@ -37,6 +37,9 @@ public class Actions_Constraints extends BaseConstraintsDescriptor {
       return result;
     }
     private static boolean staticValidateProperty(SNode node, String propertyValue) {
+      if (propertyValue.length() == 0) {
+        return false;
+      }
       // Remove all spaces, then remove first two open brackets [[, and last closed bracket ]
       String str = propertyValue.replaceAll("\\s+", "");
       str = str.substring(2, str.length() - 1);

@@ -14,7 +14,7 @@ def init() :
   strDone = "[C] ".replace(" ", str()).replace("[", str()).replace("]", str())
   doneStates = strDone.split(",")
   
-  rewards = stringToArrayList("[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]] ")
+  rewards = stringToArrayList("[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]]")
   actions = stringToArrayList("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] ")
   
   qTable = generateEmptyQtable(state_count)
@@ -56,9 +56,9 @@ def setValueDoubleArray(array, i, j, value) :
   
 def runSarasa(qTable, stateValue, doneStates, actions, rewards) :
   alpha = 0.1
-  gamma = 0.3
-  epsilon = 0.5
-  total_episodes = 1000
+  gamma = 0.43
+  epsilon = 0.3
+  total_episodes = 100000
   
   state = " "
   index = " "
@@ -96,9 +96,9 @@ def runSarasa(qTable, stateValue, doneStates, actions, rewards) :
   
 def runQLearning(qTable, stateValue, doneStates, actions, rewards) :
   alpha = 0.1
-  gamma = 0.3
-  epsilon = 0.5
-  total_episodes = 1000
+  gamma = 0.43
+  epsilon = 0.3
+  total_episodes = 100000
   
   state = " "
   next_state = " "
@@ -164,7 +164,7 @@ def printQTable(stateValue, qTable) :
     print()
 
 def runActionCritic(qTable, stateList, doneStates, actions, rewards) :
-  total_episodes = 1000
+  total_episodes = 100000
   current_state = " "
   action = " "
   next_state = " "
@@ -193,7 +193,7 @@ def maxBestAction(qTable, arr, state_index) :
   
 
 def actor_critic_choose_action(qTable, stateList, current_state, actionList) :
-  epsilon = 0.5
+  epsilon = 0.3
   state_index = stateList.index(current_state)
   actions = actionList[state_index]
   
@@ -204,7 +204,7 @@ def actor_critic_choose_action(qTable, stateList, current_state, actionList) :
   
 def actor_critic_update(qTable, stateList, current_state, next_state, actionList, reward, action) :
   alpha = 0.1
-  gamma = 0.3
+  gamma = 0.43
   
   state_index = stateList.index(current_state)
   next_state_index = stateList.index(next_state)
@@ -239,7 +239,7 @@ actionList = allInitialValues[2]
 rewardList = allInitialValues[3]
 qTable = allInitialValues[4]
 
-chosenAlgorithm = "SARSA"
+chosenAlgorithm = "MonteCarloControl"
 
 pickAndRunAlgorithm(chosenAlgorithm, qTable, stateList, doneStatesList, actionList, rewardList)
 

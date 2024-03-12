@@ -34,6 +34,9 @@ public class States_Constraints extends BaseConstraintsDescriptor {
       return result;
     }
     private static boolean staticValidateProperty(SNode node, String propertyValue) {
+      if (propertyValue.length() == 0) {
+        return false;
+      }
       String str = propertyValue.replaceAll("\\s+", "");
       str = str.substring(1, str.length() - 1);
       String[] states = str.split(",");

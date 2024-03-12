@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class SomeCompare {
+public class PathFindingCompareQLearningAndSARSA {
   /*package*/ final DecimalFormat df = new DecimalFormat("#.##");
 
   /*package*/ String[] states;
@@ -30,7 +30,7 @@ public class SomeCompare {
   /*package*/ ActorCriticAgent agent;
   /*package*/ Vec stateValues;
 
-  public SomeCompare() {
+  public PathFindingCompareQLearningAndSARSA() {
     init();
   }
 
@@ -135,7 +135,7 @@ public class SomeCompare {
       // with the probability = (1 — epsilon) + (epsilon / k), in contrast, other actions will be selected.
 
       final double alpha = 0.1;
-      final double gamma = 0.1;
+      final double gamma = 0.4;
       boolean done = false;
       Random rand = new Random();
 
@@ -206,8 +206,8 @@ public class SomeCompare {
       // And thus, in the state S(t+1), its action will be A(t+1) which is selected while updating 
       // the action-state value of St.
 
-      final double alpha = 0.9;
-      final double gamma = 0.1;
+      final double alpha = 0.1;
+      final double gamma = 0.4;
       boolean done = false;
       Random rand = new Random();
 
@@ -260,74 +260,15 @@ public class SomeCompare {
     System.out.println();
     System.out.println();
   }
-  private void MonteCarloControl() {
-    System.out.print("Algorithm Name: ");
-    System.out.println("MonteCarloControl");
-    System.out.println();
-    String algoName = "MonteCarloControl";
-    long Begin1L = System.currentTimeMillis();
-    {
-      // DQN: <todo - update description>
-
-      final double alpha = 0.9;
-      final double gamma = 0.2;
-      boolean done = false;
-      Random rand = new Random();
-
-      // Train episodes
-      for (int i = 0; i < 10000; i++) {
-
-        // For each episode: select random initial state
-        int state = rand.nextInt(statesCount);
-
-        done = false;
-        // Do while not reach goal state
-        while (!(done)) {
-
-          // Select one among all possible actions for the current state
-          // Selection strategy is random in this example
-          // Action outcome is set to deterministic in this example
-          // Transition probability is 1
-          int index = rand.nextInt(actions[state].length);
-          int action = actions[state][index];
-
-          int nextState = action;
-          int r = rewards[state][action];
-
-          if (Arrays.asList(doneStates).contains(states[nextState])) {
-            done = true;
-          }
-
-          // Using this possible action, consider going to the next state
-          double q = qTable[state][action];
-
-          // Get maximum Q-value of this next state, based on all possible actions from next state
-
-
-
-          // Set the next state as the current state
-          state = nextState;
-        }
-      }
-    }
-    this.printQTableResult();
-    this.showPolicy();
-    displayResult.append(getResultBuilder(algoName));
-    long End = System.currentTimeMillis();
-    System.out.println("\nTime: " + (End - Begin1L) / 1000.0 + "sec.");
-    System.out.println();
-    System.out.println();
-  }
 
   public static void main(String[] args) {
-    SomeCompare obj = new SomeCompare();
+    PathFindingCompareQLearningAndSARSA obj = new PathFindingCompareQLearningAndSARSA();
     obj.run();
   }
 
   public void run() {
     QLearning();
     SARSA();
-    MonteCarloControl();
   }
 
   /*package*/ double maxQ(int s) {
@@ -625,8 +566,8 @@ public class SomeCompare {
 
 
   /*package*/ interface ActionSelectionStrategy extends Serializable {
-    SomeCompare.IndexValue selectAction(int stateId, SomeCompare.QModel model, Set<Integer> actionsAtState);
-    SomeCompare.IndexValue selectAction(int stateId, SomeCompare.UtilityModel model, Set<Integer> actionsAtState);
+    PathFindingCompareQLearningAndSARSA.IndexValue selectAction(int stateId, PathFindingCompareQLearningAndSARSA.QModel model, Set<Integer> actionsAtState);
+    PathFindingCompareQLearningAndSARSA.IndexValue selectAction(int stateId, PathFindingCompareQLearningAndSARSA.UtilityModel model, Set<Integer> actionsAtState);
     String getPrototype();
     Map<String, String> getAttributes();
   }

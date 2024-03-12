@@ -80,7 +80,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
       editorCell.addEditorCell(createConstant_4());
     }
     editorCell.addEditorCell(createCollection_1());
-    editorCell.addEditorCell(createConstant_14());
+    editorCell.addEditorCell(createConstant_18());
     return editorCell;
   }
   private boolean nodeCondition_r3quft_a5a() {
@@ -188,14 +188,27 @@ import org.jetbrains.mps.openapi.language.SConcept;
     editorCell.addEditorCell(createRefNode_1());
     editorCell.addEditorCell(createConstant_9());
     editorCell.addEditorCell(createCollection_4());
-    editorCell.addEditorCell(createConstant_11());
     editorCell.addEditorCell(createConstant_12());
-    editorCell.addEditorCell(createConstant_13());
+    if (nodeCondition_r3quft_a9h0()) {
+      editorCell.addEditorCell(createConstant_13());
+    }
+    if (nodeCondition_r3quft_a01h0()) {
+      editorCell.addEditorCell(createConstant_14());
+    }
+    editorCell.addEditorCell(createConstant_15());
+    editorCell.addEditorCell(createConstant_16());
+    editorCell.addEditorCell(createConstant_17());
     editorCell.addEditorCell(createRefNode_2());
     return editorCell;
   }
   private boolean nodeCondition_r3quft_a2h0() {
     return SPropertyOperations.getBoolean(myNode, PROPS.useFile$Lt8q);
+  }
+  private boolean nodeCondition_r3quft_a9h0() {
+    return SPropertyOperations.getBoolean(myNode, PROPS.languageSelection$TJMz);
+  }
+  private boolean nodeCondition_r3quft_a01h0() {
+    return !(SPropertyOperations.getBoolean(myNode, PROPS.languageSelection$TJMz));
   }
   private EditorCell createConstant_5() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "RL Environment");
@@ -434,6 +447,8 @@ import org.jetbrains.mps.openapi.language.SConcept;
     editorCell.addEditorCell(createJComponent_2());
     editorCell.addEditorCell(createConstant_10());
     editorCell.addEditorCell(createJComponent_3());
+    editorCell.addEditorCell(createConstant_11());
+    editorCell.addEditorCell(createJComponent_4());
     return editorCell;
   }
   private EditorCell createJComponent_2() {
@@ -442,7 +457,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return editorCell;
   }
   private JComponent _QueryFunction_JComponent_r3quft_a0a7h0() {
-    return ComponentFactory.createRunProgramButton(getEditorContext(), myNode);
+    return ComponentFactory.createLanguageSelectionButton(getEditorContext(), myNode);
   }
   private EditorCell createConstant_10() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
@@ -456,29 +471,67 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return editorCell;
   }
   private JComponent _QueryFunction_JComponent_r3quft_a2a7h0() {
-    return ComponentFactory.createClearButton(getEditorContext(), myNode);
+    return ComponentFactory.createRunProgramButton(getEditorContext(), myNode);
   }
   private EditorCell createConstant_11() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
+    editorCell.setCellId("Constant_r3quft_d0h7a");
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createJComponent_4() {
+    EditorCell editorCell = EditorCell_Component.createComponentCell(getEditorContext(), myNode, _QueryFunction_JComponent_r3quft_a4a7h0(), "JComponent_r3quft_e0h7a");
+    editorCell.setCellId("JComponent_r3quft_e0h7a_0");
+    return editorCell;
+  }
+  private JComponent _QueryFunction_JComponent_r3quft_a4a7h0() {
+    return ComponentFactory.createClearButton(getEditorContext(), myNode);
+  }
+  private EditorCell createConstant_12() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "Selected Language: ");
     editorCell.setCellId("Constant_r3quft_i7a");
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createConstant_13() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "Java");
+    editorCell.setCellId("Constant_r3quft_j7a");
     Style style = new StyleImpl();
     style.set(StyleAttributes.INDENT_LAYOUT_NEW_LINE, true);
     editorCell.getStyle().putAll(style);
     editorCell.setDefaultText("");
     return editorCell;
   }
-  private EditorCell createConstant_12() {
+  private EditorCell createConstant_14() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "Python");
+    editorCell.setCellId("Constant_r3quft_k7a");
+    Style style = new StyleImpl();
+    style.set(StyleAttributes.INDENT_LAYOUT_NEW_LINE, true);
+    editorCell.getStyle().putAll(style);
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createConstant_15() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
+    editorCell.setCellId("Constant_r3quft_l7a");
+    Style style = new StyleImpl();
+    style.set(StyleAttributes.INDENT_LAYOUT_NEW_LINE, true);
+    editorCell.getStyle().putAll(style);
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createConstant_16() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "Result");
-    editorCell.setCellId("Constant_r3quft_j7a");
+    editorCell.setCellId("Constant_r3quft_m7a");
     Style style = new StyleImpl();
     style.set(StyleAttributes.TEXT_COLOR, getStyleRegistry().getSimpleColor(MPSColors.DARK_GREEN));
     editorCell.getStyle().putAll(style);
     editorCell.setDefaultText("");
     return editorCell;
   }
-  private EditorCell createConstant_13() {
+  private EditorCell createConstant_17() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, ":");
-    editorCell.setCellId("Constant_r3quft_k7a");
+    editorCell.setCellId("Constant_r3quft_n7a");
     Style style = new StyleImpl();
     style.set(StyleAttributes.PUNCTUATION_LEFT, true);
     style.set(StyleAttributes.INDENT_LAYOUT_NEW_LINE, true);
@@ -487,14 +540,14 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return editorCell;
   }
   private EditorCell createRefNode_2() {
-    SingleRoleCellProvider provider = new resultSingleRoleHandler_r3quft_l7a(myNode, LINKS.result$uOrF, getEditorContext());
+    SingleRoleCellProvider provider = new resultSingleRoleHandler_r3quft_o7a(myNode, LINKS.result$uOrF, getEditorContext());
     return provider.createCell();
   }
-  private static class resultSingleRoleHandler_r3quft_l7a extends SingleRoleCellProvider {
+  private static class resultSingleRoleHandler_r3quft_o7a extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public resultSingleRoleHandler_r3quft_l7a(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public resultSingleRoleHandler_r3quft_o7a(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -545,7 +598,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
       return "<no result>";
     }
   }
-  private EditorCell createConstant_14() {
+  private EditorCell createConstant_18() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
     editorCell.setCellId("Constant_r3quft_i0");
     Style style = new StyleImpl();
@@ -558,6 +611,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
   private static final class PROPS {
     /*package*/ static final SProperty useFile$Lt8q = MetaAdapterFactory.getProperty(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd8f1L, 0x10f517300f490204L, "useFile");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty languageSelection$TJMz = MetaAdapterFactory.getProperty(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd8f1L, 0x664b083071203caeL, "languageSelection");
     /*package*/ static final SProperty displayFileStatus$v80n = MetaAdapterFactory.getProperty(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd8f1L, 0x10f517300f50b65bL, "displayFileStatus");
   }
 
