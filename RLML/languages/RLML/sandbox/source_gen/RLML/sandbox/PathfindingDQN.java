@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Arrays;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Set;
@@ -15,7 +16,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class TESTSARSA {
+public class PathfindingDQN {
   /*package*/ final DecimalFormat df = new DecimalFormat("#.##");
 
   /*package*/ String[] states;
@@ -31,14 +32,14 @@ public class TESTSARSA {
   /*package*/ ActorCriticAgent agent;
   /*package*/ Vec stateValues;
 
-  public TESTSARSA() {
+  public PathfindingDQN() {
     init();
   }
 
   /*package*/ void init() {
     // Set parameters and environment reward matrix R
     // Remove all spaces, then remove first open brackets [, and last closed bracket ]
-    String str = "[A,B]".replaceAll("\\s+", "");
+    String str = "[A, B, C, D, E, F] ".replaceAll("\\s+", "");
     str = str.substring(1, str.length() - 1);
     states = str.split(",");
 
@@ -47,12 +48,13 @@ public class TESTSARSA {
     actionsCount = states.length;
 
     // Done states; goal state or states that will end the game
-    String doneStr = "[B]".replaceAll("\\s+", "");
+    String doneStr = "[C] ".replaceAll("\\s+", "");
     doneStr = doneStr.substring(1, doneStr.length() - 1);
     doneStates = doneStr.split(",");
 
-    rewards = strToArrArr("[[0,1],[0,1]]", rewardsArrLst);
-    actions = strToArrArr("[[1],[1]]", actionsArrLst);
+    String rewardStr = "[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]]";
+    rewards = strToArrArr(rewardStr, rewardsArrLst);
+    actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] ", actionsArrLst);
     //  Initialize matrix Q as zero matrix
     qTable = new double[statesCount][statesCount];
     // Initialize actor critic agent
@@ -102,7 +104,7 @@ public class TESTSARSA {
 
   public static void main(String[] args) {
     long Begin = System.currentTimeMillis();
-    TESTSARSA obj = new TESTSARSA();
+    PathfindingDQN obj = new PathfindingDQN();
     obj.run();
     obj.printQTableResult();
     obj.saveQTableResult();
@@ -114,53 +116,39 @@ public class TESTSARSA {
 
   public void run() {
     {
-      // SARSA : We will choose the current action At and the next action A(t+1) using the same policy.
-      // And thus, in the state S(t+1), its action will be A(t+1) which is selected while updating 
-      // the action-state value of St.
+      // DQN: <todo - update description>
 
       final double alpha = 0.1;
-      final double gamma = 0.9;
+      final double gamma = 0.3;
       boolean done = false;
       Random rand = new Random();
 
       // Train episodes
-      for (int i = 0; i < 100; i++) {
+      for (int i = 0; i < 10000; i++) {
 
         // For each episode: select random initial state
         int state = rand.nextInt(statesCount);
 
-        int index = rand.nextInt(actions[state].length);
-        // Initial action, the rest is calculated while preparing the Q_Table
-        int action = actions[state][index];
-
         done = false;
-        // Do while not reach goal state o
+        // Do while not reach goal state
         while (!(done)) {
+
+          // Select one among all possible actions for the current state
+          // Selection strategy is random in this example
+          // Action outcome is set to deterministic in this example
+          // Transition probability is 1
+          int index = rand.nextInt(actions[state].length);
+          int action = actions[state][index];
 
           int nextState = action;
           int r = rewards[state][action];
+
           if (Arrays.asList(doneStates).contains(states[nextState])) {
             done = true;
           }
 
-          // Using this possible action, consider to go to the next state
-          double q = qTable[state][action];
-
-          // Select one action among all possible actions for the current state
-          // Selection strategy is random in this example
-          // Action outcome is set to deterministic in this example
-          // Transition probability is 1
-          int index2 = rand.nextInt(actions[state].length);
-          int nextAction = actions[state][index2];
-          double q2 = qTable[nextState][nextAction];
-
-          // SARSA Computation 
-          double value = q + alpha * (r + gamma * q2 - q);
-          qTable[state][action] = value;
-
           // Set the next state as the current state
           state = nextState;
-          action = nextAction;
         }
       }
     }
@@ -201,12 +189,15 @@ public class TESTSARSA {
 
   /*package*/ void saveQTableResult() {
     try {
-      File qTableFile = new File("Users/sahilsalma/Desktop/filename.txt");
+      File qTableFile = new File("PathfindingDQN.txt");
       if (qTableFile.createNewFile()) {
         System.out.println("file created: " + qTableFile.getName());
       } else {
         System.out.println("File already exists");
       }
+      FileWriter writer = new FileWriter(qTableFile);
+      writer.write(getResult().toString());
+      writer.close();
     } catch (IOException e) {
       System.out.println("An error occured" + e);
       e.printStackTrace();
@@ -221,7 +212,7 @@ public class TESTSARSA {
     for (int i = 0; i < qTable.length; i++) {
       qTableStr.append("" + states[i] + ":  ");
       for (int j = 0; j < qTable[i].length; j++) {
-        qTableStr.append(String.format("%4s ", df.format(qTable[i][j])));
+        qTableStr.append(String.format("%6s ", df.format(qTable[i][j])));
       }
       qTableStr.append(System.getProperty("line.separator"));
     }
@@ -485,8 +476,8 @@ public class TESTSARSA {
 
 
   /*package*/ interface ActionSelectionStrategy extends Serializable {
-    TESTSARSA.IndexValue selectAction(int stateId, TESTSARSA.QModel model, Set<Integer> actionsAtState);
-    TESTSARSA.IndexValue selectAction(int stateId, TESTSARSA.UtilityModel model, Set<Integer> actionsAtState);
+    PathfindingDQN.IndexValue selectAction(int stateId, PathfindingDQN.QModel model, Set<Integer> actionsAtState);
+    PathfindingDQN.IndexValue selectAction(int stateId, PathfindingDQN.UtilityModel model, Set<Integer> actionsAtState);
     String getPrototype();
     Map<String, String> getAttributes();
   }

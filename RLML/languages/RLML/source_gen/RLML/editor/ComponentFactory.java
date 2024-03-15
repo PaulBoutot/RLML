@@ -72,40 +72,12 @@ public class ComponentFactory {
       @Override
       public void run() {
 
-        if (SPropertyOperations.getBoolean(node, PROPS.languageSelection$4JPJ)) {
-          SRepository repository = editorContext.getRepository();
-          StringBuilder resultString = RunProgram.runMyProgramCompare(node, repository);
-          String[] result = resultString.toString().split("STRINGENDSHEREBREAK");
+        SRepository repository = editorContext.getRepository();
+        StringBuilder resultString = RunProgram.runMyProgramCompare(node, repository);
+        String[] result = resultString.toString().split("STRINGENDSHEREBREAK");
 
-          for (int i = 0; i < result.length; i++) {
-            SPropertyOperations.assign(ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.result$Y15E)).getElement(i), PROPS.result$tVy0, result[i]);
-          }
-        } else {
-          SRepository repository = editorContext.getRepository();
-          StringBuilder result = RunProgram.runMyProgram_Python_Compare(node, repository);
-          try {
-            String pythonScriptPath = result.toString();
-            ProcessBuilder processBuilder = new ProcessBuilder("python3", String.valueOf(pythonScriptPath));
-            processBuilder.redirectErrorStream(true);
-
-            Process process = processBuilder.start();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-              sb.append(line);
-              sb.append(System.getProperty("line.separator"));
-            }
-            SPropertyOperations.assign(ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.result$Y15E)).getElement(0), PROPS.result$tVy0, sb.toString());
-
-            int exitCode = process.waitFor();
-            System.out.println("\nExited with error code : " + exitCode);
-          } catch (IOException | InterruptedException e) {
-            SPropertyOperations.assign(ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.result$Y15E)).getElement(0), PROPS.result$tVy0, e.toString());
-            e.printStackTrace();
-          }
+        for (int i = 0; i < result.length; i++) {
+          SPropertyOperations.assign(ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.result$Y15E)).getElement(i), PROPS.result$tVy0, result[i]);
         }
       }
     });
@@ -121,17 +93,6 @@ public class ComponentFactory {
     });
     return button;
   }
-
-  public static JComponent createLanguageSelectionButtonCompare(final EditorContext editorContext, final SNode node) {
-    JButton button = ComponentFactory.createButton(node, editorContext, "Change Run Language", new Runnable() {
-      @Override
-      public void run() {
-        SPropertyOperations.assign(node, PROPS.languageSelection$4JPJ, !(SPropertyOperations.getBoolean(node, PROPS.languageSelection$4JPJ)));
-      }
-    });
-    return button;
-  }
-
 
   public static JComponent createClearButton(final EditorContext editorContext, final SNode node) {
     JButton button = ComponentFactory.createButton(node, editorContext, "Clear Result", new Runnable() {
@@ -353,7 +314,6 @@ public class ComponentFactory {
   private static final class PROPS {
     /*package*/ static final SProperty result$tVy0 = MetaAdapterFactory.getProperty(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92cL, 0x1fc7710a25a88d53L, "result");
     /*package*/ static final SProperty languageSelection$TJMz = MetaAdapterFactory.getProperty(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd8f1L, 0x664b083071203caeL, "languageSelection");
-    /*package*/ static final SProperty languageSelection$4JPJ = MetaAdapterFactory.getProperty(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x10f517300f75a927L, 0x24a8ad3fe6081f81L, "languageSelection");
     /*package*/ static final SProperty useFile$Lt8q = MetaAdapterFactory.getProperty(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd8f1L, 0x10f517300f490204L, "useFile");
     /*package*/ static final SProperty useFile$XUKf = MetaAdapterFactory.getProperty(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x10f517300f75a927L, 0x10f517300f75a943L, "useFile");
     /*package*/ static final SProperty displayFileStatus$v80n = MetaAdapterFactory.getProperty(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd8f1L, 0x10f517300f50b65bL, "displayFileStatus");

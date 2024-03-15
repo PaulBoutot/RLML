@@ -48,79 +48,52 @@
       <node id="7370994219267430863" at="64,19,65,0" concept="5" />
       <node id="1248996203826738390" at="66,30,67,85" concept="4" />
       <node id="1248996203826738475" at="68,7,69,0" concept="5" />
-      <node id="2641551671406809678" at="73,111,74,74" concept="3" />
-      <node id="2641551671406809689" at="75,48,76,84" concept="4" />
-      <node id="2641551671406809699" at="77,12,78,0" concept="5" />
-      <node id="2641551671406809721" at="79,11,80,69" concept="3" />
-      <node id="2641551671406809724" at="80,69,81,149" concept="1" />
-      <node id="2641551671406809734" at="81,149,82,48" concept="3" />
-      <node id="2641551671406809739" at="82,48,83,100" concept="3" />
-      <node id="2641551671406809750" at="83,100,84,79" concept="3" />
-      <node id="2641551671406809761" at="84,79,85,74" concept="3" />
-      <node id="2641551671406809768" at="85,74,86,186" concept="3" />
-      <node id="2641551671406809784" at="86,186,87,0" concept="5" />
-      <node id="2641551671406809785" at="87,0,88,0" concept="5" />
-      <node id="2641551671406809786" at="88,0,89,39" concept="1" />
-      <node id="2641551671406809791" at="89,39,90,0" concept="5" />
-      <node id="2641551671406809792" at="90,0,91,19" concept="4" />
-      <node id="2641551671406809794" at="91,19,92,0" concept="5" />
-      <node id="2641551671406809706" at="93,30,94,85" concept="4" />
-      <node id="2641551671406809795" at="95,7,96,0" concept="5" />
-      <node id="442065746490389959" at="101,103,102,74" concept="3" />
-      <node id="442065746512799582" at="103,48,104,84" concept="4" />
-      <node id="442065746490389980" at="105,12,106,0" concept="5" />
-      <node id="442065746490390002" at="107,11,108,69" concept="3" />
-      <node id="442065746490390005" at="108,69,109,149" concept="1" />
-      <node id="442065746490390015" at="109,149,110,79" concept="3" />
-      <node id="442065746490390026" at="110,79,111,66" concept="3" />
-      <node id="442065746490390034" at="111,66,112,0" concept="5" />
-      <node id="442065746490390035" at="112,0,113,56" concept="3" />
-      <node id="442065746490390042" at="113,56,114,38" concept="1" />
-      <node id="442065746490390047" at="114,38,115,0" concept="5" />
-      <node id="442065746490390048" at="115,0,116,65" concept="3" />
-      <node id="442065746490390055" at="116,65,117,63" concept="3" />
-      <node id="442065746500625591" at="117,63,118,0" concept="5" />
-      <node id="442065746490390062" at="118,0,119,57" concept="3" />
-      <node id="442065746490390068" at="119,57,120,0" concept="5" />
-      <node id="442065746490390069" at="120,0,121,19" concept="4" />
-      <node id="442065746490390071" at="121,19,122,0" concept="5" />
-      <node id="442065746500698017" at="123,30,124,85" concept="4" />
-      <node id="442065746490390072" at="125,7,126,0" concept="5" />
-      <node id="7032693678566307227" at="131,0,132,0" concept="6" trace="name$MnvL" />
+      <node id="442065746490389959" at="73,103,74,74" concept="3" />
+      <node id="442065746512799582" at="75,48,76,84" concept="4" />
+      <node id="442065746490389980" at="77,12,78,0" concept="5" />
+      <node id="442065746490390002" at="79,11,80,69" concept="3" />
+      <node id="442065746490390005" at="80,69,81,149" concept="1" />
+      <node id="442065746490390015" at="81,149,82,79" concept="3" />
+      <node id="442065746490390026" at="82,79,83,66" concept="3" />
+      <node id="442065746490390034" at="83,66,84,0" concept="5" />
+      <node id="442065746490390035" at="84,0,85,56" concept="3" />
+      <node id="442065746490390042" at="85,56,86,38" concept="1" />
+      <node id="442065746490390047" at="86,38,87,0" concept="5" />
+      <node id="442065746490390048" at="87,0,88,65" concept="3" />
+      <node id="442065746490390055" at="88,65,89,63" concept="3" />
+      <node id="442065746500625591" at="89,63,90,0" concept="5" />
+      <node id="442065746490390062" at="90,0,91,57" concept="3" />
+      <node id="442065746490390068" at="91,57,92,0" concept="5" />
+      <node id="442065746490390069" at="92,0,93,19" concept="4" />
+      <node id="442065746490390071" at="93,19,94,0" concept="5" />
+      <node id="442065746500698017" at="95,30,96,85" concept="4" />
+      <node id="442065746490390072" at="97,7,98,0" concept="5" />
+      <node id="7032693678566307227" at="103,0,104,0" concept="6" trace="name$MnvL" />
       <node id="1248996203826738384" at="51,0,68,7" concept="8" />
-      <node id="2641551671406809700" at="78,0,95,7" concept="8" />
       <node id="722930861325123814" at="23,0,41,7" concept="8" />
-      <node id="442065746490389981" at="106,0,125,7" concept="8" />
+      <node id="442065746490389981" at="78,0,97,7" concept="8" />
       <node id="1248996203826738381" at="50,10,70,5" concept="0" />
-      <node id="2641551671406809697" at="77,10,97,5" concept="0" />
       <node id="722930861325038499" at="22,10,43,5" concept="0" />
-      <node id="442065746490389978" at="105,10,127,5" concept="0" />
+      <node id="442065746490389978" at="77,10,99,5" concept="0" />
       <node id="1248996203826738371" at="47,64,70,5" concept="2" />
-      <node id="2641551671406809687" at="74,74,97,5" concept="2" />
       <node id="722930861324972617" at="19,64,43,5" concept="2" />
-      <node id="442065746490389968" at="102,74,127,5" concept="2" />
+      <node id="442065746490389968" at="74,74,99,5" concept="2" />
       <node id="1248996203826738360" at="46,0,72,0" concept="7" trace="runMyProgram_Python#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/lang/StringBuilder;" />
-      <node id="2641551671406809676" at="73,0,99,0" concept="7" trace="runMyProgram_Python_Compare#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/lang/StringBuilder;" />
       <node id="722930861325227936" at="18,0,45,0" concept="7" trace="runMyProgram#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/lang/StringBuilder;" />
-      <node id="442065746490389957" at="101,0,129,0" concept="7" trace="runMyProgramCompare#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/lang/StringBuilder;" />
+      <node id="442065746490389957" at="73,0,101,0" concept="7" trace="runMyProgramCompare#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/lang/StringBuilder;" />
       <scope id="722930861324972619" at="20,48,21,84" />
       <scope id="722930861325128355" at="39,30,40,85" />
       <scope id="1248996203826738372" at="48,48,49,84" />
       <scope id="1248996203826738389" at="66,30,67,85" />
-      <scope id="2641551671406809688" at="75,48,76,84" />
-      <scope id="2641551671406809705" at="93,30,94,85" />
-      <scope id="442065746490389969" at="103,48,104,84" />
-      <scope id="442065746490389986" at="123,30,124,85" />
+      <scope id="442065746490389969" at="75,48,76,84" />
+      <scope id="442065746490389986" at="95,30,96,85" />
       <scope id="722930861325128352" at="39,7,41,7">
         <var name="ex" id="722930861325128353" />
       </scope>
       <scope id="1248996203826738385" at="66,7,68,7">
         <var name="ex" id="1248996203826738386" />
       </scope>
-      <scope id="2641551671406809701" at="93,7,95,7">
-        <var name="ex" id="2641551671406809702" />
-      </scope>
-      <scope id="442065746490389982" at="123,7,125,7">
+      <scope id="442065746490389982" at="95,7,97,7">
         <var name="ex" id="442065746490389983" />
       </scope>
       <scope id="1248996203826738404" at="52,11,65,0">
@@ -131,14 +104,6 @@
         <var name="startIndex" id="1248996203828376633" />
         <var name="str" id="1248996203826762878" />
       </scope>
-      <scope id="2641551671406809720" at="79,11,92,0">
-        <var name="currentLocation" id="2641551671406809740" />
-        <var name="endIndex" id="2641551671406809762" />
-        <var name="fqName" id="2641551671406809722" />
-        <var name="pythonFileLocation" id="2641551671406809769" />
-        <var name="startIndex" id="2641551671406809751" />
-        <var name="str" id="2641551671406809735" />
-      </scope>
       <scope id="722930861325123816" at="24,11,38,0">
         <var name="fqName" id="722930861325409022" />
         <var name="getResultMethod" id="722930861325233151" />
@@ -148,7 +113,7 @@
         <var name="str" id="2173015607135835832" />
         <var name="theClass" id="722930861325061623" />
       </scope>
-      <scope id="442065746490390001" at="107,11,122,0">
+      <scope id="442065746490390001" at="79,11,94,0">
         <var name="fqName" id="442065746490390003" />
         <var name="getResultMethod" id="442065746490390049" />
         <var name="getRunMethod" id="442065746490390036" />
@@ -158,14 +123,10 @@
         <var name="theClass" id="442065746490390016" />
       </scope>
       <scope id="1248996203826738382" at="50,12,69,0" />
-      <scope id="2641551671406809698" at="77,12,96,0" />
       <scope id="722930861325038500" at="22,12,42,0" />
-      <scope id="442065746490389979" at="105,12,126,0" />
+      <scope id="442065746490389979" at="77,12,98,0" />
       <scope id="1248996203826738361" at="46,93,70,5">
         <var name="module" id="1248996203826738363" />
-      </scope>
-      <scope id="2641551671406809677" at="73,111,97,5">
-        <var name="module" id="2641551671406809679" />
       </scope>
       <scope id="722930861325227939" at="18,86,43,5">
         <var name="module" id="722930861324966491" />
@@ -174,23 +135,19 @@
         <var name="repository" id="1248996203826738480" />
         <var name="rlml" id="1248996203826738478" />
       </scope>
-      <scope id="2641551671406809676" at="73,0,99,0">
-        <var name="repository" id="2641551671406809800" />
-        <var name="rlmlComparator" id="2641551671406809798" />
-      </scope>
-      <scope id="442065746490389958" at="101,103,127,5">
+      <scope id="442065746490389958" at="73,103,99,5">
         <var name="module" id="442065746490389960" />
       </scope>
       <scope id="722930861325227936" at="18,0,45,0">
         <var name="repository" id="722930861325434263" />
         <var name="rlml" id="722930861325227963" />
       </scope>
-      <scope id="442065746490389957" at="101,0,129,0">
+      <scope id="442065746490389957" at="73,0,101,0">
         <var name="repository" id="442065746490390077" />
         <var name="rlmlComparator" id="442065746490390075" />
       </scope>
-      <unit id="7032693678566307227" at="130,0,133,0" name="RLML.util.RunProgram$PROPS" />
-      <unit id="7032693678566307227" at="17,0,134,0" name="RLML.util.RunProgram" />
+      <unit id="7032693678566307227" at="102,0,105,0" name="RLML.util.RunProgram$PROPS" />
+      <unit id="7032693678566307227" at="17,0,106,0" name="RLML.util.RunProgram" />
     </file>
   </root>
 </debug-info>

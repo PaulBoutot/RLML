@@ -4,18 +4,18 @@ import numpy as np
 import re
 
 def init() :
-  strStates = "[A, B, C, D, E, F] ".replace(" ", str()).replace("[", str()).replace("]", str())
+  strStates = "[S(0;0), F(0;1), F(0;2), F(0;3), F(1;0), H(1;1), F(1;2), H(1;3), F(2;0), F(2;1), F(2;2), H(2;3), H(3;0), F(3;1), F(3;2), G(3;3)]  ".replace(" ", str()).replace("[", str()).replace("]", str())
   states = strStates.split(",")
   
   
   state_count = len(states)
   actions_count = len(states)
   
-  strDone = "[C] ".replace(" ", str()).replace("[", str()).replace("]", str())
+  strDone = "[G(3;3),H(1;1),H(1;3),H(2;3),H(3;0)] ".replace(" ", str()).replace("[", str()).replace("]", str())
   doneStates = strDone.split(",")
   
-  rewards = stringToArrayList("[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]] ")
-  actions = stringToArrayList("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] ")
+  rewards = stringToArrayList("[[0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1],  [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1],  [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1]]")
+  actions = stringToArrayList("[[1,4], [0,2,5], [1,3,6], [2,7],[0,5,8], [1,4,6,9], [2,5,7,10], [3,6,11], [4,9,12],[5,8,10,13],[6,9,11,14], [7,10,15], [8,13],[9,12,14],[10,13,15],[15]] ")
   
   qTable = generateEmptyQtable(state_count)
   
@@ -55,10 +55,10 @@ def setValueDoubleArray(array, i, j, value) :
   setArrayValue(dummy, j, value)
   
 def runSarasa(qTable, stateValue, doneStates, actions, rewards) :
-  alpha = 0.1
-  gamma = 0.9
-  epsilon = 0.9
-  total_episodes = 1000
+  alpha = 0.4
+  gamma = 0.3
+  epsilon = 0.8
+  total_episodes = 10000
   
   state = " "
   index = " "
@@ -95,10 +95,10 @@ def runSarasa(qTable, stateValue, doneStates, actions, rewards) :
   
   
 def runQLearning(qTable, stateValue, doneStates, actions, rewards) :
-  alpha = 0.1
-  gamma = 0.9
-  epsilon = 0.9
-  total_episodes = 1000
+  alpha = 0.4
+  gamma = 0.3
+  epsilon = 0.8
+  total_episodes = 10000
   
   state = " "
   next_state = " "
@@ -164,7 +164,7 @@ def printQTable(stateValue, qTable) :
     print()
 
 def runActionCritic(qTable, stateList, doneStates, actions, rewards) :
-  total_episodes = 1000
+  total_episodes = 10000
   current_state = " "
   action = " "
   next_state = " "
@@ -193,7 +193,7 @@ def maxBestAction(qTable, arr, state_index) :
   
 
 def actor_critic_choose_action(qTable, stateList, current_state, actionList) :
-  epsilon = 0.9
+  epsilon = 0.8
   state_index = stateList.index(current_state)
   actions = actionList[state_index]
   
@@ -203,8 +203,8 @@ def actor_critic_choose_action(qTable, stateList, current_state, actionList) :
     return maxBestAction(qTable, actions, state_index)
   
 def actor_critic_update(qTable, stateList, current_state, next_state, actionList, reward, action) :
-  alpha = 0.1
-  gamma = 0.9
+  alpha = 0.4
+  gamma = 0.3
   
   state_index = stateList.index(current_state)
   next_state_index = stateList.index(next_state)
@@ -214,6 +214,37 @@ def actor_critic_update(qTable, stateList, current_state, next_state, actionList
   td_error = td_target - getValueDoubleArray(qTable, state_index, action)
   setValueDoubleArray(qTable, state_index, action, getValueDoubleArray(qTable, state_index, action) + alpha * td_error)
   
+def runDQN(qTable, stateList, doneStates, actions, rewards) :
+  alpha = 0.4
+  gamma = 0.3
+  epsilon = 0.8
+  total_episodes = 10000
+  
+  state = " "
+  next_state = " "
+  reward = " "
+  action = " "
+  max_value = " "
+  value = " "
+  index = 0
+  notDone = True
+  for episode in range(total_episodes) :
+    state = random.randint(0, len(stateList) - 1)
+    notDone = True
+    while notDone :
+      index = random.randint(0, len(actions[state]) - 1)
+      action = getValueDoubleArray(actions, state, index)
+      
+      next_state = action
+      reward = getValueDoubleArray(rewards, state, action)
+      
+      target = reward
+      if stateList[next_state] in doneStates :
+        notDone = False
+      
+      state = next_state
+  return qTable
+
 
 
 def pickAndRunAlgorithm(name, qTable, stateList, doneStates, actions, rewards) :
@@ -223,6 +254,8 @@ def pickAndRunAlgorithm(name, qTable, stateList, doneStates, actions, rewards) :
     runSarasa(qTable, stateList, doneStates, actions, rewards)
   elif name == 'ActorCritic' :
     runActionCritic(qTable, stateList, doneStates, actions, rewards)
+  elif name == 'DQN' :
+    runDQN(qTable, stateList, doneStates, actions, rewards)
   else :
     print("\nALGORITHM NOT DEFINED YET\n")
     return None
@@ -239,7 +272,7 @@ actionList = allInitialValues[2]
 rewardList = allInitialValues[3]
 qTable = allInitialValues[4]
 
-chosenAlgorithm = "NoName"
+chosenAlgorithm = "QLearning"
 
 pickAndRunAlgorithm(chosenAlgorithm, qTable, stateList, doneStatesList, actionList, rewardList)
 

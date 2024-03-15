@@ -759,6 +759,27 @@
     <ref role="1XX52x" to="10up:65A0jOcuIDs" resolve="Hyperparameters" />
     <node concept="3EZMnI" id="47TPQTIQ2a1" role="2wV5jI">
       <node concept="l2Vlx" id="47TPQTIQ2a2" role="2iSdaV" />
+      <node concept="3F0ifn" id="47TPQTIQ2aq" role="3EZMnx">
+        <property role="3F0ifm" value="Total Episodes" />
+        <node concept="VechU" id="47TPQTIXjtS" role="3F10Kt">
+          <property role="Vb096" value="g1_qRwE/darkGreen" />
+        </node>
+      </node>
+      <node concept="3F0ifn" id="47TPQTIQ2ar" role="3EZMnx">
+        <property role="3F0ifm" value=":" />
+        <node concept="11L4FC" id="47TPQTIQ2as" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+        <node concept="VechU" id="47TPQTIXNhs" role="3F10Kt">
+          <property role="Vb096" value="g1_qRwE/darkGreen" />
+        </node>
+      </node>
+      <node concept="3F0A7n" id="47TPQTIQ2at" role="3EZMnx">
+        <ref role="1NtTu8" to="10up:3CRs5xFk4SX" resolve="total_episodes" />
+        <node concept="ljvvj" id="5CDzF_xyg5r" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+      </node>
       <node concept="3F0ifn" id="47TPQTIQ2a8" role="3EZMnx">
         <property role="3F0ifm" value="Alpha" />
         <node concept="VechU" id="47TPQTIXi2n" role="3F10Kt">
@@ -821,24 +842,6 @@
         <node concept="ljvvj" id="47TPQTIR0WX" role="3F10Kt">
           <property role="VOm3f" value="true" />
         </node>
-      </node>
-      <node concept="3F0ifn" id="47TPQTIQ2aq" role="3EZMnx">
-        <property role="3F0ifm" value="Total Episodes" />
-        <node concept="VechU" id="47TPQTIXjtS" role="3F10Kt">
-          <property role="Vb096" value="g1_qRwE/darkGreen" />
-        </node>
-      </node>
-      <node concept="3F0ifn" id="47TPQTIQ2ar" role="3EZMnx">
-        <property role="3F0ifm" value=":" />
-        <node concept="11L4FC" id="47TPQTIQ2as" role="3F10Kt">
-          <property role="VOm3f" value="true" />
-        </node>
-        <node concept="VechU" id="47TPQTIXNhs" role="3F10Kt">
-          <property role="Vb096" value="g1_qRwE/darkGreen" />
-        </node>
-      </node>
-      <node concept="3F0A7n" id="47TPQTIQ2at" role="3EZMnx">
-        <ref role="1NtTu8" to="10up:3CRs5xFk4SX" resolve="total_episodes" />
       </node>
     </node>
   </node>
@@ -1051,6 +1054,30 @@
       <node concept="3F1sOY" id="4b2ZscRNNaB" role="3EZMnx">
         <ref role="1NtTu8" to="10up:3CRs5xFk4Ea" resolve="settings" />
         <node concept="ljvvj" id="4b2ZscRNNaC" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+      </node>
+      <node concept="3F0ifn" id="5CDzF_xxY1g" role="3EZMnx">
+        <property role="3F0ifm" value="Beta" />
+        <node concept="VechU" id="5CDzF_xxY1h" role="3F10Kt">
+          <property role="Vb096" value="g1_qRwE/darkGreen" />
+        </node>
+        <node concept="lj46D" id="5CDzF_xyfYs" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+      </node>
+      <node concept="3F0ifn" id="5CDzF_xxY1i" role="3EZMnx">
+        <property role="3F0ifm" value=":" />
+        <node concept="11L4FC" id="5CDzF_xxY1j" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+        <node concept="VechU" id="5CDzF_xxY1k" role="3F10Kt">
+          <property role="Vb096" value="g1_qRwE/darkGreen" />
+        </node>
+      </node>
+      <node concept="3F0A7n" id="5CDzF_xxY1l" role="3EZMnx">
+        <ref role="1NtTu8" to="10up:5CDzF_xxXWS" resolve="beta" />
+        <node concept="ljvvj" id="5CDzF_xxY1m" role="3F10Kt">
           <property role="VOm3f" value="true" />
         </node>
       </node>

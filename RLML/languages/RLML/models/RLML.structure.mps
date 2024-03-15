@@ -302,6 +302,11 @@
     <node concept="PrWs8" id="13P5N0eVS61" role="PzmwI">
       <ref role="PrY4T" to="tpce:6TyNL3imAnw" resolve="INamedAspect" />
     </node>
+    <node concept="1TJgyi" id="5CDzF_xxXWS" role="1TKVEl">
+      <property role="IQ2nx" value="6496880864315039544" />
+      <property role="TrG5h" value="beta" />
+      <ref role="AX2Wp" to="tpee:4_5hYVHKxAU" resolve="_FloatNumberValue" />
+    </node>
   </node>
   <node concept="1TIwiD" id="13P5N0ftq$B">
     <property role="EcuMT" value="1221908369086196007" />

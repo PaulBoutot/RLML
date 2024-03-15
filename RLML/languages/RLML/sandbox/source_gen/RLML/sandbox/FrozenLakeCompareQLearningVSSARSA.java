@@ -4,10 +4,8 @@ package RLML.sandbox;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Arrays;
-import java.io.File;
-import java.io.IOException;
+import java.util.Random;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.function.Function;
@@ -15,7 +13,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class PathFindingSARSA {
+public class FrozenLakeCompareQLearningVSSARSA {
   /*package*/ final DecimalFormat df = new DecimalFormat("#.##");
 
   /*package*/ String[] states;
@@ -24,6 +22,7 @@ public class PathFindingSARSA {
   /*package*/ int[][] rewards;
   /*package*/ int[][] actions;
   /*package*/ int actionsCount;
+  /*package*/ StringBuilder displayResult = new StringBuilder();
   /*package*/ ArrayList<ArrayList<Integer>> rewardsArrLst = new ArrayList<ArrayList<Integer>>();
   /*package*/ ArrayList<ArrayList<Integer>> actionsArrLst = new ArrayList<ArrayList<Integer>>();
   /*package*/ double[][] qTable;
@@ -31,14 +30,14 @@ public class PathFindingSARSA {
   /*package*/ ActorCriticAgent agent;
   /*package*/ Vec stateValues;
 
-  public PathFindingSARSA() {
+  public FrozenLakeCompareQLearningVSSARSA() {
     init();
   }
 
   /*package*/ void init() {
     // Set parameters and environment reward matrix R
     // Remove all spaces, then remove first open brackets [, and last closed bracket ]
-    String str = "[A, B, C, D, E, F]".replaceAll("\\s+", "");
+    String str = "[S(0;0), F(0;1), F(0;2), F(0;3), F(1;0), H(1;1), F(1;2), H(1;3), F(2;0), F(2;1), F(2;2), H(2;3), H(3;0), F(3;1), F(3;2), G(3;3)]  ".replaceAll("\\s+", "");
     str = str.substring(1, str.length() - 1);
     states = str.split(",");
 
@@ -47,12 +46,19 @@ public class PathFindingSARSA {
     actionsCount = states.length;
 
     // Done states; goal state or states that will end the game
-    String doneStr = "[C]".replaceAll("\\s+", "");
+    String doneStr = "[G(3;3),H(1;1),H(1;3),H(2;3),H(3;0)] ".replaceAll("\\s+", "");
     doneStr = doneStr.substring(1, doneStr.length() - 1);
     doneStates = doneStr.split(",");
 
-    rewards = strToArrArr("[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,100,0,0,0]]", rewardsArrLst);
-    actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]]", actionsArrLst);
+    System.out.println("States: ");
+    System.out.println("[S(0;0), F(0;1), F(0;2), F(0;3), F(1;0), H(1;1), F(1;2), H(1;3), F(2;0), F(2;1), F(2;2), H(2;3), H(3;0), F(3;1), F(3;2), G(3;3)]  ");
+
+    System.out.println("\nActions ");
+    actions = strToArrArr("[[1,4], [0,2,5], [1,3,6], [2,7],[0,5,8], [1,4,6,9], [2,5,7,10], [3,6,11], [4,9,12],[5,8,10,13],[6,9,11,14], [7,10,15], [8,13],[9,12,14],[10,13,15],[15]] ", actionsArrLst);
+
+    System.out.println("\nRewards: ");
+    rewards = strToArrArr("[[0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1],  [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1],  [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1]]", rewardsArrLst);
+
     //  Initialize matrix Q as zero matrix
     qTable = new double[statesCount][statesCount];
     // Initialize actor critic agent
@@ -97,34 +103,116 @@ public class PathFindingSARSA {
       }
     }
 
+    System.out.println(Arrays.deepToString(arrArrInt));
     return arrArrInt;
   }
 
-  public static void main(String[] args) {
-    long Begin = System.currentTimeMillis();
-    PathFindingSARSA obj = new PathFindingSARSA();
-    obj.run();
-    obj.printQTableResult();
-    obj.saveQTableResult();
-    obj.showPolicy();
-
-    long End = System.currentTimeMillis();
-    System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
+  public StringBuilder getResultBuilder(String name) {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("Algorithm Name: " + name);
+    stringBuilder.append(System.getProperty("line.separator"));
+    stringBuilder.append(this.printQTableResult());
+    stringBuilder.append(System.getProperty("line.separator"));
+    stringBuilder.append(this.showPolicy());
+    stringBuilder.append("STRINGENDSHEREBREAK");
+    return stringBuilder;
   }
 
-  public void run() {
+  public StringBuilder getResult() {
+    return displayResult;
+  }
+
+  private void QLearning() {
+    System.out.print("Algorithm Name: ");
+    System.out.println("QLearning");
+    System.out.println();
+    String algoName = "QLearning";
+    long Begin1L = System.currentTimeMillis();
+    {
+      // Q-learning: When we update the Q(St, At), we will choose the A(t+1) that makes Q(St+1, At+1) estimated
+      // biggest. But when we get to state S(t+1), we have the probability that does not choose the action A(t+1).
+      // For example, if its policy is Epsilon-Greedy algorithm, then in state S(t+1), the action A(t+1) is selected
+      // with the probability = (1 — epsilon) + (epsilon / k), in contrast, other actions will be selected.
+
+      final double alpha = 0.3;
+      final double gamma = 0.4;
+      boolean done = false;
+      Random rand = new Random();
+
+      // Train episodes
+      for (int i = 0; i < 10000; i++) {
+
+        // For each episode: select random initial state
+        int state = rand.nextInt(statesCount);
+
+        done = false;
+        // Do while not reach goal state
+        while (!(done)) {
+
+          // Select one among all possible actions for the current state
+          // Selection strategy is random in this example
+          // Action outcome is set to deterministic in this example
+          // Transition probability is 1
+          int index = rand.nextInt(actions[state].length);
+          int action = actions[state][index];
+
+          int nextState = action;
+          int r = rewards[state][action];
+
+          if (Arrays.asList(doneStates).contains(states[nextState])) {
+            done = true;
+          }
+
+          // Using this possible action, consider going to the next state
+          double q = qTable[state][action];
+
+          // Get maximum Q-value of this next state, based on all possible actions from next state
+          int[] actionsFromNextState = actions[nextState];
+          double maxValue = Double.MIN_VALUE;
+          for (int j = 0; j < actionsFromNextState.length; j++) {
+            int nextPossibleState = actionsFromNextState[j];
+            double value = qTable[nextState][nextPossibleState];
+            if (value > maxValue) {
+              maxValue = value;
+            }
+          }
+          double maxQ = maxValue;
+
+          // Q-Learning Computation 
+          double value = q + alpha * (r + gamma * maxQ - q);
+          qTable[state][action] = value;
+
+          // Set the next state as the current state
+          state = nextState;
+        }
+      }
+    }
+    this.printQTableResult();
+    this.showPolicy();
+    displayResult.append(getResultBuilder(algoName));
+    long End = System.currentTimeMillis();
+    System.out.println("\nTime: " + (End - Begin1L) / 1000.0 + "sec.");
+    System.out.println();
+    System.out.println();
+  }
+  private void SARSA() {
+    System.out.print("Algorithm Name: ");
+    System.out.println("SARSA");
+    System.out.println();
+    String algoName = "SARSA";
+    long Begin1L = System.currentTimeMillis();
     {
       // SARSA : We will choose the current action At and the next action A(t+1) using the same policy.
       // And thus, in the state S(t+1), its action will be A(t+1) which is selected while updating 
       // the action-state value of St.
 
-      final double alpha = 0.1;
-      final double gamma = 0.9;
+      final double alpha = 0.3;
+      final double gamma = 0.4;
       boolean done = false;
       Random rand = new Random();
 
       // Train episodes
-      for (int i = 0; i < 100000; i++) {
+      for (int i = 0; i < 10000; i++) {
 
         // For each episode: select random initial state
         int state = rand.nextInt(statesCount);
@@ -164,6 +252,23 @@ public class PathFindingSARSA {
         }
       }
     }
+    this.printQTableResult();
+    this.showPolicy();
+    displayResult.append(getResultBuilder(algoName));
+    long End = System.currentTimeMillis();
+    System.out.println("\nTime: " + (End - Begin1L) / 1000.0 + "sec.");
+    System.out.println();
+    System.out.println();
+  }
+
+  public static void main(String[] args) {
+    FrozenLakeCompareQLearningVSSARSA obj = new FrozenLakeCompareQLearningVSSARSA();
+    obj.run();
+  }
+
+  public void run() {
+    QLearning();
+    SARSA();
   }
 
   /*package*/ double maxQ(int s) {
@@ -191,28 +296,6 @@ public class PathFindingSARSA {
     return rewards[s][a];
   }
 
-  public StringBuilder getResult() {
-    StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append(this.printQTableResult());
-    stringBuilder.append(System.getProperty("line.separator"));
-    stringBuilder.append(this.showPolicy());
-    return stringBuilder;
-  }
-
-  /*package*/ void saveQTableResult() {
-    try {
-      File qTableFile = new File("Users/sahilsalma/Desktop/filename.txt");
-      if (qTableFile.createNewFile()) {
-        System.out.println("file created: " + qTableFile.getName());
-      } else {
-        System.out.println("File already exists");
-      }
-    } catch (IOException e) {
-      System.out.println("An error occured" + e);
-      e.printStackTrace();
-    }
-  }
-
   public StringBuilder printQTableResult() {
     StringBuilder qTableStr = new StringBuilder();
     qTableStr.append("Q-Table Result:");
@@ -229,7 +312,6 @@ public class PathFindingSARSA {
     System.out.println(qTableStr.toString());
     return qTableStr;
   }
-
 
 
   /*package*/ int policy(int state) {
@@ -262,7 +344,6 @@ public class PathFindingSARSA {
     System.out.println(policy.toString());
     return policy;
   }
-
 
   public class ActorCriticAgent implements Serializable {
     private ActorCriticLearner learner;
@@ -485,8 +566,8 @@ public class PathFindingSARSA {
 
 
   /*package*/ interface ActionSelectionStrategy extends Serializable {
-    PathFindingSARSA.IndexValue selectAction(int stateId, PathFindingSARSA.QModel model, Set<Integer> actionsAtState);
-    PathFindingSARSA.IndexValue selectAction(int stateId, PathFindingSARSA.UtilityModel model, Set<Integer> actionsAtState);
+    FrozenLakeCompareQLearningVSSARSA.IndexValue selectAction(int stateId, FrozenLakeCompareQLearningVSSARSA.QModel model, Set<Integer> actionsAtState);
+    FrozenLakeCompareQLearningVSSARSA.IndexValue selectAction(int stateId, FrozenLakeCompareQLearningVSSARSA.UtilityModel model, Set<Integer> actionsAtState);
     String getPrototype();
     Map<String, String> getAttributes();
   }
@@ -652,6 +733,7 @@ public class PathFindingSARSA {
     }
   }
 
+
   public class GibbsSoftMaxActionSelectionStrategy extends AbstractActionSelectionStrategy {
     private Random random = null;
     public GibbsSoftMaxActionSelectionStrategy() {
@@ -700,6 +782,8 @@ public class PathFindingSARSA {
       return iv;
     }
   }
+
+
 
   public class GreedyActionSelectionStrategy extends AbstractActionSelectionStrategy {
     @Override

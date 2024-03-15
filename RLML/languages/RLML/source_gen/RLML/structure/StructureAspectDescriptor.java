@@ -163,6 +163,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.parent(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x6e62cf10d25a65e0L);
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/4810686366881886308");
     b.version(3);
+    b.property("beta", 0x5a298eb96187df38L).type(MetaIdFactory.dataTypeId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x494547eeedc219baL)).origin("6496880864315039544").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForQLearning() {
@@ -216,7 +217,6 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:79d840d4-50c1-4923-a649-6cb59cd638d3(RLML.structure)/1221908369086196007");
     b.version(3);
     b.property("useFile", 0x10f517300f75a943L).type(PrimitiveTypeId.BOOLEAN).origin("1221908369086196035").done();
-    b.property("languageSelection", 0x24a8ad3fe6081f81L).type(PrimitiveTypeId.BOOLEAN).origin("2641551671406632833").done();
     b.property("displayFileStatus", 0x10f517300f75a944L).type(PrimitiveTypeId.STRING).origin("1221908369086196036").done();
     b.aggregate("environment", 0x10f517300f75a947L).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92aL).optional(false).ordered(true).multiple(false).origin("1221908369086196039").done();
     b.aggregate("agent", 0x10f517300f75a948L).target(0x3c2f74fb565a4cb8L, 0x8a8142024cc7aa10L, 0x4613d414d7bcd92bL).optional(false).ordered(true).multiple(true).origin("1221908369086196040").done();

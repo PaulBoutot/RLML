@@ -70,34 +70,6 @@ public class RunProgram {
     }
   }
 
-  public static StringBuilder runMyProgram_Python_Compare(final SNode rlmlComparator, SRepository repository) {
-    SModule module = SNodeOperations.getModel(rlmlComparator).getModule();
-    if (!(module instanceof ReloadableModule)) {
-      return new StringBuilder("Module not reloadable, cannot obtain class loader");
-    } else {
-
-      try {
-        final Wrappers._T<String> fqName = new Wrappers._T<String>();
-        repository.getModelAccess().runReadAction(() -> fqName.value = INamedConcept__BehaviorDescriptor.getFqName_idhEwIO9y.invoke(rlmlComparator));
-        StringBuilder str = new StringBuilder();
-        String currentLocation = SNodeOperations.getModel(rlmlComparator).getSource().getLocation();
-        int startIndex = currentLocation.indexOf("path: ") + "path: ".length();
-        int endIndex = currentLocation.indexOf("models/RLML.sandbox.mps");
-        String pythonFileLocation = currentLocation.substring(startIndex, endIndex) + "source_gen/RLML/sandbox/" + SPropertyOperations.getString(rlmlComparator, PROPS.name$MnvL) + ".py";
-
-
-        str.append(pythonFileLocation);
-
-        return str;
-
-      } catch (Exception ex) {
-        return new StringBuilder("Caught " + ex.getClass() + ": " + ex.getMessage());
-      }
-
-    }
-  }
-
-
   public static StringBuilder runMyProgramCompare(final SNode rlmlComparator, SRepository repository) {
     SModule module = SNodeOperations.getModel(rlmlComparator).getModule();
     if (!(module instanceof ReloadableModule)) {
