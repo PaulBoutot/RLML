@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class PathfindingDQN {
+public class SimpleGameQLearning {
   /*package*/ final DecimalFormat df = new DecimalFormat("#.##");
 
   /*package*/ String[] states;
@@ -32,14 +32,14 @@ public class PathfindingDQN {
   /*package*/ ActorCriticAgent agent;
   /*package*/ Vec stateValues;
 
-  public PathfindingDQN() {
+  public SimpleGameQLearning() {
     init();
   }
 
   /*package*/ void init() {
     // Set parameters and environment reward matrix R
     // Remove all spaces, then remove first open brackets [, and last closed bracket ]
-    String str = "[A, B, C, D, E, F] ".replaceAll("\\s+", "");
+    String str = "[A, B, C, D, E, F, G, H, I]".replaceAll("\\s+", "");
     str = str.substring(1, str.length() - 1);
     states = str.split(",");
 
@@ -52,9 +52,9 @@ public class PathfindingDQN {
     doneStr = doneStr.substring(1, doneStr.length() - 1);
     doneStates = doneStr.split(",");
 
-    String rewardStr = "[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]]";
+    String rewardStr = "[[0,0,0,0,0,0,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0]]";
     rewards = strToArrArr(rewardStr, rewardsArrLst);
-    actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] ", actionsArrLst);
+    actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4,6], [1,3,5,7], [2,4,8], [3,7], [4,6,8], [5,7]]", actionsArrLst);
     //  Initialize matrix Q as zero matrix
     qTable = new double[statesCount][statesCount];
     // Initialize actor critic agent
@@ -104,7 +104,7 @@ public class PathfindingDQN {
 
   public static void main(String[] args) {
     long Begin = System.currentTimeMillis();
-    PathfindingDQN obj = new PathfindingDQN();
+    SimpleGameQLearning obj = new SimpleGameQLearning();
     obj.run();
     obj.printQTableResult();
     obj.saveQTableResult();
@@ -116,7 +116,10 @@ public class PathfindingDQN {
 
   public void run() {
     {
-      // DQN: <todo - update description>
+      // Q-learning: When we update the Q(St, At), we will choose the A(t+1) that makes Q(St+1, At+1) estimated
+      // biggest. But when we get to state S(t+1), we have the probability that does not choose the action A(t+1).
+      // For example, if its policy is Epsilon-Greedy algorithm, then in state S(t+1), the action A(t+1) is selected
+      // with the probability = (1 — epsilon) + (epsilon / k), in contrast, other actions will be selected.
 
       final double alpha = 0.1;
       final double gamma = 0.3;
@@ -146,6 +149,25 @@ public class PathfindingDQN {
           if (Arrays.asList(doneStates).contains(states[nextState])) {
             done = true;
           }
+
+          // Using this possible action, consider going to the next state
+          double q = qTable[state][action];
+
+          // Get maximum Q-value of this next state, based on all possible actions from next state
+          int[] actionsFromNextState = actions[nextState];
+          double maxValue = Double.MIN_VALUE;
+          for (int j = 0; j < actionsFromNextState.length; j++) {
+            int nextPossibleState = actionsFromNextState[j];
+            double value = qTable[nextState][nextPossibleState];
+            if (value > maxValue) {
+              maxValue = value;
+            }
+          }
+          double maxQ = maxValue;
+
+          // Q-Learning Computation 
+          double value = q + alpha * (r + gamma * maxQ - q);
+          qTable[state][action] = value;
 
           // Set the next state as the current state
           state = nextState;
@@ -189,7 +211,7 @@ public class PathfindingDQN {
 
   /*package*/ void saveQTableResult() {
     try {
-      File qTableFile = new File("PathfindingDQN.txt");
+      File qTableFile = new File("SimpleGameQLearning.txt");
       if (qTableFile.createNewFile()) {
         System.out.println("file created: " + qTableFile.getName());
       } else {
@@ -476,8 +498,8 @@ public class PathfindingDQN {
 
 
   /*package*/ interface ActionSelectionStrategy extends Serializable {
-    PathfindingDQN.IndexValue selectAction(int stateId, PathfindingDQN.QModel model, Set<Integer> actionsAtState);
-    PathfindingDQN.IndexValue selectAction(int stateId, PathfindingDQN.UtilityModel model, Set<Integer> actionsAtState);
+    SimpleGameQLearning.IndexValue selectAction(int stateId, SimpleGameQLearning.QModel model, Set<Integer> actionsAtState);
+    SimpleGameQLearning.IndexValue selectAction(int stateId, SimpleGameQLearning.UtilityModel model, Set<Integer> actionsAtState);
     String getPrototype();
     Map<String, String> getAttributes();
   }

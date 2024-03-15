@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="3oe3r92fv3lflymfsbtlwocijws4ea7">
-  <files names="FrozenLakeCompareQLearningVSSARSA.java:FrozenLakeQlearning.java:FrozenLakeQlearning.py:PathfindingDQN.java:PathfindingDQN.py" />
+<product version="3" modelHash="-9lypn1ntvq4gk87jba00lln2u70jyo4">
+  <files names="FrozenLakeCompareQLearningVSSARSA.java:FrozenLakeQlearning.java:FrozenLakeQlearning.py:PathfindingCompareQLearningVSSARSAVSActorCritic.java:PathfindingQLearning.java:PathfindingQLearning.py:SimpleGameCompareActorCriticVSSARSA.java:SimpleGameQLearning.java:SimpleGameQLearning.py" />
 </product>
 

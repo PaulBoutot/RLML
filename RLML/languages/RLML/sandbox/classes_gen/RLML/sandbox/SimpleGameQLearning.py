@@ -4,7 +4,7 @@ import numpy as np
 import re
 
 def init() :
-  strStates = "[A, B, C, D, E, F] ".replace(" ", str()).replace("[", str()).replace("]", str())
+  strStates = "[A, B, C, D, E, F, G, H, I]".replace(" ", str()).replace("[", str()).replace("]", str())
   states = strStates.split(",")
   
   
@@ -14,8 +14,8 @@ def init() :
   strDone = "[C] ".replace(" ", str()).replace("[", str()).replace("]", str())
   doneStates = strDone.split(",")
   
-  rewards = stringToArrayList("[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]]")
-  actions = stringToArrayList("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] ")
+  rewards = stringToArrayList("[[0,0,0,0,0,0,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0]]")
+  actions = stringToArrayList("[[1,3], [0,2,4], [2], [0,4,6], [1,3,5,7], [2,4,8], [3,7], [4,6,8], [5,7]]")
   
   qTable = generateEmptyQtable(state_count)
   
@@ -57,7 +57,7 @@ def setValueDoubleArray(array, i, j, value) :
 def runSarasa(qTable, stateValue, doneStates, actions, rewards) :
   alpha = 0.1
   gamma = 0.3
-  epsilon = 0.8
+  epsilon = 0.9
   total_episodes = 10000
   
   state = " "
@@ -97,7 +97,7 @@ def runSarasa(qTable, stateValue, doneStates, actions, rewards) :
 def runQLearning(qTable, stateValue, doneStates, actions, rewards) :
   alpha = 0.1
   gamma = 0.3
-  epsilon = 0.8
+  epsilon = 0.9
   total_episodes = 10000
   
   state = " "
@@ -193,7 +193,7 @@ def maxBestAction(qTable, arr, state_index) :
   
 
 def actor_critic_choose_action(qTable, stateList, current_state, actionList) :
-  epsilon = 0.8
+  epsilon = 0.9
   state_index = stateList.index(current_state)
   actions = actionList[state_index]
   
@@ -217,7 +217,7 @@ def actor_critic_update(qTable, stateList, current_state, next_state, actionList
 def runDQN(qTable, stateList, doneStates, actions, rewards) :
   alpha = 0.1
   gamma = 0.3
-  epsilon = 0.8
+  epsilon = 0.9
   total_episodes = 10000
   
   state = " "
@@ -272,7 +272,7 @@ actionList = allInitialValues[2]
 rewardList = allInitialValues[3]
 qTable = allInitialValues[4]
 
-chosenAlgorithm = "DQN"
+chosenAlgorithm = "QLearning"
 
 pickAndRunAlgorithm(chosenAlgorithm, qTable, stateList, doneStatesList, actionList, rewardList)
 

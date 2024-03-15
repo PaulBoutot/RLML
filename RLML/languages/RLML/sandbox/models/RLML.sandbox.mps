@@ -37,7 +37,6 @@
         <child id="1221908369086196040" name="agent" index="vwbTS" />
         <child id="1221908369086196041" name="result" index="vwbTT" />
       </concept>
-      <concept id="4754067750975714854" name="RLML.structure.DQN" flags="ng" index="IXu58" />
       <concept id="2123160928991345816" name="RLML.structure.Actions" flags="ng" index="2KWCs5">
         <property id="2123160928991345817" name="value" index="2KWCs4" />
       </concept>
@@ -64,6 +63,7 @@
       <concept id="7018298431017511515" name="RLML.structure.Settings" flags="ng" index="1H7eHA">
         <child id="4194945102978763409" name="hyperparameters" index="1hpNF9" />
       </concept>
+      <concept id="4810686366881361394" name="RLML.structure.ActorCritic" flags="ng" index="1P1t0L" />
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
@@ -158,7 +158,7 @@
   </node>
   <node concept="2hFKN_" id="73QAZMz3bYx">
     <property role="vDq5F" value="Selected file successfully processed, make sure data constraints are followed" />
-    <property role="TrG5h" value="PathfindingDQN" />
+    <property role="TrG5h" value="PathfindingQLearning" />
     <node concept="2hFKOY" id="73QAZMz3bYy" role="1hpOZQ">
       <node concept="2KWCs8" id="73QAZMz3bYz" role="30DmD$">
         <property role="2KWCsb" value="[A, B, C, D, E, F] " />
@@ -174,20 +174,170 @@
       </node>
     </node>
     <node concept="2hFKOZ" id="73QAZMz3bYB" role="1hpOZB">
-      <node concept="IXu58" id="73QAZMz3bYX" role="1hpNCA">
-        <property role="TrG5h" value="DQN" />
-        <node concept="1H7eHA" id="73QAZMz3bYZ" role="1hpNFi">
-          <node concept="1H7eHx" id="73QAZMz3bZ1" role="1hpNF9">
+      <node concept="1hpOEb" id="73QAZMz4WG1" role="1hpNCA">
+        <property role="TrG5h" value="QLearning" />
+        <node concept="1H7eHA" id="73QAZMz4WG3" role="1hpNFi">
+          <node concept="1H7eHx" id="73QAZMz4WG5" role="1hpNF9">
             <property role="1hpNT_" value="10000" />
             <property role="1hpNF0" value="0.1" />
             <property role="1hpNF2" value="0.3" />
-            <property role="1hpNTG" value="0.8" />
+            <property role="1hpNTG" value="0.9" />
           </node>
         </node>
       </node>
     </node>
     <node concept="2hFKOS" id="73QAZMz3bYF" role="1hpOYk">
-      <property role="UrZLp" value="Q-Table Result&#10;&#10;A :    0.00   0.00   0.00   0.00   0.00   0.00 &#10;B :    0.00   0.00   0.00   0.00   0.00   0.00 &#10;C :    0.00   0.00   0.00   0.00   0.00   0.00 &#10;D :    0.00   0.00   0.00   0.00   0.00   0.00 &#10;E :    0.00   0.00   0.00   0.00   0.00   0.00 &#10;F :    0.00   0.00   0.00   0.00   0.00   0.00 &#10;&#10;Policy&#10;&#10;From A  go to B &#10;From B  go to A &#10;From C  go to C &#10;From D  go to A &#10;From E  go to B &#10;From F  go to C &#10;&#10;" />
+      <property role="UrZLp" value="Q-Table Result&#10;&#10;A :    0.00  30.00   0.00   2.70   0.00   0.00 &#10;B :    9.00   0.00 100.00   0.00   9.00   0.00 &#10;C :    0.00   0.00   0.00   0.00   0.00   0.00 &#10;D :    9.00   0.00   0.00   0.00   9.00   0.00 &#10;E :    0.00  30.00   0.00   2.70   0.00  30.00 &#10;F :    0.00   0.00 100.00   0.00   9.00   0.00 &#10;&#10;Policy&#10;&#10;From A  go to B &#10;From B  go to C &#10;From C  go to C &#10;From D  go to A &#10;From E  go to B &#10;From F  go to C &#10;&#10;" />
+    </node>
+  </node>
+  <node concept="2hFKN_" id="73QAZMz5agF">
+    <property role="vDq5F" value="Selected file successfully processed, make sure data constraints are followed" />
+    <property role="TrG5h" value="SimpleGameQLearning" />
+    <node concept="2hFKOY" id="73QAZMz5agG" role="1hpOZQ">
+      <node concept="2KWCs8" id="73QAZMz5agH" role="30DmD$">
+        <property role="2KWCsb" value="[A, B, C, D, E, F, G, H, I]" />
+      </node>
+      <node concept="2KWCs5" id="73QAZMz5agI" role="30DmDA">
+        <property role="2KWCs4" value="[[1,3], [0,2,4], [2], [0,4,6], [1,3,5,7], [2,4,8], [3,7], [4,6,8], [5,7]]" />
+      </node>
+      <node concept="30DmDJ" id="73QAZMz5agJ" role="30DmEp">
+        <property role="30DmDy" value="[[0,0,0,0,0,0,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0]]" />
+      </node>
+      <node concept="1sM6Dn" id="73QAZMz5agK" role="1sM6DO">
+        <property role="1sM6D4" value="[C] " />
+      </node>
+    </node>
+    <node concept="2hFKOZ" id="73QAZMz5agL" role="1hpOZB">
+      <node concept="1hpOEb" id="73QAZMz5agM" role="1hpNCA">
+        <property role="TrG5h" value="QLearning" />
+        <node concept="1H7eHA" id="73QAZMz5agN" role="1hpNFi">
+          <node concept="1H7eHx" id="73QAZMz5agO" role="1hpNF9">
+            <property role="1hpNT_" value="10000" />
+            <property role="1hpNF0" value="0.1" />
+            <property role="1hpNF2" value="0.3" />
+            <property role="1hpNTG" value="0.9" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2hFKOS" id="73QAZMz5agP" role="1hpOYk">
+      <property role="UrZLp" value="States: 9&#10;Actions 9&#10;Rewards 9&#10;Done States 1" />
+    </node>
+  </node>
+  <node concept="vwbSn" id="73QAZMz5k6L">
+    <property role="TrG5h" value="PathfindingCompareQLearningVSSARSAVSActorCritic" />
+    <property role="vwbTO" value="Selected file successfully processed, make sure data constraints are followed" />
+    <node concept="2hFKOS" id="73QAZMz5k71" role="vwbTT">
+      <property role="UrZLp" value="Algorithm Name: QLearning&#10;Q-Table Result:&#10;A:     0   40    0  6.4    0    0 &#10;B:    16    0  100    0   16    0 &#10;C:     0    0    0    0    0    0 &#10;D:    16    0    0    0   16    0 &#10;E:     0   40    0  6.4    0   40 &#10;F:     0    0  100    0   16    0 &#10;&#10;Policy:&#10;From  A go to  B&#10;From  B go to  C&#10;From  C go to  C&#10;From  D go to  A&#10;From  E go to  B&#10;From  F go to  C&#10;" />
+    </node>
+    <node concept="2hFKOY" id="73QAZMz5k6M" role="vwbTR">
+      <node concept="2KWCs8" id="73QAZMz5k6N" role="30DmD$">
+        <property role="2KWCsb" value="[A, B, C, D, E, F] " />
+      </node>
+      <node concept="2KWCs5" id="73QAZMz5k6O" role="30DmDA">
+        <property role="2KWCs4" value="[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]] " />
+      </node>
+      <node concept="30DmDJ" id="73QAZMz5k6P" role="30DmEp">
+        <property role="30DmDy" value="[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0],[0,0,100,0,0,0]]" />
+      </node>
+      <node concept="1sM6Dn" id="73QAZMz5k6Q" role="1sM6DO">
+        <property role="1sM6D4" value="[C] " />
+      </node>
+    </node>
+    <node concept="2hFKOZ" id="73QAZMz5k6R" role="vwbTS">
+      <node concept="1hpOEb" id="73QAZMz5k6S" role="1hpNCA">
+        <property role="TrG5h" value="QLearning" />
+        <node concept="1H7eHA" id="73QAZMz5k6T" role="1hpNFi">
+          <node concept="1H7eHx" id="73QAZMz5k6U" role="1hpNF9">
+            <property role="1hpNT_" value="10000" />
+            <property role="1hpNF0" value="0.3" />
+            <property role="1hpNF2" value="0.4" />
+            <property role="1hpNTG" value="0.7" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2hFKOZ" id="73QAZMz5k6V" role="vwbTS">
+      <node concept="1H7eHb" id="73QAZMz5k6W" role="1hpNCA">
+        <property role="TrG5h" value="SARSA" />
+        <node concept="1H7eHA" id="73QAZMz5k6X" role="1hpNFi">
+          <node concept="1H7eHx" id="73QAZMz5k6Y" role="1hpNF9">
+            <property role="1hpNT_" value="10000" />
+            <property role="1hpNF0" value="0.3" />
+            <property role="1hpNF2" value="0.4" />
+            <property role="1hpNTG" value="0.7" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2hFKOZ" id="73QAZMz5k75" role="vwbTS">
+      <node concept="1P1t0L" id="73QAZMz5k7l" role="1hpNCA">
+        <property role="TrG5h" value="ActorCritic" />
+        <node concept="1H7eHA" id="73QAZMz5k7p" role="1hpNFi">
+          <node concept="1H7eHx" id="73QAZMz5k7t" role="1hpNF9">
+            <property role="1hpNT_" value="10000" />
+            <property role="1hpNF0" value="0.3" />
+            <property role="1hpNF2" value="0.4" />
+            <property role="1hpNTG" value="0.7" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2hFKOS" id="73QAZMz5k6Z" role="vwbTT">
+      <property role="UrZLp" value="Algorithm Name: SARSA&#10;Q-Table Result:&#10;A:  1.21 2.63    0 0.06 1.08 1.25 &#10;B:  0.37 14.43  100 0.14 0.55 24.92 &#10;C:     0    0    0    0    0    0 &#10;D:  0.37 0.07    0 0.15 0.37 0.09 &#10;E:  0.34 2.82    0 0.04 1.37 4.34 &#10;F:   0.3 23.31  100 0.15  0.4 4.06 &#10;&#10;Policy:&#10;From  A go to  B&#10;From  B go to  C&#10;From  C go to  C&#10;From  D go to  E&#10;From  E go to  F&#10;From  F go to  C&#10;" />
+    </node>
+    <node concept="2hFKOS" id="73QAZMz5k70" role="vwbTT">
+      <property role="UrZLp" value="Algorithm Name: ActorCritic&#10;Q-Table Result:&#10;A:  1.21 0.01    0 0.01 1.08 1.25 &#10;B:  0.01 14.43 30.01 0.14 0.01 24.92 &#10;C:     0    0 0.01    0    0    0 &#10;D:  0.01 0.07    0 0.15 0.01 0.09 &#10;E:  0.34 0.01    0 0.01 1.37 4.34 &#10;F:   0.3 23.31  100 0.15  0.4 4.06 &#10;&#10;Policy:&#10;From  A go to  B&#10;From  B go to  C&#10;From  C go to  C&#10;From  D go to  A&#10;From  E go to  F&#10;From  F go to  C&#10;" />
+    </node>
+  </node>
+  <node concept="vwbSn" id="73QAZMz5tNN">
+    <property role="TrG5h" value="SimpleGameCompareActorCriticVSSARSA" />
+    <property role="vwbTO" value="Selected file successfully processed, make sure data constraints are followed" />
+    <node concept="2hFKOY" id="73QAZMz5tNO" role="vwbTR">
+      <node concept="2KWCs8" id="73QAZMz5tNP" role="30DmD$">
+        <property role="2KWCsb" value="[A, B, C, D, E, F, G, H, I]" />
+      </node>
+      <node concept="2KWCs5" id="73QAZMz5tNQ" role="30DmDA">
+        <property role="2KWCs4" value="[[1,3], [0,2,4], [2], [0,4,6], [1,3,5,7], [2,4,8], [3,7], [4,6,8], [5,7]]" />
+      </node>
+      <node concept="30DmDJ" id="73QAZMz5tNR" role="30DmEp">
+        <property role="30DmDy" value="[[0,0,0,0,0,0,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0]]" />
+      </node>
+      <node concept="1sM6Dn" id="73QAZMz5tNS" role="1sM6DO">
+        <property role="1sM6D4" value="[C] " />
+      </node>
+    </node>
+    <node concept="2hFKOZ" id="73QAZMz5tNT" role="vwbTS">
+      <node concept="1P1t0L" id="73QAZMz5tO5" role="1hpNCA">
+        <property role="TrG5h" value="ActorCritic" />
+        <node concept="1H7eHA" id="73QAZMz5tO7" role="1hpNFi">
+          <node concept="1H7eHx" id="73QAZMz5tO9" role="1hpNF9">
+            <property role="1hpNT_" value="10000" />
+            <property role="1hpNF0" value="0.3" />
+            <property role="1hpNF2" value="0.4" />
+            <property role="1hpNTG" value="0.7" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2hFKOZ" id="73QAZMz5tNX" role="vwbTS">
+      <node concept="1H7eHb" id="73QAZMz5tNY" role="1hpNCA">
+        <property role="TrG5h" value="SARSA" />
+        <node concept="1H7eHA" id="73QAZMz5tNZ" role="1hpNFi">
+          <node concept="1H7eHx" id="73QAZMz5tO0" role="1hpNF9">
+            <property role="1hpNT_" value="10000" />
+            <property role="1hpNF0" value="0.3" />
+            <property role="1hpNF2" value="0.4" />
+            <property role="1hpNTG" value="0.7" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2hFKOS" id="73QAZMz5tO1" role="vwbTT">
+      <property role="UrZLp" value="Algorithm Name: ActorCritic&#10;Q-Table Result:&#10;A:     0 0.01    0 0.01    0    0    0    0    0 &#10;B:     0    0    0    0 -2.99    0    0    0    0 &#10;C:     0    0 0.01    0    0    0    0    0    0 &#10;D:  0.01    0    0    0 -2.99    0 0.01    0    0 &#10;E:     0    0    0 0.01    0 -2.99    0 0.01    0 &#10;F:     0    0 1.51    0 -2.99    0    0    0    0 &#10;G:     0    0    0 0.01    0    0    0 0.01    0 &#10;H:     0    0    0    0 -2.99    0 0.01    0    0 &#10;I:     0    0    0    0    0 -2.99    0    0    0 &#10;&#10;Policy:&#10;From  A go to  B&#10;From  B go to  B&#10;From  C go to  C&#10;From  D go to  A&#10;From  E go to  D&#10;From  F go to  C&#10;From  G go to  D&#10;From  H go to  G&#10;From  I go to  I&#10;" />
+    </node>
+    <node concept="2hFKOS" id="73QAZMz5tO2" role="vwbTT">
+      <property role="UrZLp" value="Algorithm Name: SARSA&#10;Q-Table Result:&#10;A:  -0.14 -0.88    0 -0.48 -0.22 -0.47 -0.21 -0.77 -0.19 &#10;B:  -0.06 -0.83    5 -2.01 -10.14 0.03 -0.08   -1 -0.32 &#10;C:     0    0    0    0    0    0    0    0    0 &#10;D:  -0.09 -1.93    0 -0.15 -10.21 -1.34 -0.09 -0.07 -0.27 &#10;E:  -0.25 -0.57    0 -0.51 -0.53 -10.38 -0.25 -0.5 -0.33 &#10;F:  -0.04 -2.6    5 -0.41 -10.5 1.22 -0.08 -2.76 -0.87 &#10;G:  -0.25 -0.52    0 -0.28 -0.2 -0.55 -0.23 -0.51 -0.12 &#10;H:  -0.09 -1.38    0 -1.39 -10.3 -1.92 -0.08 -1.79 -0.61 &#10;I:  -0.23 -0.26    0 -0.35 -3.26 -10.78 -0.21 -0.46   -2 &#10;&#10;Policy:&#10;From  A go to  A&#10;From  B go to  C&#10;From  C go to  C&#10;From  D go to  D&#10;From  E go to  E&#10;From  F go to  C&#10;From  G go to  G&#10;From  H go to  H&#10;From  I go to  I&#10;" />
     </node>
   </node>
 </model>
