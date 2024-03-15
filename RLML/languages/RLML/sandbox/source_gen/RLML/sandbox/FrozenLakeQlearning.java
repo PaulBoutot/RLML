@@ -5,15 +5,18 @@ package RLML.sandbox;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Collections;
+import java.util.Arrays;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.HashSet;
 
-public class PathFindingActorCritic {
+public class FrozenLakeQlearning {
   /*package*/ final DecimalFormat df = new DecimalFormat("#.##");
 
   /*package*/ String[] states;
@@ -29,14 +32,14 @@ public class PathFindingActorCritic {
   /*package*/ ActorCriticAgent agent;
   /*package*/ Vec stateValues;
 
-  public PathFindingActorCritic() {
+  public FrozenLakeQlearning() {
     init();
   }
 
   /*package*/ void init() {
     // Set parameters and environment reward matrix R
     // Remove all spaces, then remove first open brackets [, and last closed bracket ]
-    String str = "[A, B, C, D, E, F]".replaceAll("\\s+", "");
+    String str = "[S(0;0), F(0;1), F(0;2), F(0;3), F(1;0), H(1;1), F(1;2), H(1;3), F(2;0), F(2;1), F(2;2), H(2;3), H(3;0), F(3;1), F(3;2), G(3;3)]  ".replaceAll("\\s+", "");
     str = str.substring(1, str.length() - 1);
     states = str.split(",");
 
@@ -45,12 +48,13 @@ public class PathFindingActorCritic {
     actionsCount = states.length;
 
     // Done states; goal state or states that will end the game
-    String doneStr = "[C]".replaceAll("\\s+", "");
+    String doneStr = "[G(3;3),H(1;1),H(1;3),H(2;3),H(3;0)] ".replaceAll("\\s+", "");
     doneStr = doneStr.substring(1, doneStr.length() - 1);
     doneStates = doneStr.split(",");
 
-    rewards = strToArrArr("[[0,0,0,0,0,0], [0,0,100,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,100,0,0,0]]", rewardsArrLst);
-    actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4], [1,3,5], [2,4]]", actionsArrLst);
+    String rewardStr = "[[0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1],  [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1],  [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1], [0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, -1, -1, 0, 0, 1]]";
+    rewards = strToArrArr(rewardStr, rewardsArrLst);
+    actions = strToArrArr("[[1,4], [0,2,5], [1,3,6], [2,7],[0,5,8], [1,4,6,9], [2,5,7,10], [3,6,11], [4,9,12],[5,8,10,13],[6,9,11,14], [7,10,15], [8,13],[9,12,14],[10,13,15],[15]] ", actionsArrLst);
     //  Initialize matrix Q as zero matrix
     qTable = new double[statesCount][statesCount];
     // Initialize actor critic agent
@@ -100,72 +104,74 @@ public class PathFindingActorCritic {
 
   public static void main(String[] args) {
     long Begin = System.currentTimeMillis();
-    PathFindingActorCritic obj = new PathFindingActorCritic();
+    FrozenLakeQlearning obj = new FrozenLakeQlearning();
     obj.run();
     obj.printQTableResult();
+    obj.saveQTableResult();
     obj.showPolicy();
 
     long End = System.currentTimeMillis();
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  /*package*/ void run() {
+  public void run() {
     {
-      // ActorCritic: Hyper Parameters
-      final double alpha = 0.3;
-      final double gamma = 0.5;
-      final int episodes = 10000000;
+      // Q-learning: When we update the Q(St, At), we will choose the A(t+1) that makes Q(St+1, At+1) estimated
+      // biggest. But when we get to state S(t+1), we have the probability that does not choose the action A(t+1).
+      // For example, if its policy is Epsilon-Greedy algorithm, then in state S(t+1), the action A(t+1) is selected
+      // with the probability = (1 — epsilon) + (epsilon / k), in contrast, other actions will be selected.
 
-      // Actor Critic Agent was initialized in the init function
-      // Set properties of agent
-      agent.getLearner().getP().setAlpha(alpha);
-      agent.getLearner().getP().setGamma(gamma);
+      final double alpha = 0.4;
+      final double gamma = 0.3;
+      boolean done = false;
+      Random rand = new Random();
 
-      // Set state values to zero
-      for (int stateId = 0; stateId < statesCount; ++stateId) {
-        stateValues.set(stateId, 0);
-      }
+      // Train episodes
+      for (int i = 0; i < 10000; i++) {
 
-      // Run Episodes
-      Random random = new Random();
+        // For each episode: select random initial state
+        int state = rand.nextInt(statesCount);
 
-      //  Initial State of the agent
-      int currentState = random.nextInt(statesCount);
-      agent.start(currentState);
+        done = false;
+        // Do while not reach goal state
+        while (!(done)) {
 
-      for (int i = 0; i < episodes; i++) {
-        //  Calculate the current actions available at current state.
-        Set<Integer> actionsAtState = new HashSet<Integer>();
-        Integer[] boxedActions = new Integer[actions[currentState].length];
-        for (int j = 0; j < actions[currentState].length; j++) {
-          boxedActions[j] = actions[currentState][j];
+          // Select one among all possible actions for the current state
+          // Selection strategy is random in this example
+          // Action outcome is set to deterministic in this example
+          // Transition probability is 1
+          int index = rand.nextInt(actions[state].length);
+          int action = actions[state][index];
+
+          int nextState = action;
+          int r = rewards[state][action];
+
+          if (Arrays.asList(doneStates).contains(states[nextState])) {
+            done = true;
+          }
+
+          // Using this possible action, consider going to the next state
+          double q = qTable[state][action];
+
+          // Get maximum Q-value of this next state, based on all possible actions from next state
+          int[] actionsFromNextState = actions[nextState];
+          double maxValue = Double.MIN_VALUE;
+          for (int j = 0; j < actionsFromNextState.length; j++) {
+            int nextPossibleState = actionsFromNextState[j];
+            double value = qTable[nextState][nextPossibleState];
+            if (value > maxValue) {
+              maxValue = value;
+            }
+          }
+          double maxQ = maxValue;
+
+          // Q-Learning Computation 
+          double value = q + alpha * (r + gamma * maxQ - q);
+          qTable[state][action] = value;
+
+          // Set the next state as the current state
+          state = nextState;
         }
-        Collections.addAll(actionsAtState, boxedActions);
-
-        // Choose action to perform with agent
-        int action = agent.selectAction(actionsAtState);
-
-        // Get new state and the reward
-        int nextState = action;
-        int r = rewards[currentState][action];
-
-        // Get next possible actions at next state
-        Set<Integer> actionsAtNextState = new HashSet<Integer>();
-        Integer[] boxedActions2 = new Integer[actions[currentState].length];
-        for (int j = 0; j < actions[currentState].length; j++) {
-          boxedActions2[j] = actions[currentState][j];
-        }
-        Collections.addAll(actionsAtNextState, boxedActions2);
-
-        // Update the agent
-        agent.update(action, nextState, actionsAtNextState, r, stateValues);
-
-        // Update qTable (probably wrong)
-        double value = agent.getLearner().getP().getQ(currentState, action);
-        qTable[currentState][action] = value;
-
-        // Update values
-        currentState = nextState;
       }
     }
   }
@@ -195,16 +201,49 @@ public class PathFindingActorCritic {
     return rewards[s][a];
   }
 
-  /*package*/ void printQTableResult() {
-    System.out.println("Q-Table Result:");
-    for (int i = 0; i < qTable.length; i++) {
-      System.out.print("" + states[i] + ":  ");
-      for (int j = 0; j < qTable[i].length; j++) {
-        System.out.print(df.format(qTable[i][j]) + " ");
+  public StringBuilder getResult() {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(this.printQTableResult());
+    stringBuilder.append(System.getProperty("line.separator"));
+    stringBuilder.append(this.showPolicy());
+    return stringBuilder;
+  }
+
+  /*package*/ void saveQTableResult() {
+    try {
+      File qTableFile = new File("FrozenLakeQlearning.txt");
+      if (qTableFile.createNewFile()) {
+        System.out.println("file created: " + qTableFile.getName());
+      } else {
+        System.out.println("File already exists");
       }
-      System.out.println();
+      FileWriter writer = new FileWriter(qTableFile);
+      writer.write(getResult().toString());
+      writer.close();
+    } catch (IOException e) {
+      System.out.println("An error occured" + e);
+      e.printStackTrace();
     }
   }
+
+  public StringBuilder printQTableResult() {
+    StringBuilder qTableStr = new StringBuilder();
+    qTableStr.append("Q-Table Result:");
+    qTableStr.append(System.getProperty("line.separator"));
+
+    for (int i = 0; i < qTable.length; i++) {
+      qTableStr.append("" + states[i] + ":  ");
+      for (int j = 0; j < qTable[i].length; j++) {
+        qTableStr.append(String.format("%6s ", df.format(qTable[i][j])));
+      }
+      qTableStr.append(System.getProperty("line.separator"));
+    }
+
+    System.out.println(qTableStr.toString());
+    return qTableStr;
+  }
+
+
 
   /*package*/ int policy(int state) {
     int[] actionsFromState = actions[state];
@@ -222,13 +261,21 @@ public class PathFindingActorCritic {
     return policyGotoState;
   }
 
-  /*package*/ void showPolicy() {
-    System.out.println("Policy:");
+  public StringBuilder showPolicy() {
+    StringBuilder policy = new StringBuilder();
+    policy.append("Policy:");
+    policy.append(System.getProperty("line.separator"));
+
     for (int i = 0; i < states.length; i++) {
       int to = policy(i);
-      System.out.println("From " + states[i] + " go to " + states[to]);
+      policy.append(String.format("From %2s go to %2s", states[i], states[to]));
+      policy.append(System.getProperty("line.separator"));
     }
+
+    System.out.println(policy.toString());
+    return policy;
   }
+
 
   public class ActorCriticAgent implements Serializable {
     private ActorCriticLearner learner;
@@ -451,8 +498,8 @@ public class PathFindingActorCritic {
 
 
   /*package*/ interface ActionSelectionStrategy extends Serializable {
-    PathFindingActorCritic.IndexValue selectAction(int stateId, PathFindingActorCritic.QModel model, Set<Integer> actionsAtState);
-    PathFindingActorCritic.IndexValue selectAction(int stateId, PathFindingActorCritic.UtilityModel model, Set<Integer> actionsAtState);
+    FrozenLakeQlearning.IndexValue selectAction(int stateId, FrozenLakeQlearning.QModel model, Set<Integer> actionsAtState);
+    FrozenLakeQlearning.IndexValue selectAction(int stateId, FrozenLakeQlearning.UtilityModel model, Set<Integer> actionsAtState);
     String getPrototype();
     Map<String, String> getAttributes();
   }

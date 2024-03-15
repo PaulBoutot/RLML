@@ -10,9 +10,11 @@ import jetbrains.mps.module.ReloadableModule;
 import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
 import jetbrains.mps.lang.core.behavior.INamedConcept__BehaviorDescriptor;
 import java.lang.reflect.Method;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class RunProgram {
-
   public static StringBuilder runMyProgram(final SNode rlml, SRepository repository) {
     SModule module = SNodeOperations.getModel(rlml).getModule();
     if (!(module instanceof ReloadableModule)) {
@@ -31,6 +33,7 @@ public class RunProgram {
         Method getResultMethod = theClass.getMethod("getResult");
         Object resultObject = getResultMethod.invoke(instance);
         StringBuilder str = (StringBuilder) resultObject;
+
         return str;
 
       } catch (Exception ex) {
@@ -40,4 +43,63 @@ public class RunProgram {
     }
   }
 
+  public static StringBuilder runMyProgram_Python(final SNode rlml, SRepository repository) {
+    SModule module = SNodeOperations.getModel(rlml).getModule();
+    if (!(module instanceof ReloadableModule)) {
+      return new StringBuilder("Module not reloadable, cannot obtain class loader");
+    } else {
+
+      try {
+        final Wrappers._T<String> fqName = new Wrappers._T<String>();
+        repository.getModelAccess().runReadAction(() -> fqName.value = INamedConcept__BehaviorDescriptor.getFqName_idhEwIO9y.invoke(rlml));
+        StringBuilder str = new StringBuilder();
+        String currentLocation = SNodeOperations.getModel(rlml).getSource().getLocation();
+        int startIndex = currentLocation.indexOf("path: ") + "path: ".length();
+        int endIndex = currentLocation.indexOf("models/RLML.sandbox.mps");
+        String pythonFileLocation = currentLocation.substring(startIndex, endIndex) + "source_gen/RLML/sandbox/" + SPropertyOperations.getString(rlml, PROPS.name$MnvL) + ".py";
+
+
+        str.append(pythonFileLocation);
+
+        return str;
+
+      } catch (Exception ex) {
+        return new StringBuilder("Caught " + ex.getClass() + ": " + ex.getMessage());
+      }
+
+    }
+  }
+
+  public static StringBuilder runMyProgramCompare(final SNode rlmlComparator, SRepository repository) {
+    SModule module = SNodeOperations.getModel(rlmlComparator).getModule();
+    if (!(module instanceof ReloadableModule)) {
+      return new StringBuilder("Module not reloadable, cannot obtain class loader");
+    } else {
+
+      try {
+        final Wrappers._T<String> fqName = new Wrappers._T<String>();
+        repository.getModelAccess().runReadAction(() -> fqName.value = INamedConcept__BehaviorDescriptor.getFqName_idhEwIO9y.invoke(rlmlComparator));
+        Class<?> theClass = ((ReloadableModule) module).getClass(fqName.value);
+        Object instance = theClass.getConstructor().newInstance();
+
+        Method getRunMethod = theClass.getMethod("run");
+        getRunMethod.invoke(instance);
+
+        Method getResultMethod = theClass.getMethod("getResult");
+        Object resultObject = getResultMethod.invoke(instance);
+
+        StringBuilder str = (StringBuilder) resultObject;
+
+        return str;
+
+      } catch (Exception ex) {
+        return new StringBuilder("Caught " + ex.getClass() + ": " + ex.getMessage());
+      }
+
+    }
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
 }

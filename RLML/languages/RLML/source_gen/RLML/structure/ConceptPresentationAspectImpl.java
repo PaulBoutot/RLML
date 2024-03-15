@@ -20,6 +20,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_RLAgent;
   private ConceptPresentation props_RLAlgorithm;
   private ConceptPresentation props_RLML;
+  private ConceptPresentation props_RLMLComparator;
   private ConceptPresentation props_Result;
   private ConceptPresentation props_Rewards;
   private ConceptPresentation props_SARSA;
@@ -111,6 +112,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_RLML = cpb.create();
         }
         return props_RLML;
+      case LanguageConceptSwitch.RLMLComparator:
+        if (props_RLMLComparator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RLMLComparator = cpb.create();
+        }
+        return props_RLMLComparator;
       case LanguageConceptSwitch.Result:
         if (props_Result == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

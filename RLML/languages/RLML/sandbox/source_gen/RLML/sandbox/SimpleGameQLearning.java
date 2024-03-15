@@ -6,6 +6,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Arrays;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.function.Function;
@@ -45,12 +48,13 @@ public class SimpleGameQLearning {
     actionsCount = states.length;
 
     // Done states; goal state or states that will end the game
-    String doneStr = "[C]".replaceAll("\\s+", "");
+    String doneStr = "[C] ".replaceAll("\\s+", "");
     doneStr = doneStr.substring(1, doneStr.length() - 1);
     doneStates = doneStr.split(",");
 
-    rewards = strToArrArr("[[0,0,0,0,0,0,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0]]", rewardsArrLst);
-    actions = strToArrArr("[[1,3], [0,2,4], [1,5], [0,4,6], [1,3,5,7], [2,4,8], [3,7], [4,6,8], [5,7]]", actionsArrLst);
+    String rewardStr = "[[0,0,0,0,0,0,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0]]";
+    rewards = strToArrArr(rewardStr, rewardsArrLst);
+    actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4,6], [1,3,5,7], [2,4,8], [3,7], [4,6,8], [5,7]]", actionsArrLst);
     //  Initialize matrix Q as zero matrix
     qTable = new double[statesCount][statesCount];
     // Initialize actor critic agent
@@ -103,13 +107,14 @@ public class SimpleGameQLearning {
     SimpleGameQLearning obj = new SimpleGameQLearning();
     obj.run();
     obj.printQTableResult();
+    obj.saveQTableResult();
     obj.showPolicy();
 
     long End = System.currentTimeMillis();
     System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
   }
 
-  /*package*/ void run() {
+  public void run() {
     {
       // Q-learning: When we update the Q(St, At), we will choose the A(t+1) that makes Q(St+1, At+1) estimated
       // biggest. But when we get to state S(t+1), we have the probability that does not choose the action A(t+1).
@@ -117,12 +122,12 @@ public class SimpleGameQLearning {
       // with the probability = (1 — epsilon) + (epsilon / k), in contrast, other actions will be selected.
 
       final double alpha = 0.1;
-      final double gamma = 0.9;
+      final double gamma = 0.3;
       boolean done = false;
       Random rand = new Random();
 
       // Train episodes
-      for (int i = 0; i < 100000; i++) {
+      for (int i = 0; i < 10000; i++) {
 
         // For each episode: select random initial state
         int state = rand.nextInt(statesCount);
@@ -168,7 +173,6 @@ public class SimpleGameQLearning {
           state = nextState;
         }
       }
-
     }
   }
 
@@ -197,16 +201,49 @@ public class SimpleGameQLearning {
     return rewards[s][a];
   }
 
-  /*package*/ void printQTableResult() {
-    System.out.println("Q-Table Result:");
-    for (int i = 0; i < qTable.length; i++) {
-      System.out.print("" + states[i] + ":  ");
-      for (int j = 0; j < qTable[i].length; j++) {
-        System.out.print(df.format(qTable[i][j]) + " ");
+  public StringBuilder getResult() {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(this.printQTableResult());
+    stringBuilder.append(System.getProperty("line.separator"));
+    stringBuilder.append(this.showPolicy());
+    return stringBuilder;
+  }
+
+  /*package*/ void saveQTableResult() {
+    try {
+      File qTableFile = new File("SimpleGameQLearning.txt");
+      if (qTableFile.createNewFile()) {
+        System.out.println("file created: " + qTableFile.getName());
+      } else {
+        System.out.println("File already exists");
       }
-      System.out.println();
+      FileWriter writer = new FileWriter(qTableFile);
+      writer.write(getResult().toString());
+      writer.close();
+    } catch (IOException e) {
+      System.out.println("An error occured" + e);
+      e.printStackTrace();
     }
   }
+
+  public StringBuilder printQTableResult() {
+    StringBuilder qTableStr = new StringBuilder();
+    qTableStr.append("Q-Table Result:");
+    qTableStr.append(System.getProperty("line.separator"));
+
+    for (int i = 0; i < qTable.length; i++) {
+      qTableStr.append("" + states[i] + ":  ");
+      for (int j = 0; j < qTable[i].length; j++) {
+        qTableStr.append(String.format("%6s ", df.format(qTable[i][j])));
+      }
+      qTableStr.append(System.getProperty("line.separator"));
+    }
+
+    System.out.println(qTableStr.toString());
+    return qTableStr;
+  }
+
+
 
   /*package*/ int policy(int state) {
     int[] actionsFromState = actions[state];
@@ -224,13 +261,21 @@ public class SimpleGameQLearning {
     return policyGotoState;
   }
 
-  /*package*/ void showPolicy() {
-    System.out.println("Policy:");
+  public StringBuilder showPolicy() {
+    StringBuilder policy = new StringBuilder();
+    policy.append("Policy:");
+    policy.append(System.getProperty("line.separator"));
+
     for (int i = 0; i < states.length; i++) {
       int to = policy(i);
-      System.out.println("From " + states[i] + " go to " + states[to]);
+      policy.append(String.format("From %2s go to %2s", states[i], states[to]));
+      policy.append(System.getProperty("line.separator"));
     }
+
+    System.out.println(policy.toString());
+    return policy;
   }
+
 
   public class ActorCriticAgent implements Serializable {
     private ActorCriticLearner learner;

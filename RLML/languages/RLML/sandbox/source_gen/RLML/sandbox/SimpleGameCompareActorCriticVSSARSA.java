@@ -4,6 +4,7 @@ package RLML.sandbox;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
@@ -13,7 +14,7 @@ import java.util.function.Function;
 import java.util.Map;
 import java.util.HashMap;
 
-public class FrozenLakeActorCritic {
+public class SimpleGameCompareActorCriticVSSARSA {
   /*package*/ final DecimalFormat df = new DecimalFormat("#.##");
 
   /*package*/ String[] states;
@@ -22,6 +23,7 @@ public class FrozenLakeActorCritic {
   /*package*/ int[][] rewards;
   /*package*/ int[][] actions;
   /*package*/ int actionsCount;
+  /*package*/ StringBuilder displayResult = new StringBuilder();
   /*package*/ ArrayList<ArrayList<Integer>> rewardsArrLst = new ArrayList<ArrayList<Integer>>();
   /*package*/ ArrayList<ArrayList<Integer>> actionsArrLst = new ArrayList<ArrayList<Integer>>();
   /*package*/ double[][] qTable;
@@ -29,14 +31,14 @@ public class FrozenLakeActorCritic {
   /*package*/ ActorCriticAgent agent;
   /*package*/ Vec stateValues;
 
-  public FrozenLakeActorCritic() {
+  public SimpleGameCompareActorCriticVSSARSA() {
     init();
   }
 
   /*package*/ void init() {
     // Set parameters and environment reward matrix R
     // Remove all spaces, then remove first open brackets [, and last closed bracket ]
-    String str = "[S, F, F, F, F, H, F, H, F, F, F, H, H, F, F, G] ".replaceAll("\\s+", "");
+    String str = "[A, B, C, D, E, F, G, H, I]".replaceAll("\\s+", "");
     str = str.substring(1, str.length() - 1);
     states = str.split(",");
 
@@ -45,12 +47,19 @@ public class FrozenLakeActorCritic {
     actionsCount = states.length;
 
     // Done states; goal state or states that will end the game
-    String doneStr = "[G,H]".replaceAll("\\s+", "");
+    String doneStr = "[C] ".replaceAll("\\s+", "");
     doneStr = doneStr.substring(1, doneStr.length() - 1);
     doneStates = doneStr.split(",");
 
-    rewards = strToArrArr("[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]", rewardsArrLst);
-    actions = strToArrArr("[[1,4], [0,2,5], [1,3,6], [2,7],[0,5,8], [1,4,6,9], [2,5,7,10], [3,6,11], [4,9,12],[5,8,10,13],[6,9,11,14], [7,10,15], [8,13],[9,12,14],[10,13,15],[15]]", actionsArrLst);
+    System.out.println("States: ");
+    System.out.println("[A, B, C, D, E, F, G, H, I]");
+
+    System.out.println("\nActions ");
+    actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4,6], [1,3,5,7], [2,4,8], [3,7], [4,6,8], [5,7]]", actionsArrLst);
+
+    System.out.println("\nRewards: ");
+    rewards = strToArrArr("[[0,0,0,0,0,0,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0]]", rewardsArrLst);
+
     //  Initialize matrix Q as zero matrix
     qTable = new double[statesCount][statesCount];
     // Initialize actor critic agent
@@ -95,26 +104,36 @@ public class FrozenLakeActorCritic {
       }
     }
 
+    System.out.println(Arrays.deepToString(arrArrInt));
     return arrArrInt;
   }
 
-  public static void main(String[] args) {
-    long Begin = System.currentTimeMillis();
-    FrozenLakeActorCritic obj = new FrozenLakeActorCritic();
-    obj.run();
-    obj.printQTableResult();
-    obj.showPolicy();
-
-    long End = System.currentTimeMillis();
-    System.out.println("\nTime: " + (End - Begin) / 1000.0 + "sec.");
+  public StringBuilder getResultBuilder(String name) {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("Algorithm Name: " + name);
+    stringBuilder.append(System.getProperty("line.separator"));
+    stringBuilder.append(this.printQTableResult());
+    stringBuilder.append(System.getProperty("line.separator"));
+    stringBuilder.append(this.showPolicy());
+    stringBuilder.append("STRINGENDSHEREBREAK");
+    return stringBuilder;
   }
 
-  /*package*/ void run() {
+  public StringBuilder getResult() {
+    return displayResult;
+  }
+
+  private void ActorCritic() {
+    System.out.print("Algorithm Name: ");
+    System.out.println("ActorCritic");
+    System.out.println();
+    String algoName = "ActorCritic";
+    long Begin1L = System.currentTimeMillis();
     {
       // ActorCritic: Hyper Parameters
-      final double alpha = 0.1;
-      final double gamma = 0.9;
-      final int episodes = 1000;
+      final double alpha = 0.3;
+      final double gamma = 0.4;
+      final int episodes = 10000;
 
       // Actor Critic Agent was initialized in the init function
       // Set properties of agent
@@ -168,6 +187,88 @@ public class FrozenLakeActorCritic {
         currentState = nextState;
       }
     }
+    this.printQTableResult();
+    this.showPolicy();
+    displayResult.append(getResultBuilder(algoName));
+    long End = System.currentTimeMillis();
+    System.out.println("\nTime: " + (End - Begin1L) / 1000.0 + "sec.");
+    System.out.println();
+    System.out.println();
+  }
+  private void SARSA() {
+    System.out.print("Algorithm Name: ");
+    System.out.println("SARSA");
+    System.out.println();
+    String algoName = "SARSA";
+    long Begin1L = System.currentTimeMillis();
+    {
+      // SARSA : We will choose the current action At and the next action A(t+1) using the same policy.
+      // And thus, in the state S(t+1), its action will be A(t+1) which is selected while updating 
+      // the action-state value of St.
+
+      final double alpha = 0.3;
+      final double gamma = 0.4;
+      boolean done = false;
+      Random rand = new Random();
+
+      // Train episodes
+      for (int i = 0; i < 10000; i++) {
+
+        // For each episode: select random initial state
+        int state = rand.nextInt(statesCount);
+
+        int index = rand.nextInt(actions[state].length);
+        // Initial action, the rest is calculated while preparing the Q_Table
+        int action = actions[state][index];
+
+        done = false;
+        // Do while not reach goal state o
+        while (!(done)) {
+
+          int nextState = action;
+          int r = rewards[state][action];
+          if (Arrays.asList(doneStates).contains(states[nextState])) {
+            done = true;
+          }
+
+          // Using this possible action, consider to go to the next state
+          double q = qTable[state][action];
+
+          // Select one action among all possible actions for the current state
+          // Selection strategy is random in this example
+          // Action outcome is set to deterministic in this example
+          // Transition probability is 1
+          int index2 = rand.nextInt(actions[state].length);
+          int nextAction = actions[state][index2];
+          double q2 = qTable[nextState][nextAction];
+
+          // SARSA Computation 
+          double value = q + alpha * (r + gamma * q2 - q);
+          qTable[state][action] = value;
+
+          // Set the next state as the current state
+          state = nextState;
+          action = nextAction;
+        }
+      }
+    }
+    this.printQTableResult();
+    this.showPolicy();
+    displayResult.append(getResultBuilder(algoName));
+    long End = System.currentTimeMillis();
+    System.out.println("\nTime: " + (End - Begin1L) / 1000.0 + "sec.");
+    System.out.println();
+    System.out.println();
+  }
+
+  public static void main(String[] args) {
+    SimpleGameCompareActorCriticVSSARSA obj = new SimpleGameCompareActorCriticVSSARSA();
+    obj.run();
+  }
+
+  public void run() {
+    ActorCritic();
+    SARSA();
   }
 
   /*package*/ double maxQ(int s) {
@@ -195,16 +296,23 @@ public class FrozenLakeActorCritic {
     return rewards[s][a];
   }
 
-  /*package*/ void printQTableResult() {
-    System.out.println("Q-Table Result:");
+  public StringBuilder printQTableResult() {
+    StringBuilder qTableStr = new StringBuilder();
+    qTableStr.append("Q-Table Result:");
+    qTableStr.append(System.getProperty("line.separator"));
+
     for (int i = 0; i < qTable.length; i++) {
-      System.out.print("" + states[i] + ":  ");
+      qTableStr.append("" + states[i] + ":  ");
       for (int j = 0; j < qTable[i].length; j++) {
-        System.out.print(df.format(qTable[i][j]) + " ");
+        qTableStr.append(String.format("%4s ", df.format(qTable[i][j])));
       }
-      System.out.println();
+      qTableStr.append(System.getProperty("line.separator"));
     }
+
+    System.out.println(qTableStr.toString());
+    return qTableStr;
   }
+
 
   /*package*/ int policy(int state) {
     int[] actionsFromState = actions[state];
@@ -222,12 +330,19 @@ public class FrozenLakeActorCritic {
     return policyGotoState;
   }
 
-  /*package*/ void showPolicy() {
-    System.out.println("Policy:");
+  public StringBuilder showPolicy() {
+    StringBuilder policy = new StringBuilder();
+    policy.append("Policy:");
+    policy.append(System.getProperty("line.separator"));
+
     for (int i = 0; i < states.length; i++) {
       int to = policy(i);
-      System.out.println("From " + states[i] + " go to " + states[to]);
+      policy.append(String.format("From %2s go to %2s", states[i], states[to]));
+      policy.append(System.getProperty("line.separator"));
     }
+
+    System.out.println(policy.toString());
+    return policy;
   }
 
   public class ActorCriticAgent implements Serializable {
@@ -451,8 +566,8 @@ public class FrozenLakeActorCritic {
 
 
   /*package*/ interface ActionSelectionStrategy extends Serializable {
-    FrozenLakeActorCritic.IndexValue selectAction(int stateId, FrozenLakeActorCritic.QModel model, Set<Integer> actionsAtState);
-    FrozenLakeActorCritic.IndexValue selectAction(int stateId, FrozenLakeActorCritic.UtilityModel model, Set<Integer> actionsAtState);
+    SimpleGameCompareActorCriticVSSARSA.IndexValue selectAction(int stateId, SimpleGameCompareActorCriticVSSARSA.QModel model, Set<Integer> actionsAtState);
+    SimpleGameCompareActorCriticVSSARSA.IndexValue selectAction(int stateId, SimpleGameCompareActorCriticVSSARSA.UtilityModel model, Set<Integer> actionsAtState);
     String getPrototype();
     Map<String, String> getAttributes();
   }
@@ -618,6 +733,7 @@ public class FrozenLakeActorCritic {
     }
   }
 
+
   public class GibbsSoftMaxActionSelectionStrategy extends AbstractActionSelectionStrategy {
     private Random random = null;
     public GibbsSoftMaxActionSelectionStrategy() {
@@ -666,6 +782,8 @@ public class FrozenLakeActorCritic {
       return iv;
     }
   }
+
+
 
   public class GreedyActionSelectionStrategy extends AbstractActionSelectionStrategy {
     @Override
