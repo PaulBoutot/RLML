@@ -5,18 +5,18 @@ package RLML.sandbox;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.HashSet;
 
-public class SimpleGameQLearning {
+public class SimpleDemo {
   /*package*/ final DecimalFormat df = new DecimalFormat("#.##");
 
   /*package*/ String[] states;
@@ -32,14 +32,14 @@ public class SimpleGameQLearning {
   /*package*/ ActorCriticAgent agent;
   /*package*/ Vec stateValues;
 
-  public SimpleGameQLearning() {
+  public SimpleDemo() {
     init();
   }
 
   /*package*/ void init() {
     // Set parameters and environment reward matrix R
     // Remove all spaces, then remove first open brackets [, and last closed bracket ]
-    String str = "[A, B, C, D, E, F, G, H, I]".replaceAll("\\s+", "");
+    String str = "[A, B]".replaceAll("\\s+", "");
     str = str.substring(1, str.length() - 1);
     states = str.split(",");
 
@@ -48,13 +48,13 @@ public class SimpleGameQLearning {
     actionsCount = states.length;
 
     // Done states; goal state or states that will end the game
-    String doneStr = "[C] ".replaceAll("\\s+", "");
+    String doneStr = "[B]".replaceAll("\\s+", "");
     doneStr = doneStr.substring(1, doneStr.length() - 1);
     doneStates = doneStr.split(",");
 
-    String rewardStr = "[[0,0,0,0,0,0,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0], [0,0,5,0,-10,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,-10,0,0,0,0], [0,0,0,0,0,-10,0,0,0]]";
+    String rewardStr = "[[0,1],[0,1]]";
     rewards = strToArrArr(rewardStr, rewardsArrLst);
-    actions = strToArrArr("[[1,3], [0,2,4], [2], [0,4,6], [1,3,5,7], [2,4,8], [3,7], [4,6,8], [5,7]]", actionsArrLst);
+    actions = strToArrArr("[[1],[1]]", actionsArrLst);
     //  Initialize matrix Q as zero matrix
     qTable = new double[statesCount][statesCount];
     // Initialize actor critic agent
@@ -104,7 +104,7 @@ public class SimpleGameQLearning {
 
   public static void main(String[] args) {
     long Begin = System.currentTimeMillis();
-    SimpleGameQLearning obj = new SimpleGameQLearning();
+    SimpleDemo obj = new SimpleDemo();
     obj.run();
     obj.printQTableResult();
     obj.saveQTableResult();
@@ -116,62 +116,61 @@ public class SimpleGameQLearning {
 
   public void run() {
     {
-      // Q-learning: When we update the Q(St, At), we will choose the A(t+1) that makes Q(St+1, At+1) estimated
-      // biggest. But when we get to state S(t+1), we have the probability that does not choose the action A(t+1).
-      // For example, if its policy is Epsilon-Greedy algorithm, then in state S(t+1), the action A(t+1) is selected
-      // with the probability = (1 — epsilon) + (epsilon / k), in contrast, other actions will be selected.
-
+      // ActorCritic: Hyper Parameters
       final double alpha = 0.1;
-      final double gamma = 0.3;
-      boolean done = false;
-      Random rand = new Random();
+      final double gamma = 0.4;
+      final int episodes = 10000;
 
-      // Train episodes
-      for (int i = 0; i < 10000; i++) {
+      // Actor Critic Agent was initialized in the init function
+      // Set properties of agent
+      agent.getLearner().getP().setAlpha(alpha);
+      agent.getLearner().getP().setGamma(gamma);
 
-        // For each episode: select random initial state
-        int state = rand.nextInt(statesCount);
+      // Set state values to zero
+      for (int stateId = 0; stateId < statesCount; ++stateId) {
+        stateValues.set(stateId, 0);
+      }
 
-        done = false;
-        // Do while not reach goal state
-        while (!(done)) {
+      // Run Episodes
+      Random random = new Random();
 
-          // Select one among all possible actions for the current state
-          // Selection strategy is random in this example
-          // Action outcome is set to deterministic in this example
-          // Transition probability is 1
-          int index = rand.nextInt(actions[state].length);
-          int action = actions[state][index];
+      //  Initial State of the agent
+      int currentState = random.nextInt(statesCount);
+      agent.start(currentState);
 
-          int nextState = action;
-          int r = rewards[state][action];
-
-          if (Arrays.asList(doneStates).contains(states[nextState])) {
-            done = true;
-          }
-
-          // Using this possible action, consider going to the next state
-          double q = qTable[state][action];
-
-          // Get maximum Q-value of this next state, based on all possible actions from next state
-          int[] actionsFromNextState = actions[nextState];
-          double maxValue = Double.MIN_VALUE;
-          for (int j = 0; j < actionsFromNextState.length; j++) {
-            int nextPossibleState = actionsFromNextState[j];
-            double value = qTable[nextState][nextPossibleState];
-            if (value > maxValue) {
-              maxValue = value;
-            }
-          }
-          double maxQ = maxValue;
-
-          // Q-Learning Computation 
-          double value = q + alpha * (r + gamma * maxQ - q);
-          qTable[state][action] = value;
-
-          // Set the next state as the current state
-          state = nextState;
+      for (int i = 0; i < episodes; i++) {
+        //  Calculate the current actions available at current state.
+        Set<Integer> actionsAtState = new HashSet<Integer>();
+        Integer[] boxedActions = new Integer[actions[currentState].length];
+        for (int j = 0; j < actions[currentState].length; j++) {
+          boxedActions[j] = actions[currentState][j];
         }
+        Collections.addAll(actionsAtState, boxedActions);
+
+        // Choose action to perform with agent
+        int action = agent.selectAction(actionsAtState);
+
+        // Get new state and the reward
+        int nextState = action;
+        int r = rewards[currentState][action];
+
+        // Get next possible actions at next state
+        Set<Integer> actionsAtNextState = new HashSet<Integer>();
+        Integer[] boxedActions2 = new Integer[actions[currentState].length];
+        for (int j = 0; j < actions[currentState].length; j++) {
+          boxedActions2[j] = actions[currentState][j];
+        }
+        Collections.addAll(actionsAtNextState, boxedActions2);
+
+        // Update the agent
+        agent.update(action, nextState, actionsAtNextState, r, stateValues);
+
+        // Update qTable (probably wrong)
+        double value = agent.getLearner().getP().getQ(currentState, action);
+        qTable[currentState][action] = value;
+
+        // Update values
+        currentState = nextState;
       }
     }
   }
@@ -211,7 +210,7 @@ public class SimpleGameQLearning {
 
   /*package*/ void saveQTableResult() {
     try {
-      File qTableFile = new File("SimpleGameQLearning.txt");
+      File qTableFile = new File("SimpleDemo.txt");
       if (qTableFile.createNewFile()) {
         System.out.println("file created: " + qTableFile.getName());
       } else {
@@ -498,8 +497,8 @@ public class SimpleGameQLearning {
 
 
   /*package*/ interface ActionSelectionStrategy extends Serializable {
-    SimpleGameQLearning.IndexValue selectAction(int stateId, SimpleGameQLearning.QModel model, Set<Integer> actionsAtState);
-    SimpleGameQLearning.IndexValue selectAction(int stateId, SimpleGameQLearning.UtilityModel model, Set<Integer> actionsAtState);
+    SimpleDemo.IndexValue selectAction(int stateId, SimpleDemo.QModel model, Set<Integer> actionsAtState);
+    SimpleDemo.IndexValue selectAction(int stateId, SimpleDemo.UtilityModel model, Set<Integer> actionsAtState);
     String getPrototype();
     Map<String, String> getAttributes();
   }
