@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<solution name="RLML.sandbox" uuid="fa59b5cc-690b-4d1d-87b2-02fad3c7ed0b" moduleVersion="0" compileInMPS="true">
+<solution name="RLML.sandbox" uuid="fa59b5cc-690b-4d1d-87b2-02fad3c7ed0b" moduleVersion="0">
   <models>
     <modelRoot contentPath="${module}" type="default">
       <sourceRoot location="models" />
@@ -10,7 +10,6 @@
       <classes generated="true" path="${module}/classes_gen" />
     </facet>
   </facets>
-  <sourcePath />
   <dependencies>
     <dependency reexport="false">6354ebe7-c22a-4a0f-ac54-50b52ab9b065(JDK)</dependency>
     <dependency reexport="false">3c2f74fb-565a-4cb8-8a81-42024cc7aa10(RLML)</dependency>
@@ -28,7 +27,6 @@
     <module reference="8865b7a8-5271-43d3-884c-6fd1d9cfdd34(MPS.OpenAPI)" version="0" />
     <module reference="3c2f74fb-565a-4cb8-8a81-42024cc7aa10(RLML)" version="0" />
     <module reference="fa59b5cc-690b-4d1d-87b2-02fad3c7ed0b(RLML.sandbox)" version="0" />
-    <module reference="990507d3-3527-4c54-bfe9-0ca3c9c6247a(com.dslfoundry.plaintextgen)" version="0" />
     <module reference="3b1a18ff-6fd4-4977-ba7e-a7ddc907c639(com.juliuscanute.python)" version="0" />
     <module reference="4caf0310-491e-41f5-8a9b-2006b3a94898(jetbrains.mps.execution.util)" version="0" />
     <module reference="d936855b-48da-4812-a8a0-2bfddd633ac5(jetbrains.mps.lang.behavior.api)" version="0" />
